@@ -499,24 +499,52 @@
     }
 
     @media(max-width:700px){
-      body{font-size:16px}
+      body{font-size:15px;line-height:1.62}
       .shell{width:100%;margin:0}
-      .topbar{top:0;margin:0;border-radius:0;border-left:0;border-right:0}
+      .topbar{top:0;margin:0;border-radius:0;border-left:0;border-right:0;padding:12px 16px}
+      .brand{font-size:14px}
       .nav{display:none}
-      .hero{border-radius:0;padding:42px 24px}
-      h1{font-size:48px}
-      .hero-sub{font-size:17px}
+      .hero{border-radius:0;padding:38px 22px}
+      .kicker{font-size:11px}
+      h1{font-size:42px;line-height:1.02}
+      .hero-sub{font-size:16px;line-height:1.55}
+      .fact-label{font-size:10px}
+      .fact-value{font-size:13px}
       .hero-side{grid-template-columns:1fr}
-      .section{margin-top:14px;border-radius:0;border-left:0;border-right:0;padding:34px 24px}
-      h2{font-size:28px}
+      .section{margin-top:12px;border-radius:0;border-left:0;border-right:0;padding:30px 22px}
+      .section-head{margin-bottom:24px}
+      .eyebrow{font-size:11px}
+      h2{font-size:26px}
+      .section-lead{font-size:14.5px}
       .timeline:before{left:11px}
-      .timeline-item{grid-template-columns:1fr;padding-left:30px}
-      .timeline-year{text-align:left}
+      .timeline-item{grid-template-columns:1fr;padding-left:30px;gap:8px}
+      .timeline-year{text-align:left;font-size:12px}
+      .timeline-card{padding:18px}
       .timeline-card:before{left:-25px}
       .card-row{display:block}
-      .meta{margin-top:4px}
+      .card-title{font-size:18px}
+      .thesis .card-title{font-size:21px}
+      .card-sub{font-size:12px}
+      .meta{margin-top:4px;font-size:11px}
+      .card-body{font-size:14px}
+      .paper{min-height:0;padding:18px}
+      .paper h3{font-size:18px}
+      .paper p{font-size:13.5px}
+      .project{min-height:0;padding:20px}
+      .project h3{font-size:20px}
+      .project p,.project ul{font-size:13.5px}
+      .project-links{font-size:12.5px}
       .skills{grid-template-columns:1fr}
-      .footer{padding:20px 24px 28px}
+      .skill{min-height:0;padding:18px}
+      .footer{padding:20px 22px 28px}
+    }
+
+    @media(max-width:420px){
+      h1{font-size:38px}
+      .hero{padding:34px 20px}
+      .section{padding:28px 20px}
+      .hero-sub{font-size:15.5px}
+      h2{font-size:24px}
     }
 
     @media print{
