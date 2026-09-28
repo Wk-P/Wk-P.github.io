@@ -26,11 +26,10 @@
     html{scroll-behavior:smooth}
     body{
       margin:0;
+      min-height:100vh;
+      overflow-x:hidden;
       color:var(--ink);
-      background:
-        radial-gradient(circle at 12% 0%, rgba(49,94,251,.12), transparent 27%),
-        radial-gradient(circle at 92% 12%, rgba(50,199,217,.10), transparent 24%),
-        var(--bg);
+      background:#eef2f7;
       font-family:"Segoe UI Variable Text","Segoe UI",Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
       font-size:18px;
       line-height:1.72;
@@ -50,7 +49,82 @@
     }
     a:hover{color:var(--blue)}
 
+    .global-bg{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      overflow:hidden;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 12% 8%,rgba(49,94,251,.11),transparent 30%),
+        radial-gradient(circle at 88% 16%,rgba(50,199,217,.10),transparent 27%),
+        linear-gradient(180deg,#eef3f9 0%,#f7f8fa 48%,#edf2f8 100%);
+    }
+
+    .global-bg:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image:
+        linear-gradient(rgba(48,72,105,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(48,72,105,.035) 1px,transparent 1px);
+      background-size:64px 64px;
+      mask-image:linear-gradient(to bottom,rgba(0,0,0,.65),rgba(0,0,0,.18));
+    }
+
+    .global-glow{
+      position:absolute;
+      border-radius:50%;
+      filter:blur(70px);
+      opacity:.55;
+      will-change:transform;
+    }
+
+    .global-glow-a{
+      width:520px;height:520px;
+      left:-150px;top:12vh;
+      background:rgba(49,94,251,.19);
+      animation:floatGlowA 22s ease-in-out infinite alternate;
+    }
+
+    .global-glow-b{
+      width:460px;height:460px;
+      right:-110px;top:48vh;
+      background:rgba(50,199,217,.16);
+      animation:floatGlowB 26s ease-in-out infinite alternate;
+    }
+
+    .global-glow-c{
+      width:360px;height:360px;
+      left:38%;bottom:-120px;
+      background:rgba(109,124,255,.13);
+      animation:floatGlowC 28s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatGlowA{
+      from{transform:translate3d(0,0,0) scale(1)}
+      to{transform:translate3d(110px,90px,0) scale(1.12)}
+    }
+    @keyframes floatGlowB{
+      from{transform:translate3d(0,0,0) scale(1)}
+      to{transform:translate3d(-130px,-80px,0) scale(1.08)}
+    }
+    @keyframes floatGlowC{
+      from{transform:translate3d(-40px,0,0) scale(1)}
+      to{transform:translate3d(100px,-100px,0) scale(1.15)}
+    }
+
+    .global-canvas{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      opacity:.46;
+    }
+
     .shell{
+      position:relative;
+      z-index:1;
       width:min(var(--max),calc(100% - 56px));
       margin:34px auto 60px;
     }
@@ -251,7 +325,9 @@
       padding:54px 58px;
       border:1px solid var(--line);
       border-radius:var(--radius);
-      background:var(--paper);
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
       box-shadow:0 12px 38px rgba(17,24,39,.045);
     }
 
@@ -717,8 +793,9 @@
 
 
     @media (prefers-reduced-motion: reduce){
-      .hero:before,.hero-orbit{animation:none}
-      .hero-canvas{display:none}
+      .hero:before,.hero-orbit,
+      .global-glow-a,.global-glow-b,.global-glow-c{animation:none}
+      .hero-canvas,.global-canvas{display:none}
     }
 
     @media print{
@@ -732,6 +809,13 @@
   </style>
 </head>
 <body>
+  <div class="global-bg" aria-hidden="true">
+    <div class="global-glow global-glow-a"></div>
+    <div class="global-glow global-glow-b"></div>
+    <div class="global-glow global-glow-c"></div>
+    <canvas class="global-canvas"></canvas>
+  </div>
+
   <div class="shell">
 
     <div class="topbar">
@@ -1081,6 +1165,89 @@
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) cancelAnimationFrame(raf);
         else draw();
+      });
+    })();
+  </script>
+
+
+  <script>
+    (() => {
+      const canvas = document.querySelector('.global-canvas');
+      if (!canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const ctx = canvas.getContext('2d', { alpha: true });
+      let w = 0, h = 0, dpr = 1, nodes = [], raf = 0;
+
+      function count() {
+        if (window.innerWidth <= 700) return 18;
+        if (window.innerWidth <= 1200) return 28;
+        return 42;
+      }
+
+      function resize() {
+        w = Math.max(1, window.innerWidth);
+        h = Math.max(1, window.innerHeight);
+        dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        canvas.width = Math.round(w * dpr);
+        canvas.height = Math.round(h * dpr);
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+        ctx.setTransform(dpr,0,0,dpr,0,0);
+
+        nodes = Array.from({length:count()}, () => ({
+          x:Math.random()*w,
+          y:Math.random()*h,
+          vx:(Math.random()-.5)*.12,
+          vy:(Math.random()-.5)*.12,
+          r:Math.random()*1.25+.55
+        }));
+      }
+
+      function frame() {
+        ctx.clearRect(0,0,w,h);
+
+        for (let i=0;i<nodes.length;i++) {
+          const p = nodes[i];
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < -12) p.x = w+12;
+          if (p.x > w+12) p.x = -12;
+          if (p.y < -12) p.y = h+12;
+          if (p.y > h+12) p.y = -12;
+
+          ctx.beginPath();
+          ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+          ctx.fillStyle='rgba(49,94,251,.20)';
+          ctx.fill();
+
+          for (let j=i+1;j<nodes.length;j++) {
+            const q=nodes[j];
+            const dx=p.x-q.x, dy=p.y-q.y;
+            const d2=dx*dx+dy*dy;
+            const max=150;
+            if (d2 < max*max) {
+              const a=(1-Math.sqrt(d2)/max)*.075;
+              ctx.beginPath();
+              ctx.moveTo(p.x,p.y);
+              ctx.lineTo(q.x,q.y);
+              ctx.strokeStyle='rgba(55,104,176,'+a+')';
+              ctx.lineWidth=.7;
+              ctx.stroke();
+            }
+          }
+        }
+
+        raf=requestAnimationFrame(frame);
+      }
+
+      window.addEventListener('resize', resize, {passive:true});
+      resize();
+      frame();
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) cancelAnimationFrame(raf);
+        else frame();
       });
     })();
   </script>
