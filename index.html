@@ -1,199 +1,389 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Lingxiao Zhou - Platform, Backend and Cloud-Native Developer Portfolio" />
-  <title>Lingxiao Zhou | Platform & Backend Developer</title>
+  <meta name="description" content="Lingxiao Zhou — Resume and technical portfolio" />
+  <title>Lingxiao Zhou | Resume</title>
   <style>
-    :root {
-      --bg:#0b1020; --panel:#121a2d; --text:#e8edf7; --muted:#9eabc3;
-      --line:#26314b; --accent:#79a7ff; --accent2:#65d6b6; --max:1040px;
+    :root{
+      --paper:#ffffff;
+      --page:#eef1f4;
+      --text:#1f2933;
+      --muted:#5f6b76;
+      --line:#d8dde3;
+      --accent:#1f4f7a;
+      --soft:#f6f8fa;
+      --max:980px;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{margin:0;background:linear-gradient(180deg,#0b1020 0%,#0e1527 100%);color:var(--text);
-      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;line-height:1.65}
-    a{color:inherit;text-decoration:none}
-    .wrap{width:min(var(--max),calc(100% - 40px));margin:0 auto}
-    nav{position:sticky;top:0;z-index:20;background:rgba(11,16,32,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-    nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
-    .brand{font-weight:800;letter-spacing:.2px}
-    .navlinks{display:flex;gap:20px;color:var(--muted);font-size:14px}
-    .navlinks a:hover{color:var(--text)}
-    .hero{padding:92px 0 64px}
-    .eyebrow{color:var(--accent2);font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase}
-    h1{font-size:clamp(42px,7vw,74px);line-height:1.05;margin:12px 0 18px;letter-spacing:-.04em}
-    .lead{max-width:760px;color:var(--muted);font-size:20px;margin:0 0 28px}
-    .actions{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:10px;border:1px solid var(--line);font-weight:700;font-size:14px}
-    .btn.primary{background:var(--text);color:#0b1020;border-color:var(--text)}
-    .btn:hover{transform:translateY(-1px)}
-    section{padding:52px 0}
-    .section-title{font-size:28px;margin:0 0 22px;letter-spacing:-.02em}
-    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-    .card{background:rgba(18,26,45,.9);border:1px solid var(--line);border-radius:16px;padding:22px}
-    .card h3{margin:0 0 8px;font-size:20px}
-    .card p{margin:0;color:var(--muted)}
-    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-    .tag{font-size:12px;padding:5px 9px;border:1px solid var(--line);border-radius:999px;color:#c9d3e8;background:#0e1628}
-    .project{display:flex;flex-direction:column;min-height:260px}
-    .project .meta{font-size:13px;color:var(--accent2);font-weight:700;margin-bottom:7px}
-    .project ul{color:var(--muted);padding-left:18px;margin:12px 0 0}
-    .project .links{margin-top:auto;padding-top:18px;display:flex;gap:12px;font-size:14px;font-weight:700}
-    .project .links a{color:var(--accent)}
-    .about{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}
-    .facts{display:grid;gap:10px}
-    .fact{padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#0e1628}
-    .fact b{display:block;font-size:13px;margin-bottom:2px}
-    .fact span{color:var(--muted);font-size:13px}
-    .research-item{padding:18px 0;border-top:1px solid var(--line)}
-    .research-item:first-child{border-top:0;padding-top:0}
-    .research-item b{display:block;margin-bottom:4px}
-    footer{border-top:1px solid var(--line);padding:34px 0 54px;color:var(--muted);font-size:14px}
+    body{
+      margin:0;
+      background:var(--page);
+      color:var(--text);
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+      line-height:1.55;
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .page{
+      width:min(var(--max),calc(100% - 32px));
+      margin:32px auto;
+      background:var(--paper);
+      box-shadow:0 8px 28px rgba(0,0,0,.08);
+      border:1px solid #e4e8ec;
+    }
+    .header{
+      padding:46px 52px 28px;
+      border-bottom:2px solid var(--text);
+    }
+    .name{
+      margin:0;
+      font-size:42px;
+      line-height:1.05;
+      letter-spacing:-.03em;
+      font-weight:800;
+    }
+    .role{
+      margin:10px 0 14px;
+      font-size:18px;
+      font-weight:600;
+      color:var(--accent);
+    }
+    .contact{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px 18px;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .content{
+      display:grid;
+      grid-template-columns:1fr 2.25fr;
+      min-height:900px;
+    }
+    .sidebar{
+      padding:32px 28px 42px 52px;
+      border-right:1px solid var(--line);
+      background:var(--soft);
+    }
+    .main{
+      padding:32px 52px 48px 34px;
+    }
+    section{margin:0 0 30px}
+    h2{
+      margin:0 0 13px;
+      font-size:15px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      border-bottom:1px solid var(--line);
+      padding-bottom:7px;
+    }
+    h3{
+      margin:0;
+      font-size:16px;
+      line-height:1.35;
+    }
+    .sub{
+      margin-top:3px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    p{margin:8px 0 0}
+    ul{margin:8px 0 0;padding-left:18px}
+    li{margin:4px 0}
+    .entry{margin-bottom:22px}
+    .entry:last-child{margin-bottom:0}
+    .entry-head{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      align-items:flex-start;
+    }
+    .entry-title{font-weight:700}
+    .label{
+      color:var(--muted);
+      font-size:12px;
+      white-space:nowrap;
+      padding-top:2px;
+    }
+    .skills{
+      display:grid;
+      gap:16px;
+    }
+    .skill-group b{
+      display:block;
+      margin-bottom:4px;
+      font-size:13px;
+    }
+    .skill-group span{
+      color:var(--muted);
+      font-size:13px;
+    }
+    .summary{
+      color:#33414d;
+      font-size:14px;
+    }
+    .project-links{
+      margin-top:7px;
+      font-size:13px;
+      font-weight:600;
+    }
+    .course{
+      margin-bottom:9px;
+      font-size:13px;
+    }
+    .course b{display:block}
+    .course span{color:var(--muted)}
+    .small{
+      color:var(--muted);
+      font-size:13px;
+    }
+    footer{
+      padding:18px 52px 24px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:12px;
+    }
     @media (max-width:760px){
-      .navlinks{display:none}.hero{padding-top:64px}.grid,.about{grid-template-columns:1fr}
-      .lead{font-size:18px}
+      .page{width:100%;margin:0;border:0;box-shadow:none}
+      .header{padding:32px 24px 22px}
+      .name{font-size:34px}
+      .content{grid-template-columns:1fr}
+      .sidebar{
+        padding:26px 24px;
+        border-right:0;
+        border-bottom:1px solid var(--line)
+      }
+      .main{padding:28px 24px 36px}
+      footer{padding:16px 24px 24px}
+      .entry-head{display:block}
+      .label{margin-top:3px}
+    }
+    @media print{
+      body{background:#fff}
+      .page{width:100%;margin:0;border:0;box-shadow:none}
+      a{color:inherit}
     }
   </style>
 </head>
 <body>
-  <nav>
-    <div class="wrap">
-      <a class="brand" href="#">Lingxiao Zhou</a>
-      <div class="navlinks">
-        <a href="#about">About</a><a href="#projects">Projects</a><a href="#research">Research</a><a href="#skills">Skills</a>
-      </div>
-    </div>
-  </nav>
-
-  <main class="wrap">
-    <header class="hero">
-      <div class="eyebrow">Platform · Backend · Cloud Native</div>
-      <h1>Lingxiao Zhou</h1>
-      <p class="lead">
-        부산대학교 컴퓨터공학 석사과정에서 시스템 자원관리, Kubernetes 기반 플랫폼,
-        네트워크 모니터링과 최적화를 연구하고 있습니다. 애플리케이션 기능뿐 아니라
-        서버와 인프라까지 함께 생각하는 개발을 지향합니다.
-      </p>
-      <div class="actions">
-        <a class="btn primary" href="https://github.com/Wk-P" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="btn" href="#projects">프로젝트 보기</a>
+  <div class="page">
+    <header class="header">
+      <h1 class="name">Lingxiao Zhou</h1>
+      <div class="role">Platform / Backend / Cloud-Native Developer</div>
+      <div class="contact">
+        <span>Pusan National University</span>
+        <span>Computer Engineering</span>
+        <a href="https://github.com/Wk-P" target="_blank" rel="noreferrer">github.com/Wk-P</a>
       </div>
     </header>
 
-    <section id="about">
-      <h2 class="section-title">About</h2>
-      <div class="about">
-        <div class="card">
-          <h3>System-oriented developer</h3>
-          <p>
-            Linux, Docker, Kubernetes 환경에서 서비스와 자원을 다루며,
-            문제 발생 시 원인을 단계적으로 확인하고 시스템 전체 구조에서 해결 방법을 찾는 데 강점이 있습니다.
-            연구와 개인 프로젝트를 통해 Backend API, Cloud-native 환경, Monitoring, AI 활용 경험을 쌓았습니다.
+    <div class="content">
+      <aside class="sidebar">
+        <section>
+          <h2>Profile</h2>
+          <p class="summary">
+            Computer engineering master's student focused on cloud-native platforms,
+            backend systems, resource management, networking, and optimization.
+            Experienced with building web services as well as working with infrastructure,
+            containers, monitoring, and distributed-system experiments.
           </p>
-        </div>
-        <div class="facts">
-          <div class="fact"><b>Education</b><span>Pusan National University · Computer Engineering M.S.</span></div>
-          <div class="fact"><b>Focus</b><span>Platform · Backend · Cloud Native · Networking</span></div>
-          <div class="fact"><b>Languages</b><span>Python · C/C++ · TypeScript · JavaScript</span></div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <section id="projects">
-      <h2 class="section-title">Selected Projects</h2>
-      <div class="grid">
-        <article class="card project">
-          <div class="meta">FEATURED · CLOUD / PLATFORM</div>
-          <h3>CloudPlatform</h3>
-          <p>Kubernetes와 OpenStack 자원을 웹에서 관리하고 모니터링하기 위한 통합형 Cloud Resource Management Platform.</p>
-          <ul>
-            <li>Cluster / Node / Pod / Container 상태와 CPU·Memory 자원 모니터링</li>
-            <li>JWT 인증과 Kubernetes ServiceAccount Token 연동</li>
-            <li>Django REST API + Vue/TypeScript Dashboard 구성</li>
-            <li>Traffic anomaly detection 모듈과 운영 문서화</li>
-          </ul>
-          <div class="tags"><span class="tag">Django</span><span class="tag">Vue 3</span><span class="tag">TypeScript</span><span class="tag">Kubernetes</span><span class="tag">MySQL</span><span class="tag">Redis</span></div>
-          <div class="links"><a href="https://github.com/Wk-P/CloudPlatform" target="_blank" rel="noreferrer">Repository →</a></div>
-        </article>
-
-        <article class="card project">
-          <div class="meta">FULL STACK · AI SERVICE</div>
-          <h3>Emotion Talk Assistant</h3>
-          <p>연구용 대화 데이터를 수집하고 AI 기반 대화 기능을 제공하기 위해 개발한 Web Application.</p>
-          <ul>
-            <li>FastAPI 기반 Backend API와 SQLAlchemy 데이터 계층 구성</li>
-            <li>OpenAI API 연동 및 사용자 인증 기능 구현</li>
-            <li>Vue 3 + TypeScript Frontend와 Docker 배포 환경 구성</li>
-            <li>Cloudflare 기반 Frontend 배포 구성</li>
-          </ul>
-          <div class="tags"><span class="tag">FastAPI</span><span class="tag">OpenAI API</span><span class="tag">SQLAlchemy</span><span class="tag">Vue 3</span><span class="tag">Docker</span></div>
-          <div class="links">
-            <a href="https://github.com/Wk-P/emotion-talk-assistant" target="_blank" rel="noreferrer">Repository →</a>
-            <a href="https://emotion.knettf.com" target="_blank" rel="noreferrer">Live Demo →</a>
+        <section>
+          <h2>Technical Skills</h2>
+          <div class="skills">
+            <div class="skill-group">
+              <b>Languages</b>
+              <span>Python, C/C++, TypeScript, JavaScript</span>
+            </div>
+            <div class="skill-group">
+              <b>Backend</b>
+              <span>Django, FastAPI, REST API, SQLAlchemy</span>
+            </div>
+            <div class="skill-group">
+              <b>Cloud & Infrastructure</b>
+              <span>Linux, Docker, Kubernetes, Terraform, OpenStack</span>
+            </div>
+            <div class="skill-group">
+              <b>Data & Services</b>
+              <span>MySQL, SQLite, Redis, WebSocket, aiohttp</span>
+            </div>
+            <div class="skill-group">
+              <b>Research</b>
+              <span>Optimization, Reinforcement Learning, Safe RL, Anomaly Detection</span>
+            </div>
           </div>
-        </article>
+        </section>
 
-        <article class="card project">
-          <div class="meta">DISTRIBUTED SYSTEM · MONITORING</div>
-          <h3>Routing Monitor / Docker Request</h3>
-          <p>분산 환경에서 요청을 전달하고 Load Balancing 동작을 실험하기 위한 연구용 Prototype.</p>
-          <ul>
-            <li>Python aiohttp 기반 비동기 Client / Manager / Worker 구성</li>
-            <li>Raspberry Pi 기반 분산 Worker와 Request routing 실험</li>
-            <li>Docker 환경에서 요청 처리와 결과 로그 수집</li>
-            <li>부하 분산 알고리즘과 요청 분포를 반복 실험</li>
-          </ul>
-          <div class="tags"><span class="tag">Python</span><span class="tag">aiohttp</span><span class="tag">Docker</span><span class="tag">Raspberry Pi</span><span class="tag">Load Balancing</span></div>
-          <div class="links"><a href="https://github.com/Wk-P/Routing-Monitor-Docker-Request" target="_blank" rel="noreferrer">Repository →</a></div>
-        </article>
+        <section>
+          <h2>Relevant Coursework</h2>
+          <div class="course">
+            <b>Cloud Native Networking</b>
+            <span>A+</span>
+          </div>
+          <div class="course">
+            <b>Network & Reinforcement Learning</b>
+            <span>A</span>
+          </div>
+          <div class="course">
+            <b>Advanced Operating Systems & System Security</b>
+            <span>B+</span>
+          </div>
+        </section>
 
-        <article class="card project">
-          <div class="meta">BACKEND · SECURITY</div>
-          <h3>Gproject</h3>
-          <p>거래 데이터와 사용자 자산 검증 문제를 다룬 Django 기반 Web Prototype.</p>
-          <ul>
-            <li>Django ORM과 SQLite 기반 Backend 구성</li>
-            <li>WebSocket을 이용한 네트워크 데이터 수집</li>
-            <li>Merkle Tree와 zk-SNARK 기반 검증 아이디어 실험</li>
-          </ul>
-          <div class="tags"><span class="tag">Django</span><span class="tag">Python</span><span class="tag">WebSocket</span><span class="tag">Merkle Tree</span></div>
-          <div class="links"><a href="https://github.com/Wk-P/Gproject" target="_blank" rel="noreferrer">Repository →</a></div>
-        </article>
-      </div>
-    </section>
+        <section>
+          <h2>Languages</h2>
+          <p class="small">Chinese — Native</p>
+          <p class="small">Korean — TOPIK Level 4</p>
+        </section>
+      </aside>
 
-    <section id="research">
-      <h2 class="section-title">Research</h2>
-      <div class="card">
-        <div class="research-item">
-          <b>Privacy-Preserving Edge Service Placement by Optimization and Safe Reinforcement Learning</b>
-          <p>Edge 환경의 제한된 자원과 privacy-conflict 제약을 고려해 서비스 배치 문제를 모델링하고, ILP와 Safe RL 기반 방법을 비교·연구.</p>
-        </div>
-        <div class="research-item">
-          <b>eBPF / Hubble based Network Anomaly Detection</b>
-          <p>Kubernetes 환경에서 Hubble L3/L4 flow 데이터를 수집·전처리하고 이상 탐지 실험 환경을 구축.</p>
-        </div>
-      </div>
-    </section>
+      <main class="main">
+        <section>
+          <h2>Education</h2>
+          <div class="entry">
+            <div class="entry-head">
+              <div>
+                <h3>Pusan National University</h3>
+                <div class="sub">M.S. Program, Computer Engineering</div>
+              </div>
+              <div class="label">Coursework completed</div>
+            </div>
+            <p class="small">
+              Research focus: system resource management, cloud-native environments,
+              networking, optimization, and reinforcement learning.
+            </p>
+          </div>
 
-    <section id="skills">
-      <h2 class="section-title">Skills</h2>
-      <div class="grid">
-        <div class="card"><h3>Platform & Infra</h3><p>Linux · Docker · Kubernetes · Terraform · Networking · Monitoring</p></div>
-        <div class="card"><h3>Backend & Web</h3><p>Python · Django · FastAPI · REST API · MySQL · Redis · Vue · TypeScript</p></div>
-        <div class="card"><h3>Research</h3><p>Optimization · Reinforcement Learning · Safe RL · Anomaly Detection</p></div>
-        <div class="card"><h3>Selected Coursework</h3><p>Cloud Native Networking (A+) · Network & Reinforcement Learning (A) · Advanced OS & System Security (B+)</p></div>
-      </div>
-    </section>
-  </main>
+          <div class="entry">
+            <div class="entry-head">
+              <div>
+                <h3>Pusan National University</h3>
+                <div class="sub">B.S., Computer Engineering</div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-  <footer>
-    <div class="wrap">
-      <b>Lingxiao Zhou</b><br/>
-      Platform / Backend / Cloud-Native Developer · GitHub <a href="https://github.com/Wk-P">@Wk-P</a>
+        <section>
+          <h2>Research Experience</h2>
+
+          <div class="entry">
+            <div class="entry-head">
+              <div class="entry-title">Privacy-Preserving Edge Service Placement</div>
+              <div class="label">Optimization / Safe RL</div>
+            </div>
+            <ul>
+              <li>Modeled edge-service placement under capacity and privacy-conflict constraints.</li>
+              <li>Compared mathematical optimization with reinforcement-learning approaches for sequential placement.</li>
+              <li>Studied PPO-based safe decision methods together with DQN-family baselines.</li>
+              <li>Focused on resource utilization, feasibility, and the effect of explicit safety mechanisms.</li>
+            </ul>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head">
+              <div class="entry-title">Kubernetes Network Anomaly Detection</div>
+              <div class="label">eBPF / Hubble</div>
+            </div>
+            <ul>
+              <li>Built an experimental environment for collecting L3/L4 network-flow data with Hubble.</li>
+              <li>Prepared and processed traffic data for anomaly-detection experiments.</li>
+              <li>Worked on integrating infrastructure-side data collection with model-side analysis.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2>Selected Projects</h2>
+
+          <div class="entry">
+            <div class="entry-head">
+              <div>
+                <h3>CloudPlatform</h3>
+                <div class="sub">Kubernetes / OpenStack Resource Management Platform</div>
+              </div>
+              <div class="label">Cloud / Platform</div>
+            </div>
+            <ul>
+              <li>Built a unified web platform for monitoring and managing Kubernetes and OpenStack resources.</li>
+              <li>Implemented Cluster, Node, Pod, Container, CPU, and memory monitoring.</li>
+              <li>Integrated JWT authentication with Kubernetes ServiceAccount tokens.</li>
+              <li>Developed a Django REST backend and Vue 3 / TypeScript dashboard.</li>
+              <li>Added traffic-anomaly detection and operational documentation.</li>
+            </ul>
+            <div class="project-links">
+              <a href="https://github.com/Wk-P/CloudPlatform" target="_blank" rel="noreferrer">View repository →</a>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head">
+              <div>
+                <h3>Emotion Talk Assistant</h3>
+                <div class="sub">AI-assisted Research Web Application</div>
+              </div>
+              <div class="label">Full Stack / AI</div>
+            </div>
+            <ul>
+              <li>Developed a FastAPI backend and SQLAlchemy-based data layer.</li>
+              <li>Integrated the OpenAI API and user-authentication functionality.</li>
+              <li>Built the frontend with Vue 3 and TypeScript.</li>
+              <li>Prepared Docker-based deployment and Cloudflare-oriented frontend deployment.</li>
+            </ul>
+            <div class="project-links">
+              <a href="https://github.com/Wk-P/emotion-talk-assistant" target="_blank" rel="noreferrer">Repository →</a>
+              &nbsp;&nbsp;
+              <a href="https://emotion.knettf.com" target="_blank" rel="noreferrer">Live demo →</a>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head">
+              <div>
+                <h3>Routing Monitor / Docker Request</h3>
+                <div class="sub">Distributed Request Routing Prototype</div>
+              </div>
+              <div class="label">Distributed Systems</div>
+            </div>
+            <ul>
+              <li>Implemented asynchronous Client / Manager / Worker components with Python aiohttp.</li>
+              <li>Used Raspberry Pi workers to test distributed request routing.</li>
+              <li>Collected request-processing and result logs in Docker-based experiments.</li>
+              <li>Evaluated load-balancing behavior and request distribution.</li>
+            </ul>
+            <div class="project-links">
+              <a href="https://github.com/Wk-P/Routing-Monitor-Docker-Request" target="_blank" rel="noreferrer">View repository →</a>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head">
+              <div>
+                <h3>Gproject</h3>
+                <div class="sub">Django Web Prototype for Asset Verification</div>
+              </div>
+              <div class="label">Backend / Security</div>
+            </div>
+            <ul>
+              <li>Built a Django-based backend with ORM and SQLite.</li>
+              <li>Collected network data through WebSocket connections.</li>
+              <li>Explored Merkle-tree and zk-SNARK concepts for verification workflows.</li>
+            </ul>
+            <div class="project-links">
+              <a href="https://github.com/Wk-P/Gproject" target="_blank" rel="noreferrer">View repository →</a>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
-  </footer>
+
+    <footer>
+      Lingxiao Zhou · Technical Resume / Portfolio · GitHub @Wk-P
+    </footer>
+  </div>
 </body>
 </html>
