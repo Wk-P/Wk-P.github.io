@@ -511,42 +511,144 @@
     @media(max-width:700px){
       body{font-size:15px;line-height:1.62}
       .shell{width:100%;margin:0}
-      .topbar{top:0;margin:0;border-radius:0;border-left:0;border-right:0;padding:12px 16px}
-      .brand{font-size:14px}
+      .topbar{
+        top:0;
+        margin:0;
+        border-radius:0;
+        border-left:0;
+        border-right:0;
+        padding:12px 16px;
+        justify-content:center;
+      }
+      .brand{font-size:14px;justify-content:center}
       .nav{display:none}
-      .hero{border-radius:0;padding:38px 22px}
-      .kicker{font-size:11px}
-      h1{font-size:42px;line-height:1.02}
-      .hero-sub{font-size:16px;line-height:1.55}
+
+      .hero{
+        border-radius:0;
+        padding:38px 22px;
+        text-align:center;
+      }
+      .hero-main{
+        width:100%;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+      }
+      .kicker{
+        font-size:11px;
+        justify-content:center;
+      }
+      h1{
+        font-size:42px;
+        line-height:1.02;
+        text-align:center;
+      }
+      .hero-sub{
+        font-size:16px;
+        line-height:1.55;
+        margin-left:auto;
+        margin-right:auto;
+        text-align:center;
+      }
+      .hero-side{
+        grid-template-columns:1fr;
+        width:100%;
+        max-width:520px;
+        margin:0 auto;
+      }
+      .fact{
+        text-align:center;
+      }
       .fact-label{font-size:10px}
       .fact-value{font-size:13px}
-      .hero-side{grid-template-columns:1fr}
-      .section{margin-top:12px;border-radius:0;border-left:0;border-right:0;padding:30px 22px}
-      .section-head{margin-bottom:24px}
-      .eyebrow{font-size:11px}
-      h2{font-size:26px}
-      .section-lead{font-size:14.5px}
-      .timeline:before{left:11px}
-      .timeline-item{grid-template-columns:1fr;padding-left:30px;gap:8px}
-      .timeline-year{text-align:left;font-size:12px}
-      .timeline-card{padding:18px}
-      .timeline-card:before{left:-25px}
-      .card-row{display:block}
-      .card-title{font-size:18px}
+
+      .section{
+        margin-top:12px;
+        border-radius:0;
+        border-left:0;
+        border-right:0;
+        padding:30px 22px;
+      }
+      .section-head{
+        margin-bottom:24px;
+        text-align:center;
+        justify-items:center;
+      }
+      .eyebrow{
+        font-size:11px;
+        text-align:center;
+      }
+      h2{
+        font-size:26px;
+        text-align:center;
+      }
+      .section-lead{
+        font-size:14.5px;
+        margin-left:auto;
+        margin-right:auto;
+        text-align:center;
+      }
+
+      .timeline:before{display:none}
+      .timeline-item{
+        grid-template-columns:1fr;
+        padding-left:0;
+        gap:8px;
+      }
+      .timeline-year{
+        text-align:center;
+        font-size:12px;
+      }
+      .timeline-card{
+        padding:18px;
+        width:100%;
+        margin:0 auto;
+      }
+      .timeline-card:before{display:none}
+      .card-row{display:block;text-align:center}
+      .card-title{font-size:18px;text-align:center}
       .thesis .card-title{font-size:21px}
-      .card-sub{font-size:12px}
-      .meta{margin-top:4px;font-size:11px}
-      .card-body{font-size:14px}
-      .paper{min-height:0;padding:18px}
+      .card-sub{font-size:12px;text-align:center}
+      .meta{margin-top:4px;font-size:11px;text-align:center}
+      .card-body{
+        font-size:14px;
+        text-align:left;
+      }
+
+      .research-grid{justify-items:stretch}
+      .paper{min-height:0;padding:18px;text-align:center}
       .paper h3{font-size:18px}
       .paper p{font-size:13.5px}
+
       .project{min-height:0;padding:20px}
-      .project h3{font-size:20px}
-      .project p,.project ul{font-size:13.5px}
-      .project-links{font-size:12.5px}
+      .project-top{
+        align-items:center;
+        text-align:center;
+        flex-direction:column;
+      }
+      .project h3{font-size:20px;text-align:center;width:100%}
+      .project .card-sub{text-align:center}
+      .project p{font-size:13.5px;text-align:center}
+      .project ul{font-size:13.5px;text-align:left}
+      .project-links{
+        font-size:12.5px;
+        justify-content:center;
+        flex-wrap:wrap;
+      }
+
       .skills{grid-template-columns:1fr}
-      .skill{min-height:0;padding:18px}
-      .footer{padding:20px 22px 28px}
+      .skill{
+        min-height:0;
+        padding:18px;
+        text-align:center;
+      }
+      .footer{
+        padding:20px 22px 28px;
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+        gap:6px;
+      }
     }
 
     @media(max-width:420px){
