@@ -3,427 +3,800 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Lingxiao Zhou — Academic profile, research, publications, and engineering projects" />
-  <title>Lingxiao Zhou | Academic Portfolio</title>
+  <meta name="description" content="Lingxiao Zhou — Academic and engineering portfolio" />
+  <title>Lingxiao Zhou — Academic Portfolio</title>
   <style>
     :root{
-      --bg:#f4f6f8;
+      --bg:#f4f5f7;
       --paper:#ffffff;
-      --ink:#16202a;
-      --muted:#66727e;
-      --line:#e2e7ec;
-      --navy:#173a63;
-      --blue:#2d6cdf;
+      --ink:#111827;
+      --muted:#667085;
+      --line:#e7eaf0;
       --soft:#f7f9fc;
-      --max:1040px;
+      --blue:#315efb;
+      --blue2:#6d7cff;
+      --cyan:#32c7d9;
+      --navy:#14213d;
+      --max:1220px;
+      --radius:22px;
+      --shadow:0 20px 60px rgba(17,24,39,.08);
     }
+
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      background:var(--bg);
       color:var(--ink);
-      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-      line-height:1.62;
-    }
-    a{color:var(--blue);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .page{
-      width:min(var(--max),calc(100% - 36px));
-      margin:32px auto 52px;
-      background:var(--paper);
-      border:1px solid #e7ebef;
-      border-radius:18px;
-      overflow:hidden;
-      box-shadow:0 18px 52px rgba(18,34,50,.08);
-    }
-    header{
-      padding:52px 58px 40px;
-      background:linear-gradient(135deg,#16385f 0%,#214f81 100%);
-      color:#fff;
-    }
-    .name{
-      margin:0;
-      font-size:46px;
-      line-height:1.05;
-      letter-spacing:-.035em;
-    }
-    .role{
-      margin-top:12px;
-      font-size:18px;
-      font-weight:600;
-      color:rgba(255,255,255,.94);
-    }
-    .intro{
-      max-width:790px;
-      margin:14px 0 0;
-      font-size:14.5px;
-      color:rgba(255,255,255,.80);
-    }
-    .toplinks{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px 18px;
-      margin-top:20px;
-      font-size:13px;
-    }
-    .toplinks a{color:#fff;font-weight:600}
-    nav{
-      display:flex;
-      gap:22px;
-      flex-wrap:wrap;
-      padding:14px 58px;
-      border-bottom:1px solid var(--line);
-      background:#fff;
-      font-size:13px;
-      font-weight:700;
-    }
-    nav a{color:#495766}
-    main{padding:38px 58px 54px}
-    section{margin-bottom:40px}
-    section:last-child{margin-bottom:0}
-    h2{
-      margin:0 0 18px;
-      font-size:19px;
+      background:
+        radial-gradient(circle at 12% 0%, rgba(49,94,251,.12), transparent 27%),
+        radial-gradient(circle at 92% 12%, rgba(50,199,217,.10), transparent 24%),
+        var(--bg);
+      font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      font-size:17px;
+      line-height:1.68;
       letter-spacing:-.01em;
-      color:var(--navy);
-      padding-bottom:8px;
-      border-bottom:2px solid var(--navy);
     }
-    .summary{
-      font-size:14px;
-      color:#475461;
-      max-width:860px;
+
+    a{color:inherit;text-decoration:none}
+    a:hover{color:var(--blue)}
+
+    .shell{
+      width:min(var(--max),calc(100% - 56px));
+      margin:34px auto 60px;
     }
-    .timeline{
-      display:grid;
-      gap:16px;
-    }
-    .item{
-      border:1px solid var(--line);
-      border-radius:13px;
-      padding:18px 20px;
-      background:#fff;
-    }
-    .item-head{
+
+    .topbar{
+      position:sticky;
+      top:16px;
+      z-index:20;
       display:flex;
       justify-content:space-between;
-      gap:18px;
-      align-items:flex-start;
+      align-items:center;
+      gap:24px;
+      padding:14px 18px;
+      border:1px solid rgba(231,234,240,.9);
+      border-radius:16px;
+      background:rgba(255,255,255,.88);
+      backdrop-filter:blur(18px);
+      box-shadow:0 10px 30px rgba(17,24,39,.06);
+      margin-bottom:22px;
     }
-    .item h3{
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:800;
+      font-size:15px;
+    }
+
+    .brand-dot{
+      width:11px;height:11px;border-radius:50%;
+      background:linear-gradient(135deg,var(--blue),var(--cyan));
+      box-shadow:0 0 0 5px rgba(49,94,251,.10);
+    }
+
+    .nav{
+      display:flex;
+      gap:22px;
+      color:#596579;
+      font-size:14px;
+      font-weight:700;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:1.55fr .75fr;
+      gap:40px;
+      align-items:end;
+      min-height:520px;
+      padding:68px 72px;
+      border-radius:30px;
+      background:
+        linear-gradient(135deg,#111827 0%,#17315f 52%,#315efb 125%);
+      color:#fff;
+      box-shadow:var(--shadow);
+    }
+
+    .hero:before{
+      content:"";
+      position:absolute;
+      width:420px;height:420px;
+      right:-120px;top:-160px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:
+        0 0 0 54px rgba(255,255,255,.035),
+        0 0 0 108px rgba(255,255,255,.025);
+    }
+
+    .hero:after{
+      content:"";
+      position:absolute;
+      width:220px;height:220px;
+      left:54%;bottom:-120px;
+      border-radius:50%;
+      background:rgba(50,199,217,.13);
+      filter:blur(2px);
+    }
+
+    .hero-main,.hero-side{position:relative;z-index:1}
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      color:#cfe4ff;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-size:13px;
+      font-weight:800;
+    }
+
+    .kicker:before{
+      content:"";
+      width:28px;height:2px;
+      background:linear-gradient(90deg,var(--cyan),#fff);
+      border-radius:99px;
+    }
+
+    h1{
+      margin:18px 0 18px;
+      max-width:820px;
+      font-size:clamp(54px,6vw,78px);
+      line-height:.98;
+      letter-spacing:-.055em;
+      font-weight:850;
+    }
+
+    .hero-sub{
+      max-width:760px;
       margin:0;
+      color:rgba(255,255,255,.78);
+      font-size:20px;
+      line-height:1.58;
+      letter-spacing:-.02em;
+    }
+
+    .hero-side{
+      display:grid;
+      gap:12px;
+      align-self:stretch;
+      align-content:end;
+    }
+
+    .fact{
+      padding:16px 18px;
+      border:1px solid rgba(255,255,255,.13);
+      border-radius:16px;
+      background:rgba(255,255,255,.07);
+      backdrop-filter:blur(10px);
+    }
+
+    .fact-label{
+      color:rgba(255,255,255,.55);
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    .fact-value{
+      margin-top:5px;
+      font-size:14px;
+      font-weight:700;
+      color:#fff;
+    }
+
+    .section{
+      margin-top:28px;
+      padding:54px 58px;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:var(--paper);
+      box-shadow:0 12px 38px rgba(17,24,39,.045);
+    }
+
+    .section-head{
+      display:grid;
+      grid-template-columns:200px 1fr;
+      gap:34px;
+      align-items:start;
+      margin-bottom:30px;
+    }
+
+    .eyebrow{
+      color:var(--blue);
+      font-size:12px;
+      font-weight:850;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+    }
+
+    h2{
+      margin:0;
+      font-size:34px;
+      line-height:1.15;
+      letter-spacing:-.035em;
+    }
+
+    .section-lead{
+      margin:9px 0 0;
+      max-width:800px;
+      color:var(--muted);
       font-size:16px;
     }
-    .sub{
-      margin-top:3px;
+
+    .timeline{
+      position:relative;
+      display:grid;
+      gap:18px;
+    }
+
+    .timeline:before{
+      content:"";
+      position:absolute;
+      left:102px;
+      top:12px;
+      bottom:12px;
+      width:1px;
+      background:linear-gradient(var(--blue),#cdd5df 55%,transparent);
+    }
+
+    .timeline-item{
+      display:grid;
+      grid-template-columns:86px 1fr;
+      gap:34px;
+      position:relative;
+    }
+
+    .timeline-year{
+      padding-top:4px;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:800;
+      text-align:right;
+    }
+
+    .timeline-card{
+      position:relative;
+      padding:20px 22px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:linear-gradient(180deg,#fff,#fbfcfe);
+    }
+
+    .timeline-card:before{
+      content:"";
+      position:absolute;
+      left:-40px;
+      top:26px;
+      width:11px;height:11px;
+      border-radius:50%;
+      background:#fff;
+      border:3px solid var(--blue);
+      box-shadow:0 0 0 5px rgba(49,94,251,.08);
+    }
+
+    .card-row{
+      display:flex;
+      justify-content:space-between;
+      gap:22px;
+      align-items:flex-start;
+    }
+
+    .card-title{
+      margin:0;
+      font-size:20px;
+      line-height:1.35;
+      letter-spacing:-.02em;
+    }
+
+    .card-sub{
+      margin-top:4px;
       color:var(--blue);
       font-size:13px;
-      font-weight:600;
+      font-weight:800;
     }
+
     .meta{
       color:var(--muted);
       font-size:12px;
       white-space:nowrap;
+      padding-top:4px;
     }
-    .item p{
-      margin:9px 0 0;
-      color:#53606c;
-      font-size:13.5px;
-    }
-    .item ul{
-      margin:9px 0 0;
-      padding-left:18px;
-      color:#4b5864;
-      font-size:13.5px;
-    }
-    .item li{margin:4px 0}
-    .academic{
-      background:var(--soft);
-      border-left:4px solid var(--blue);
-    }
-    .paper-title{
-      font-weight:700;
-      color:#243140;
-    }
-    .badge{
-      display:inline-block;
+
+    .card-body{
       margin-top:10px;
-      padding:4px 8px;
-      border-radius:999px;
-      background:#edf3ff;
-      color:#2c5eb4;
-      font-size:11px;
-      font-weight:700;
+      color:#4e5a69;
+      font-size:15px;
     }
-    .grid{
+
+    .card-body ul{
+      margin:10px 0 0;
+      padding-left:20px;
+    }
+
+    .card-body li{margin:5px 0}
+
+    .thesis{
+      border:0;
+      background:
+        linear-gradient(135deg,rgba(49,94,251,.08),rgba(50,199,217,.07)),
+        #fff;
+      box-shadow:inset 0 0 0 1px rgba(49,94,251,.14);
+    }
+
+    .thesis .card-title{
+      font-size:24px;
+      max-width:790px;
+    }
+
+    .research-grid{
       display:grid;
       grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:14px;
+      gap:16px;
     }
-    .project{
+
+    .paper{
+      position:relative;
+      overflow:hidden;
+      min-height:220px;
+      padding:22px;
       border:1px solid var(--line);
-      border-radius:13px;
-      padding:17px 18px;
+      border-radius:18px;
       background:#fff;
     }
-    .project h3{margin:0;font-size:15px}
-    .project p{margin:7px 0 0;color:#596672;font-size:13px}
-    .project .links{margin-top:10px;font-size:12.5px;font-weight:700}
-    .skill-grid{
+
+    .paper:after{
+      content:"";
+      position:absolute;
+      width:110px;height:110px;
+      right:-36px;bottom:-46px;
+      border-radius:50%;
+      background:rgba(49,94,251,.06);
+    }
+
+    .paper-type{
+      color:var(--blue);
+      font-size:11px;
+      font-weight:850;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+    }
+
+    .paper h3{
+      margin:12px 0 8px;
+      font-size:20px;
+      line-height:1.35;
+      letter-spacing:-.02em;
+    }
+
+    .paper p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .projects{
       display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:12px;
+      grid-template-columns:repeat(12,1fr);
+      gap:16px;
     }
-    .skill{
-      background:var(--soft);
+
+    .project{
+      grid-column:span 6;
+      display:flex;
+      flex-direction:column;
+      min-height:255px;
+      padding:24px;
       border:1px solid var(--line);
-      border-radius:12px;
-      padding:14px 15px;
+      border-radius:20px;
+      background:linear-gradient(180deg,#fff,#fafbfe);
     }
-    .skill b{display:block;font-size:13px;margin-bottom:5px}
-    .skill span{color:var(--muted);font-size:12.5px}
-    footer{
-      border-top:1px solid var(--line);
-      padding:18px 58px 24px;
-      color:#8a949e;
-      font-size:11.5px;
-      text-align:right;
+
+    .project.featured{
+      grid-column:span 12;
+      min-height:280px;
+      background:
+        linear-gradient(135deg,rgba(49,94,251,.08),rgba(50,199,217,.06)),
+        #fff;
     }
-    @media(max-width:760px){
-      .page{width:100%;margin:0;border:0;border-radius:0;box-shadow:none}
-      header,main{padding-left:24px;padding-right:24px}
-      header{padding-top:36px}
-      nav{padding-left:24px;padding-right:24px}
-      .name{font-size:36px}
-      .item-head{display:block}
+
+    .project-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .project h3{
+      margin:0;
+      font-size:23px;
+      letter-spacing:-.025em;
+    }
+
+    .tag{
+      padding:5px 9px;
+      border-radius:999px;
+      background:#eef3ff;
+      color:var(--blue);
+      font-size:10px;
+      font-weight:850;
+      letter-spacing:.07em;
+      text-transform:uppercase;
+    }
+
+    .project p{
+      margin:10px 0 0;
+      color:var(--muted);
+      font-size:14.5px;
+      max-width:760px;
+    }
+
+    .project ul{
+      margin:12px 0 0;
+      padding-left:20px;
+      color:#4c5866;
+      font-size:14px;
+    }
+
+    .project-links{
+      margin-top:auto;
+      padding-top:18px;
+      display:flex;
+      gap:14px;
+      color:var(--blue);
+      font-size:13px;
+      font-weight:800;
+    }
+
+    .skills{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:14px;
+    }
+
+    .skill{
+      min-height:140px;
+      padding:20px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:var(--soft);
+    }
+
+    .skill b{
+      display:block;
+      font-size:14px;
+      margin-bottom:10px;
+    }
+
+    .skill span{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.7;
+    }
+
+    .footer{
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      padding:28px 4px 0;
+      color:#8a94a3;
+      font-size:12px;
+    }
+
+    @media(max-width:980px){
+      .hero{grid-template-columns:1fr;min-height:auto;padding:50px 36px}
+      .hero-side{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .section{padding:40px 32px}
+      .section-head{grid-template-columns:1fr;gap:10px}
+      .research-grid{grid-template-columns:1fr}
+      .project,.project.featured{grid-column:span 12}
+      .skills{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+
+    @media(max-width:700px){
+      body{font-size:16px}
+      .shell{width:100%;margin:0}
+      .topbar{top:0;margin:0;border-radius:0;border-left:0;border-right:0}
+      .nav{display:none}
+      .hero{border-radius:0;padding:42px 24px}
+      h1{font-size:48px}
+      .hero-sub{font-size:17px}
+      .hero-side{grid-template-columns:1fr}
+      .section{margin-top:14px;border-radius:0;border-left:0;border-right:0;padding:34px 24px}
+      h2{font-size:28px}
+      .timeline:before{left:11px}
+      .timeline-item{grid-template-columns:1fr;padding-left:30px}
+      .timeline-year{text-align:left}
+      .timeline-card:before{left:-25px}
+      .card-row{display:block}
       .meta{margin-top:4px}
-      .grid,.skill-grid{grid-template-columns:1fr}
-      footer{padding-left:24px;padding-right:24px}
+      .skills{grid-template-columns:1fr}
+      .footer{padding:20px 24px 28px}
     }
+
     @media print{
       body{background:#fff}
-      .page{width:100%;margin:0;border:0;border-radius:0;box-shadow:none}
-      nav{display:none}
-      .item,.project{break-inside:avoid}
+      .shell{width:100%;margin:0}
+      .topbar{display:none}
+      .hero,.section{box-shadow:none}
+      .hero{border-radius:0}
+      .section{break-inside:avoid}
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <header>
-      <h1 class="name">Lingxiao Zhou</h1>
-      <div class="role">Computer Engineering · Cloud Systems · Backend · Optimization</div>
-      <p class="intro">
-        M.S. candidate in Computer Engineering at Pusan National University with coursework completed.
-        My work focuses on cloud-native systems, resource management, networking, optimization, and
-        reinforcement learning. I am particularly interested in building reliable platform and backend
-        systems and connecting research ideas with deployable engineering solutions.
-      </p>
-      <div class="toplinks">
-        <span>Pusan National University</span>
-        <a href="https://github.com/Wk-P" target="_blank" rel="noreferrer">GitHub @Wk-P</a>
+  <div class="shell">
+
+    <div class="topbar">
+      <a class="brand" href="#top"><span class="brand-dot"></span>Lingxiao Zhou</a>
+      <div class="nav">
+        <a href="#education">Education</a>
+        <a href="#thesis">Thesis</a>
+        <a href="#academic">Academic Work</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+      </div>
+    </div>
+
+    <header class="hero" id="top">
+      <div class="hero-main">
+        <div class="kicker">Academic & Engineering Portfolio</div>
+        <h1>Lingxiao Zhou</h1>
+        <p class="hero-sub">
+          Computer Engineering researcher and platform-oriented developer working across
+          cloud-native systems, backend engineering, networking, resource optimization,
+          and reinforcement learning.
+        </p>
+      </div>
+
+      <div class="hero-side">
+        <div class="fact">
+          <div class="fact-label">University</div>
+          <div class="fact-value">Pusan National University</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Current Status</div>
+          <div class="fact-value">M.S. Coursework Completed</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Focus</div>
+          <div class="fact-value">Cloud · Backend · Optimization</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">GitHub</div>
+          <div class="fact-value"><a href="https://github.com/Wk-P" target="_blank" rel="noreferrer">@Wk-P ↗</a></div>
+        </div>
       </div>
     </header>
 
-    <nav>
-      <a href="#about">About</a>
-      <a href="#education">Education</a>
-      <a href="#research">Research & Thesis</a>
-      <a href="#papers">Papers & Academic Work</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-    </nav>
+    <section class="section" id="education">
+      <div class="section-head">
+        <div class="eyebrow">01 · Education</div>
+        <div>
+          <h2>Academic Journey</h2>
+          <p class="section-lead">
+            Computer Engineering from undergraduate study through graduate research,
+            with a focus on systems, networking, cloud infrastructure, and optimization.
+          </p>
+        </div>
+      </div>
 
-    <main>
-      <section id="about">
-        <h2>About</h2>
-        <p class="summary">
-          I have studied computer engineering at Pusan National University from undergraduate through
-          graduate school. My academic interests center on systems, networking, cloud infrastructure,
-          and constrained optimization. Alongside research, I build backend and full-stack prototypes
-          using Python, Django, FastAPI, Docker, Kubernetes, and modern web technologies.
-        </p>
-      </section>
-
-      <section id="education">
-        <h2>Education</h2>
-        <div class="timeline">
-          <div class="item">
-            <div class="item-head">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">B.S.</div>
+          <div class="timeline-card">
+            <div class="card-row">
               <div>
-                <h3>M.S. in Computer Engineering</h3>
-                <div class="sub">Pusan National University</div>
-              </div>
-              <div class="meta">Coursework Completed · Expected 2027</div>
-            </div>
-            <p>
-              Graduate study in resource management, cloud-native networking, system security,
-              optimization, and reinforcement learning.
-            </p>
-          </div>
-
-          <div class="item">
-            <div class="item-head">
-              <div>
-                <h3>B.S. in Computer Engineering</h3>
-                <div class="sub">Pusan National University</div>
+                <h3 class="card-title">B.S. in Computer Engineering</h3>
+                <div class="card-sub">Pusan National University</div>
               </div>
               <div class="meta">Undergraduate</div>
             </div>
-            <p>
-              Undergraduate training in programming, data structures, operating systems,
-              networking, software engineering, and computer systems.
-            </p>
-            <div class="badge">
-              <a href="https://github.com/Wk-P/2023_graduation_project" target="_blank" rel="noreferrer">2023 Graduation Project Archive</a>
+            <div class="card-body">
+              Core study in programming, data structures, operating systems, computer networks,
+              software engineering, and computer systems.
+              <div class="project-links">
+                <a href="https://github.com/Wk-P/2023_graduation_project" target="_blank" rel="noreferrer">Graduation Project Archive →</a>
+              </div>
             </div>
           </div>
         </div>
-      </section>
 
-      <section id="research">
-        <h2>Graduate Research & Thesis</h2>
-        <div class="timeline">
-          <div class="item academic">
-            <div class="item-head">
+        <div class="timeline-item">
+          <div class="timeline-year">M.S.</div>
+          <div class="timeline-card">
+            <div class="card-row">
               <div>
-                <h3 class="paper-title">Privacy Preserving Edge Service Placement by Optimization and Safe Reinforcement Learning</h3>
-                <div class="sub">Master's Thesis · In Progress</div>
+                <h3 class="card-title">M.S. in Computer Engineering</h3>
+                <div class="card-sub">Pusan National University</div>
               </div>
-              <div class="meta">Edge Computing / Safe RL</div>
+              <div class="meta">Coursework Completed</div>
             </div>
-            <ul>
-              <li>Formulates edge-service placement under resource-capacity and privacy-conflict constraints.</li>
-              <li>Uses integer optimization as a reference solution and compares multiple reinforcement-learning approaches.</li>
-              <li>Studies PPO-based safety mechanisms together with DQN and DDQN baselines.</li>
-              <li>Evaluates resource utilization, feasibility, and constraint satisfaction across different scenarios.</li>
-            </ul>
-          </div>
-
-          <div class="item">
-            <div class="item-head">
-              <div>
-                <h3>Kubernetes Network Anomaly Detection</h3>
-                <div class="sub">eBPF · Hubble · L3/L4 Flow Monitoring</div>
-              </div>
-              <div class="meta">Research Collaboration</div>
+            <div class="card-body">
+              Graduate study in resource management, cloud-native networking, system security,
+              optimization, reinforcement learning, and edge computing.
             </div>
-            <ul>
-              <li>Built and maintained the Kubernetes-side experimental environment.</li>
-              <li>Collected and processed Hubble network-flow data for anomaly-detection experiments.</li>
-              <li>Worked on connecting infrastructure-side telemetry with model-side analysis.</li>
-            </ul>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="papers">
-        <h2>Papers & Academic Work</h2>
-        <div class="timeline">
-          <div class="item">
-            <div class="item-head">
-              <div>
-                <h3>KCI Journal Publication</h3>
-                <div class="sub">First Author</div>
-              </div>
-              <div class="meta">Journal Paper</div>
-            </div>
-            <p>First-author research publication in a Korean Citation Index (KCI) journal.</p>
-          </div>
-
-          <div class="item">
-            <div class="item-head">
-              <div>
-                <h3>KICS Summer Conference Paper</h3>
-                <div class="sub">Academic Conference</div>
-              </div>
-              <div class="meta">Conference Paper</div>
-            </div>
-            <p>Research work presented through the Korean Institute of Communications and Information Sciences.</p>
-          </div>
-
-          <div class="item">
-            <div class="item-head">
-              <div>
-                <h3>ICMU 2025 Poster Presentation</h3>
-                <div class="sub">International Conference on Mobile and Ubiquitous Systems</div>
-              </div>
-              <div class="meta">Poster</div>
-            </div>
-            <p>Presented research work in English in a poster-session format.</p>
-          </div>
-
-          <div class="item">
-            <div class="item-head">
-              <div>
-                <h3>Conference Version of Master's Thesis Research</h3>
-                <div class="sub">Submitted</div>
-              </div>
-              <div class="meta">Manuscript</div>
-            </div>
-            <p>Conference manuscript based on the master's research on privacy-preserving edge service placement.</p>
-          </div>
+    <section class="section" id="thesis">
+      <div class="section-head">
+        <div class="eyebrow">02 · Thesis</div>
+        <div>
+          <h2>Master's Thesis</h2>
+          <p class="section-lead">
+            Research on privacy-aware service placement in resource-constrained edge environments.
+          </p>
         </div>
-      </section>
+      </div>
 
-      <section id="projects">
-        <h2>Selected Engineering Projects</h2>
-        <div class="grid">
-          <article class="project">
-            <h3>CloudPlatform</h3>
-            <p>
-              Kubernetes/OpenStack resource management and monitoring platform with a Django REST backend,
-              Vue 3/TypeScript dashboard, authentication, and infrastructure monitoring.
-            </p>
-            <div class="links"><a href="https://github.com/Wk-P/CloudPlatform" target="_blank" rel="noreferrer">Repository →</a></div>
-          </article>
+      <div class="timeline-card thesis">
+        <div class="card-row">
+          <div>
+            <h3 class="card-title">Privacy Preserving Edge Service Placement by Optimization and Safe Reinforcement Learning</h3>
+            <div class="card-sub">Edge Computing · Optimization · Safe Reinforcement Learning</div>
+          </div>
+          <div class="meta">In Progress</div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li>Models service placement under ECU capacity and privacy-conflict constraints.</li>
+            <li>Uses integer optimization as a reference and compares it with sequential RL-based placement.</li>
+            <li>Studies PPO-based safety mechanisms together with DQN and DDQN baselines.</li>
+            <li>Evaluates feasibility, resource utilization, and constraint satisfaction across multiple scenarios.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-          <article class="project">
+    <section class="section" id="academic">
+      <div class="section-head">
+        <div class="eyebrow">03 · Academic Work</div>
+        <div>
+          <h2>Research & Publications</h2>
+          <p class="section-lead">
+            Selected journal, conference, poster, and collaborative research work.
+          </p>
+        </div>
+      </div>
+
+      <div class="research-grid">
+        <article class="paper">
+          <div class="paper-type">Journal</div>
+          <h3>KCI Journal Publication</h3>
+          <p>First-author research publication in a Korean Citation Index journal.</p>
+        </article>
+
+        <article class="paper">
+          <div class="paper-type">Conference</div>
+          <h3>KICS Summer Conference</h3>
+          <p>Research paper presented through the Korean Institute of Communications and Information Sciences.</p>
+        </article>
+
+        <article class="paper">
+          <div class="paper-type">Poster</div>
+          <h3>ICMU 2025 Poster Presentation</h3>
+          <p>Presented research work in English in an international poster-session format.</p>
+        </article>
+
+        <article class="paper">
+          <div class="paper-type">Research Collaboration</div>
+          <h3>Kubernetes Network Anomaly Detection</h3>
+          <p>Built and operated the Kubernetes-side environment for eBPF/Hubble L3/L4 flow collection and anomaly-detection experiments.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section-head">
+        <div class="eyebrow">04 · Engineering</div>
+        <div>
+          <h2>Selected Projects</h2>
+          <p class="section-lead">
+            Systems and web projects that connect research interests with deployable engineering.
+          </p>
+        </div>
+      </div>
+
+      <div class="projects">
+        <article class="project featured">
+          <div class="project-top">
+            <div>
+              <h3>CloudPlatform</h3>
+              <div class="card-sub">Kubernetes / OpenStack Resource Management Platform</div>
+            </div>
+            <span class="tag">Featured</span>
+          </div>
+          <p>
+            Unified cloud resource management and monitoring platform with a Django REST backend,
+            Vue 3 / TypeScript dashboard, Kubernetes integration, authentication, and infrastructure observability.
+          </p>
+          <ul>
+            <li>Cluster / Node / Pod / Container monitoring with CPU and memory visibility.</li>
+            <li>JWT authentication and Kubernetes ServiceAccount token integration.</li>
+            <li>Django REST API, Vue 3, TypeScript, MySQL, and Redis.</li>
+          </ul>
+          <div class="project-links">
+            <a href="https://github.com/Wk-P/CloudPlatform" target="_blank" rel="noreferrer">Repository →</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-top">
             <h3>Emotion Talk Assistant</h3>
-            <p>
-              Full-stack research web application using FastAPI, SQLAlchemy, Vue 3, TypeScript,
-              Docker, and the OpenAI API.
-            </p>
-            <div class="links">
-              <a href="https://github.com/Wk-P/emotion-talk-assistant" target="_blank" rel="noreferrer">Repository →</a>
-            </div>
-          </article>
+            <span class="tag">Full Stack / AI</span>
+          </div>
+          <p>
+            Research web application using FastAPI, SQLAlchemy, Vue 3, TypeScript,
+            Docker, and the OpenAI API.
+          </p>
+          <div class="project-links">
+            <a href="https://github.com/Wk-P/emotion-talk-assistant" target="_blank" rel="noreferrer">Repository →</a>
+            <a href="https://emotion.knettf.com" target="_blank" rel="noreferrer">Live Demo →</a>
+          </div>
+        </article>
 
-          <article class="project">
+        <article class="project">
+          <div class="project-top">
             <h3>Routing Monitor / Docker Request</h3>
-            <p>
-              Distributed request-routing prototype using Python aiohttp, Docker, Raspberry Pi workers,
-              and load-balancing experiments.
-            </p>
-            <div class="links"><a href="https://github.com/Wk-P/Routing-Monitor-Docker-Request" target="_blank" rel="noreferrer">Repository →</a></div>
-          </article>
+            <span class="tag">Distributed Systems</span>
+          </div>
+          <p>
+            Distributed request-routing prototype using Python aiohttp, Docker,
+            Raspberry Pi workers, request logging, and load-balancing experiments.
+          </p>
+          <div class="project-links">
+            <a href="https://github.com/Wk-P/Routing-Monitor-Docker-Request" target="_blank" rel="noreferrer">Repository →</a>
+          </div>
+        </article>
 
-          <article class="project">
+        <article class="project">
+          <div class="project-top">
             <h3>Gproject</h3>
-            <p>
-              Django-based web prototype exploring asset verification, WebSocket data collection,
-              Merkle-tree concepts, and zk-SNARK-based verification ideas.
-            </p>
-            <div class="links"><a href="https://github.com/Wk-P/Gproject" target="_blank" rel="noreferrer">Repository →</a></div>
-          </article>
-        </div>
-      </section>
+            <span class="tag">Backend / Security</span>
+          </div>
+          <p>
+            Django-based prototype exploring asset verification, WebSocket data collection,
+            Merkle-tree concepts, and zk-SNARK-based verification ideas.
+          </p>
+          <div class="project-links">
+            <a href="https://github.com/Wk-P/Gproject" target="_blank" rel="noreferrer">Repository →</a>
+          </div>
+        </article>
+      </div>
+    </section>
 
-      <section id="skills">
-        <h2>Technical Skills</h2>
-        <div class="skill-grid">
-          <div class="skill"><b>Programming</b><span>Python · C/C++ · TypeScript · JavaScript</span></div>
-          <div class="skill"><b>Backend</b><span>Django · FastAPI · REST API · SQLAlchemy</span></div>
-          <div class="skill"><b>Cloud & Infrastructure</b><span>Linux · Docker · Kubernetes · OpenStack · Terraform</span></div>
-          <div class="skill"><b>Data & Services</b><span>MySQL · SQLite · Redis · WebSocket · aiohttp</span></div>
-          <div class="skill"><b>Research</b><span>Optimization · RL · Safe RL · Anomaly Detection</span></div>
-          <div class="skill"><b>Language</b><span>Chinese — Native · Korean — TOPIK Level 4</span></div>
+    <section class="section" id="skills">
+      <div class="section-head">
+        <div class="eyebrow">05 · Skills</div>
+        <div>
+          <h2>Technical Stack</h2>
+          <p class="section-lead">
+            Technologies used across research prototypes, backend systems, and infrastructure work.
+          </p>
         </div>
-      </section>
-    </main>
+      </div>
 
-    <footer>Lingxiao Zhou · Academic & Technical Portfolio</footer>
+      <div class="skills">
+        <div class="skill"><b>Programming</b><span>Python · C/C++ · TypeScript · JavaScript</span></div>
+        <div class="skill"><b>Backend</b><span>Django · FastAPI · REST API · SQLAlchemy</span></div>
+        <div class="skill"><b>Cloud & Infrastructure</b><span>Linux · Docker · Kubernetes · OpenStack · Terraform</span></div>
+        <div class="skill"><b>Research</b><span>Optimization · Reinforcement Learning · Safe RL · Anomaly Detection</span></div>
+      </div>
+    </section>
+
+    <div class="footer">
+      <span>Lingxiao Zhou · Academic & Engineering Portfolio</span>
+      <span><a href="https://github.com/Wk-P" target="_blank" rel="noreferrer">github.com/Wk-P</a></span>
+    </div>
+
   </div>
 </body>
 </html>
