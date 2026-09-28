@@ -168,6 +168,67 @@
       font-weight:700;
     }
 
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:18px;
+    }
+
+    .lang-switch{
+      display:flex;
+      align-items:center;
+      gap:4px;
+      padding:4px;
+      border:1px solid rgba(49,94,251,.12);
+      border-radius:12px;
+      background:rgba(244,247,252,.9);
+    }
+
+    .lang-btn{
+      appearance:none;
+      border:0;
+      border-radius:9px;
+      background:transparent;
+      color:#667085;
+      padding:7px 10px;
+      font:inherit;
+      font-size:12px;
+      font-weight:800;
+      line-height:1;
+      cursor:pointer;
+      transition:background .18s ease,color .18s ease,transform .18s ease;
+    }
+
+    .lang-btn:hover{
+      color:var(--blue);
+      transform:translateY(-1px);
+    }
+
+    .lang-btn.active{
+      color:#fff;
+      background:linear-gradient(135deg,var(--blue),var(--blue2));
+      box-shadow:0 4px 12px rgba(49,94,251,.20);
+    }
+
+    html[lang="zh-CN"] body{
+      font-family:"Microsoft YaHei UI","Microsoft YaHei","PingFang SC","Noto Sans CJK SC","Segoe UI",sans-serif;
+      letter-spacing:0;
+    }
+
+    html[lang="ko"] body{
+      font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR","Segoe UI",sans-serif;
+      letter-spacing:-.015em;
+    }
+
+    html[lang="zh-CN"] h1,
+    html[lang="zh-CN"] h2,
+    html[lang="zh-CN"] h3,
+    html[lang="ko"] h1,
+    html[lang="ko"] h2,
+    html[lang="ko"] h3{
+      letter-spacing:-.025em;
+    }
+
     .hero{
       position:relative;
       overflow:hidden;
@@ -652,8 +713,15 @@
         padding:12px 16px;
         justify-content:center;
       }
+      .topbar{
+        flex-direction:column;
+        gap:9px;
+      }
       .brand{font-size:14px;justify-content:center}
+      .top-actions{width:100%;justify-content:center}
       .nav{display:none}
+      .lang-switch{padding:3px}
+      .lang-btn{padding:7px 11px;font-size:11px}
 
       .hero{
         border-radius:0;
@@ -820,12 +888,19 @@
 
     <div class="topbar">
       <a class="brand" href="#top"><span class="brand-dot"></span>Lingxiao Zhou</a>
-      <div class="nav">
-        <a href="#education">Education</a>
-        <a href="#thesis">Thesis</a>
-        <a href="#academic">Academic Work</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
+      <div class="top-actions">
+        <div class="nav">
+          <a href="#education" data-i18n="nav.education">Education</a>
+          <a href="#thesis" data-i18n="nav.thesis">Thesis</a>
+          <a href="#academic" data-i18n="nav.academic">Academic Work</a>
+          <a href="#projects" data-i18n="nav.projects">Projects</a>
+          <a href="#skills" data-i18n="nav.skills">Skills</a>
+        </div>
+        <div class="lang-switch" aria-label="Language">
+          <button class="lang-btn" type="button" data-lang="zh">中文</button>
+          <button class="lang-btn active" type="button" data-lang="en">EN</button>
+          <button class="lang-btn" type="button" data-lang="ko">한국어</button>
+        </div>
       </div>
     </div>
 
@@ -833,27 +908,23 @@
       <canvas class="hero-canvas" aria-hidden="true"></canvas>
       <div class="hero-orbit" aria-hidden="true"></div>
       <div class="hero-main">
-        <div class="kicker">Academic & Engineering Portfolio</div>
+        <div class="kicker" data-i18n="hero.kicker">Academic & Engineering Portfolio</div>
         <h1>Lingxiao Zhou</h1>
-        <p class="hero-sub">
-          Computer Engineering researcher and platform-oriented developer working across
-          cloud-native systems, backend engineering, networking, resource optimization,
-          and reinforcement learning.
-        </p>
+        <p class="hero-sub" data-i18n="hero.summary">Computer Engineering researcher and platform-oriented developer working across cloud-native systems, backend engineering, networking, resource optimization, and reinforcement learning.</p>
       </div>
 
       <div class="hero-side">
         <div class="fact">
-          <div class="fact-label">University</div>
-          <div class="fact-value">Pusan National University</div>
+          <div class="fact-label" data-i18n="fact.university.label">University</div>
+          <div class="fact-value" data-i18n="fact.university.value">Pusan National University</div>
         </div>
         <div class="fact">
-          <div class="fact-label">Current Status</div>
-          <div class="fact-value">M.S. Coursework Completed</div>
+          <div class="fact-label" data-i18n="fact.status.label">Current Status</div>
+          <div class="fact-value" data-i18n="fact.status.value">M.S. Coursework Completed</div>
         </div>
         <div class="fact">
-          <div class="fact-label">Focus</div>
-          <div class="fact-value">Cloud · Backend · Optimization</div>
+          <div class="fact-label" data-i18n="fact.focus.label">Focus</div>
+          <div class="fact-value" data-i18n="fact.focus.value">Cloud · Backend · Optimization</div>
         </div>
         <div class="fact">
           <div class="fact-label">GitHub</div>
@@ -864,51 +935,44 @@
 
     <section class="section" id="education">
       <div class="section-head">
-        <div class="eyebrow">01 · Education</div>
+        <div class="eyebrow" data-i18n="education.eyebrow">01 · Education</div>
         <div>
-          <h2>Academic Journey</h2>
-          <p class="section-lead">
-            Computer Engineering from undergraduate study through graduate research,
-            with a focus on systems, networking, cloud infrastructure, and optimization.
-          </p>
+          <h2 data-i18n="education.title">Academic Journey</h2>
+          <p class="section-lead" data-i18n="education.lead">Computer Engineering from undergraduate study through graduate research, with a focus on systems, networking, cloud infrastructure, and optimization.</p>
         </div>
       </div>
 
       <div class="timeline">
         <div class="timeline-item">
-          <div class="timeline-year">B.S.</div>
+          <div class="timeline-year" data-i18n="education.bs.short">B.S.</div>
           <div class="timeline-card">
             <div class="card-row">
               <div>
-                <h3 class="card-title">B.S. in Computer Engineering</h3>
-                <div class="card-sub">Pusan National University</div>
+                <h3 class="card-title" data-i18n="education.bs.title">B.S. in Computer Engineering</h3>
+                <div class="card-sub" data-i18n="common.pnu">Pusan National University</div>
               </div>
-              <div class="meta">Undergraduate</div>
+              <div class="meta" data-i18n="education.bs.meta">Undergraduate</div>
             </div>
             <div class="card-body">
-              Core study in programming, data structures, operating systems, computer networks,
-              software engineering, and computer systems.
+              <span data-i18n="education.bs.body">Core study in programming, data structures, operating systems, computer networks, software engineering, and computer systems.</span>
               <div class="project-links">
-                <a href="https://github.com/Wk-P/2023_graduation_project" target="_blank" rel="noreferrer">Graduation Project Archive →</a>
+                <a href="https://github.com/Wk-P/2023_graduation_project" target="_blank" rel="noreferrer" data-i18n="education.bs.archive">Graduation Project Archive →</a>
               </div>
             </div>
           </div>
         </div>
 
         <div class="timeline-item">
-          <div class="timeline-year">M.S.</div>
+          <div class="timeline-year" data-i18n="education.ms.short">M.S.</div>
           <div class="timeline-card">
             <div class="card-row">
               <div>
-                <h3 class="card-title">M.S. in Computer Engineering</h3>
+                <h3 class="card-title" data-i18n="education.ms.title">M.S. in Computer Engineering</h3>
                 <div class="card-sub">Pusan National University</div>
               </div>
-              <div class="meta">Coursework Completed</div>
+              <div class="meta" data-i18n="education.ms.meta">Coursework Completed</div>
             </div>
-            <div class="card-body">
-              Graduate study in resource management, cloud-native networking, system security,
-              optimization, reinforcement learning, and edge computing.
-            </div>
+            <div class="card-body" data-i18n="education.ms.body">Graduate study in resource management, cloud-native networking, system security, optimization, reinforcement learning, and edge computing.</div>
           </div>
         </div>
       </div>
@@ -916,29 +980,27 @@
 
     <section class="section" id="thesis">
       <div class="section-head">
-        <div class="eyebrow">02 · Thesis</div>
+        <div class="eyebrow" data-i18n="thesis.eyebrow">02 · Thesis</div>
         <div>
-          <h2>Master's Thesis</h2>
-          <p class="section-lead">
-            Research on privacy-aware service placement in resource-constrained edge environments.
-          </p>
+          <h2 data-i18n="thesis.sectionTitle">Master's Thesis</h2>
+          <p class="section-lead" data-i18n="thesis.lead">Research on privacy-aware service placement in resource-constrained edge environments.</p>
         </div>
       </div>
 
       <div class="timeline-card thesis">
         <div class="card-row">
           <div>
-            <h3 class="card-title">Privacy Preserving Edge Service Placement by Optimization and Safe Reinforcement Learning</h3>
-            <div class="card-sub">Edge Computing · Optimization · Safe Reinforcement Learning</div>
+            <h3 class="card-title" data-i18n="thesis.title">Privacy Preserving Edge Service Placement by Optimization and Safe Reinforcement Learning</h3>
+            <div class="card-sub" data-i18n="thesis.tags">Edge Computing · Optimization · Safe Reinforcement Learning</div>
           </div>
-          <div class="meta">In Progress</div>
+          <div class="meta" data-i18n="thesis.status">In Progress</div>
         </div>
         <div class="card-body">
           <ul>
-            <li>Models service placement under ECU capacity and privacy-conflict constraints.</li>
-            <li>Uses integer optimization as a reference and compares it with sequential RL-based placement.</li>
-            <li>Studies PPO-based safety mechanisms together with DQN and DDQN baselines.</li>
-            <li>Evaluates feasibility, resource utilization, and constraint satisfaction across multiple scenarios.</li>
+            <li data-i18n="thesis.b1">Models service placement under ECU capacity and privacy-conflict constraints.</li>
+            <li data-i18n="thesis.b2">Uses integer optimization as a reference and compares it with sequential RL-based placement.</li>
+            <li data-i18n="thesis.b3">Studies PPO-based safety mechanisms together with DQN and DDQN baselines.</li>
+            <li data-i18n="thesis.b4">Evaluates feasibility, resource utilization, and constraint satisfaction across multiple scenarios.</li>
           </ul>
         </div>
       </div>
@@ -946,50 +1008,46 @@
 
     <section class="section" id="academic">
       <div class="section-head">
-        <div class="eyebrow">03 · Academic Work</div>
+        <div class="eyebrow" data-i18n="academic.eyebrow">03 · Academic Work</div>
         <div>
-          <h2>Research & Publications</h2>
-          <p class="section-lead">
-            Selected journal, conference, poster, and collaborative research work.
-          </p>
+          <h2 data-i18n="academic.title">Research & Publications</h2>
+          <p class="section-lead" data-i18n="academic.lead">Selected journal, conference, poster, and collaborative research work.</p>
         </div>
       </div>
 
       <div class="research-grid">
         <article class="paper">
-          <div class="paper-type">Journal</div>
-          <h3>KCI Journal Publication</h3>
-          <p>First-author research publication in a Korean Citation Index journal.</p>
+          <div class="paper-type" data-i18n="academic.journal.type">Journal</div>
+          <h3 data-i18n="academic.journal.title">KCI Journal Publication</h3>
+          <p data-i18n="academic.journal.body">First-author research publication in a Korean Citation Index journal.</p>
         </article>
 
         <article class="paper">
-          <div class="paper-type">Conference</div>
-          <h3>KICS Summer Conference</h3>
-          <p>Research paper presented through the Korean Institute of Communications and Information Sciences.</p>
+          <div class="paper-type" data-i18n="academic.kics.type">Conference</div>
+          <h3 data-i18n="academic.kics.title">KICS Summer Conference</h3>
+          <p data-i18n="academic.kics.body">Research paper presented through the Korean Institute of Communications and Information Sciences.</p>
         </article>
 
         <article class="paper">
-          <div class="paper-type">Poster</div>
-          <h3>ICMU 2025 Poster Presentation</h3>
-          <p>Presented research work in English in an international poster-session format.</p>
+          <div class="paper-type" data-i18n="academic.icmu.type">Poster</div>
+          <h3 data-i18n="academic.icmu.title">ICMU 2025 Poster Presentation</h3>
+          <p data-i18n="academic.icmu.body">Presented research work in English in an international poster-session format.</p>
         </article>
 
         <article class="paper">
-          <div class="paper-type">Research Collaboration</div>
-          <h3>Kubernetes Network Anomaly Detection</h3>
-          <p>Built and operated the Kubernetes-side environment for eBPF/Hubble L3/L4 flow collection and anomaly-detection experiments.</p>
+          <div class="paper-type" data-i18n="academic.net.type">Research Collaboration</div>
+          <h3 data-i18n="academic.net.title">Kubernetes Network Anomaly Detection</h3>
+          <p data-i18n="academic.net.body">Built and operated the Kubernetes-side environment for eBPF/Hubble L3/L4 flow collection and anomaly-detection experiments.</p>
         </article>
       </div>
     </section>
 
     <section class="section" id="projects">
       <div class="section-head">
-        <div class="eyebrow">04 · Engineering</div>
+        <div class="eyebrow" data-i18n="projects.eyebrow">04 · Engineering</div>
         <div>
-          <h2>Selected Projects</h2>
-          <p class="section-lead">
-            Systems and web projects that connect research interests with deployable engineering.
-          </p>
+          <h2 data-i18n="projects.title">Selected Projects</h2>
+          <p class="section-lead" data-i18n="projects.lead">Systems and web projects that connect research interests with deployable engineering.</p>
         </div>
       </div>
 
@@ -998,64 +1056,52 @@
           <div class="project-top">
             <div>
               <h3>CloudPlatform</h3>
-              <div class="card-sub">Kubernetes / OpenStack Resource Management Platform</div>
+              <div class="card-sub" data-i18n="projects.cloud.subtitle">Kubernetes / OpenStack Resource Management Platform</div>
             </div>
-            <span class="tag">Featured</span>
+            <span class="tag" data-i18n="projects.featured">Featured</span>
           </div>
-          <p>
-            Unified cloud resource management and monitoring platform with a Django REST backend,
-            Vue 3 / TypeScript dashboard, Kubernetes integration, authentication, and infrastructure observability.
-          </p>
+          <p data-i18n="projects.cloud.body">Unified cloud resource management and monitoring platform with a Django REST backend, Vue 3 / TypeScript dashboard, Kubernetes integration, authentication, and infrastructure observability.</p>
           <ul>
-            <li>Cluster / Node / Pod / Container monitoring with CPU and memory visibility.</li>
-            <li>JWT authentication and Kubernetes ServiceAccount token integration.</li>
-            <li>Django REST API, Vue 3, TypeScript, MySQL, and Redis.</li>
+            <li data-i18n="projects.cloud.b1">Cluster / Node / Pod / Container monitoring with CPU and memory visibility.</li>
+            <li data-i18n="projects.cloud.b2">JWT authentication and Kubernetes ServiceAccount token integration.</li>
+            <li data-i18n="projects.cloud.b3">Django REST API, Vue 3, TypeScript, MySQL, and Redis.</li>
           </ul>
           <div class="project-links">
-            <a href="https://github.com/Wk-P/CloudPlatform" target="_blank" rel="noreferrer">Repository →</a>
+            <a href="https://github.com/Wk-P/CloudPlatform" target="_blank" rel="noreferrer" data-i18n="common.repository">Repository →</a>
           </div>
         </article>
 
         <article class="project">
           <div class="project-top">
             <h3>Emotion Talk Assistant</h3>
-            <span class="tag">Full Stack / AI</span>
+            <span class="tag" data-i18n="projects.emotion.tag">Full Stack / AI</span>
           </div>
-          <p>
-            Research web application using FastAPI, SQLAlchemy, Vue 3, TypeScript,
-            Docker, and the OpenAI API.
-          </p>
+          <p data-i18n="projects.emotion.body">Research web application using FastAPI, SQLAlchemy, Vue 3, TypeScript, Docker, and the OpenAI API.</p>
           <div class="project-links">
-            <a href="https://github.com/Wk-P/emotion-talk-assistant" target="_blank" rel="noreferrer">Repository →</a>
-            <a href="https://emotion.knettf.com" target="_blank" rel="noreferrer">Live Demo →</a>
+            <a href="https://github.com/Wk-P/emotion-talk-assistant" target="_blank" rel="noreferrer" data-i18n="common.repository">Repository →</a>
+            <a href="https://emotion.knettf.com" target="_blank" rel="noreferrer" data-i18n="common.demo">Live Demo →</a>
           </div>
         </article>
 
         <article class="project">
           <div class="project-top">
             <h3>Routing Monitor / Docker Request</h3>
-            <span class="tag">Distributed Systems</span>
+            <span class="tag" data-i18n="projects.routing.tag">Distributed Systems</span>
           </div>
-          <p>
-            Distributed request-routing prototype using Python aiohttp, Docker,
-            Raspberry Pi workers, request logging, and load-balancing experiments.
-          </p>
+          <p data-i18n="projects.routing.body">Distributed request-routing prototype using Python aiohttp, Docker, Raspberry Pi workers, request logging, and load-balancing experiments.</p>
           <div class="project-links">
-            <a href="https://github.com/Wk-P/Routing-Monitor-Docker-Request" target="_blank" rel="noreferrer">Repository →</a>
+            <a href="https://github.com/Wk-P/Routing-Monitor-Docker-Request" target="_blank" rel="noreferrer" data-i18n="common.repository">Repository →</a>
           </div>
         </article>
 
         <article class="project">
           <div class="project-top">
             <h3>Gproject</h3>
-            <span class="tag">Backend / Security</span>
+            <span class="tag" data-i18n="projects.gproject.tag">Backend / Security</span>
           </div>
-          <p>
-            Django-based prototype exploring asset verification, WebSocket data collection,
-            Merkle-tree concepts, and zk-SNARK-based verification ideas.
-          </p>
+          <p data-i18n="projects.gproject.body">Django-based prototype exploring asset verification, WebSocket data collection, Merkle-tree concepts, and zk-SNARK-based verification ideas.</p>
           <div class="project-links">
-            <a href="https://github.com/Wk-P/Gproject" target="_blank" rel="noreferrer">Repository →</a>
+            <a href="https://github.com/Wk-P/Gproject" target="_blank" rel="noreferrer" data-i18n="common.repository">Repository →</a>
           </div>
         </article>
       </div>
@@ -1063,29 +1109,231 @@
 
     <section class="section" id="skills">
       <div class="section-head">
-        <div class="eyebrow">05 · Skills</div>
+        <div class="eyebrow" data-i18n="skills.eyebrow">05 · Skills</div>
         <div>
-          <h2>Technical Stack</h2>
-          <p class="section-lead">
-            Technologies used across research prototypes, backend systems, and infrastructure work.
-          </p>
+          <h2 data-i18n="skills.title">Technical Stack</h2>
+          <p class="section-lead" data-i18n="skills.lead">Technologies used across research prototypes, backend systems, and infrastructure work.</p>
         </div>
       </div>
 
       <div class="skills">
-        <div class="skill"><b>Programming</b><span>Python · C/C++ · TypeScript · JavaScript</span></div>
-        <div class="skill"><b>Backend</b><span>Django · FastAPI · REST API · SQLAlchemy</span></div>
-        <div class="skill"><b>Cloud & Infrastructure</b><span>Linux · Docker · Kubernetes · OpenStack · Terraform</span></div>
-        <div class="skill"><b>Research</b><span>Optimization · Reinforcement Learning · Safe RL · Anomaly Detection</span></div>
+        <div class="skill"><b data-i18n="skills.programming">Programming</b><span>Python · C/C++ · TypeScript · JavaScript</span></div>
+        <div class="skill"><b data-i18n="skills.backend">Backend</b><span>Django · FastAPI · REST API · SQLAlchemy</span></div>
+        <div class="skill"><b data-i18n="skills.cloud">Cloud & Infrastructure</b><span>Linux · Docker · Kubernetes · OpenStack · Terraform</span></div>
+        <div class="skill"><b data-i18n="skills.research">Research</b><span>Optimization · Reinforcement Learning · Safe RL · Anomaly Detection</span></div>
       </div>
     </section>
 
     <div class="footer">
-      <span>Lingxiao Zhou · Academic & Engineering Portfolio</span>
+      <span data-i18n="footer.label">Lingxiao Zhou · Academic & Engineering Portfolio</span>
       <span><a href="https://github.com/Wk-P" target="_blank" rel="noreferrer">github.com/Wk-P</a></span>
     </div>
 
   </div>
+
+
+  <script>
+    (() => {
+      const translations = {
+        en: {
+          metaTitle: "Lingxiao Zhou — Academic Portfolio",
+          metaDescription: "Lingxiao Zhou — Academic and engineering portfolio",
+          "nav.education":"Education","nav.thesis":"Thesis","nav.academic":"Academic Work","nav.projects":"Projects","nav.skills":"Skills",
+          "hero.kicker":"Academic & Engineering Portfolio",
+          "hero.summary":"Computer Engineering researcher and platform-oriented developer working across cloud-native systems, backend engineering, networking, resource optimization, and reinforcement learning.",
+          "fact.university.label":"University","fact.university.value":"Pusan National University",
+          "fact.status.label":"Current Status","fact.status.value":"M.S. Coursework Completed",
+          "fact.focus.label":"Focus","fact.focus.value":"Cloud · Backend · Optimization",
+          "education.eyebrow":"01 · Education","education.title":"Academic Journey",
+          "education.lead":"Computer Engineering from undergraduate study through graduate research, with a focus on systems, networking, cloud infrastructure, and optimization.",
+          "education.bs.short":"B.S.","education.bs.title":"B.S. in Computer Engineering","education.bs.meta":"Undergraduate",
+          "education.bs.body":"Core study in programming, data structures, operating systems, computer networks, software engineering, and computer systems.",
+          "education.bs.archive":"Graduation Project Archive →",
+          "education.ms.short":"M.S.","education.ms.title":"M.S. in Computer Engineering","education.ms.meta":"Coursework Completed",
+          "education.ms.body":"Graduate study in resource management, cloud-native networking, system security, optimization, reinforcement learning, and edge computing.",
+          "common.pnu":"Pusan National University",
+          "thesis.eyebrow":"02 · Thesis","thesis.sectionTitle":"Master's Thesis",
+          "thesis.lead":"Research on privacy-aware service placement in resource-constrained edge environments.",
+          "thesis.title":"Privacy Preserving Edge Service Placement by Optimization and Safe Reinforcement Learning",
+          "thesis.tags":"Edge Computing · Optimization · Safe Reinforcement Learning","thesis.status":"In Progress",
+          "thesis.b1":"Models service placement under ECU capacity and privacy-conflict constraints.",
+          "thesis.b2":"Uses integer optimization as a reference and compares it with sequential RL-based placement.",
+          "thesis.b3":"Studies PPO-based safety mechanisms together with DQN and DDQN baselines.",
+          "thesis.b4":"Evaluates feasibility, resource utilization, and constraint satisfaction across multiple scenarios.",
+          "academic.eyebrow":"03 · Academic Work","academic.title":"Research & Publications",
+          "academic.lead":"Selected journal, conference, poster, and collaborative research work.",
+          "academic.journal.type":"Journal","academic.journal.title":"KCI Journal Publication",
+          "academic.journal.body":"First-author research publication in a Korean Citation Index journal.",
+          "academic.kics.type":"Conference","academic.kics.title":"KICS Summer Conference",
+          "academic.kics.body":"Research paper presented through the Korean Institute of Communications and Information Sciences.",
+          "academic.icmu.type":"Poster","academic.icmu.title":"ICMU 2025 Poster Presentation",
+          "academic.icmu.body":"Presented research work in English in an international poster-session format.",
+          "academic.net.type":"Research Collaboration","academic.net.title":"Kubernetes Network Anomaly Detection",
+          "academic.net.body":"Built and operated the Kubernetes-side environment for eBPF/Hubble L3/L4 flow collection and anomaly-detection experiments.",
+          "projects.eyebrow":"04 · Engineering","projects.title":"Selected Projects",
+          "projects.lead":"Systems and web projects that connect research interests with deployable engineering.",
+          "projects.cloud.subtitle":"Kubernetes / OpenStack Resource Management Platform","projects.featured":"Featured",
+          "projects.cloud.body":"Unified cloud resource management and monitoring platform with a Django REST backend, Vue 3 / TypeScript dashboard, Kubernetes integration, authentication, and infrastructure observability.",
+          "projects.cloud.b1":"Cluster / Node / Pod / Container monitoring with CPU and memory visibility.",
+          "projects.cloud.b2":"JWT authentication and Kubernetes ServiceAccount token integration.",
+          "projects.cloud.b3":"Django REST API, Vue 3, TypeScript, MySQL, and Redis.",
+          "projects.emotion.tag":"Full Stack / AI",
+          "projects.emotion.body":"Research web application using FastAPI, SQLAlchemy, Vue 3, TypeScript, Docker, and the OpenAI API.",
+          "projects.routing.tag":"Distributed Systems",
+          "projects.routing.body":"Distributed request-routing prototype using Python aiohttp, Docker, Raspberry Pi workers, request logging, and load-balancing experiments.",
+          "projects.gproject.tag":"Backend / Security",
+          "projects.gproject.body":"Django-based prototype exploring asset verification, WebSocket data collection, Merkle-tree concepts, and zk-SNARK-based verification ideas.",
+          "skills.eyebrow":"05 · Skills","skills.title":"Technical Stack",
+          "skills.lead":"Technologies used across research prototypes, backend systems, and infrastructure work.",
+          "skills.programming":"Programming","skills.backend":"Backend","skills.cloud":"Cloud & Infrastructure","skills.research":"Research",
+          "common.repository":"Repository →","common.demo":"Live Demo →",
+          "footer.label":"Lingxiao Zhou · Academic & Engineering Portfolio"
+        },
+
+        zh: {
+          metaTitle: "周凌霄 — 学术与技术履历",
+          metaDescription: "周凌霄的学术研究、论文与工程项目主页",
+          "nav.education":"教育经历","nav.thesis":"硕士论文","nav.academic":"学术成果","nav.projects":"项目经历","nav.skills":"技术能力",
+          "hero.kicker":"学术研究 · 工程实践",
+          "hero.summary":"计算机工程研究者与平台方向开发者，主要关注云原生系统、后端工程、计算机网络、资源优化与强化学习。",
+          "fact.university.label":"学校","fact.university.value":"釜山大学",
+          "fact.status.label":"当前状态","fact.status.value":"计算机工学硕士课程结业",
+          "fact.focus.label":"研究 / 求职方向","fact.focus.value":"云平台 · 后端 · 优化",
+          "education.eyebrow":"01 · 教育经历","education.title":"学习经历",
+          "education.lead":"从本科到硕士阶段持续学习计算机工程，重点关注系统、网络、云基础设施与优化问题。",
+          "education.bs.short":"本科","education.bs.title":"计算机工程学士","education.bs.meta":"本科阶段",
+          "education.bs.body":"主要学习程序设计、数据结构、操作系统、计算机网络、软件工程与计算机系统等课程。",
+          "education.bs.archive":"本科毕业项目资料 →",
+          "education.ms.short":"硕士","education.ms.title":"计算机工程硕士","education.ms.meta":"课程结业",
+          "education.ms.body":"研究生阶段主要学习资源管理、云原生网络、系统安全、优化、强化学习与边缘计算。",
+          "common.pnu":"釜山大学",
+          "thesis.eyebrow":"02 · 硕士论文","thesis.sectionTitle":"硕士学位论文",
+          "thesis.lead":"研究资源受限边缘环境中的隐私约束服务放置问题。",
+          "thesis.title":"基于优化与安全强化学习的隐私保护边缘服务放置",
+          "thesis.tags":"边缘计算 · 优化 · 安全强化学习","thesis.status":"进行中",
+          "thesis.b1":"在 ECU 容量约束与隐私冲突约束下建立服务放置模型。",
+          "thesis.b2":"以整数优化作为参考方法，与顺序式强化学习放置方法进行比较。",
+          "thesis.b3":"研究基于 PPO 的安全机制，并与 DQN、DDQN 等方法进行对比。",
+          "thesis.b4":"在多种场景下评估可行性、资源利用率与约束满足情况。",
+          "academic.eyebrow":"03 · 学术成果","academic.title":"研究与发表",
+          "academic.lead":"包括期刊论文、学术会议、海报展示与合作研究。",
+          "academic.journal.type":"期刊论文","academic.journal.title":"KCI 期刊论文",
+          "academic.journal.body":"以第一作者身份发表韩国学术振兴财团 KCI 收录期刊论文。",
+          "academic.kics.type":"学术会议","academic.kics.title":"KICS 夏季学术大会",
+          "academic.kics.body":"参加韩国通信学会夏季学术大会并完成相关研究论文发表 / 展示。",
+          "academic.icmu.type":"海报展示","academic.icmu.title":"ICMU 2025 Poster Presentation",
+          "academic.icmu.body":"在国际会议海报环节以英文介绍并展示研究工作。",
+          "academic.net.type":"合作研究","academic.net.title":"Kubernetes 网络异常检测",
+          "academic.net.body":"搭建并维护 Kubernetes 侧实验环境，使用 eBPF/Hubble 收集 L3/L4 流量数据，并支持异常检测实验。",
+          "projects.eyebrow":"04 · 工程实践","projects.title":"代表项目",
+          "projects.lead":"将系统研究兴趣与可部署的软件和基础设施工程结合起来。",
+          "projects.cloud.subtitle":"Kubernetes / OpenStack 资源管理平台","projects.featured":"重点项目",
+          "projects.cloud.body":"面向 Kubernetes 与 OpenStack 的统一资源管理与监控平台，包含 Django REST 后端、Vue 3 / TypeScript 前端、Kubernetes 接入、认证和基础设施可观测能力。",
+          "projects.cloud.b1":"监控 Cluster / Node / Pod / Container 状态以及 CPU、内存资源。",
+          "projects.cloud.b2":"实现 JWT 认证与 Kubernetes ServiceAccount Token 集成。",
+          "projects.cloud.b3":"使用 Django REST API、Vue 3、TypeScript、MySQL 与 Redis。",
+          "projects.emotion.tag":"全栈 / AI",
+          "projects.emotion.body":"基于 FastAPI、SQLAlchemy、Vue 3、TypeScript、Docker 与 OpenAI API 开发的研究型 Web 应用。",
+          "projects.routing.tag":"分布式系统",
+          "projects.routing.body":"使用 Python aiohttp、Docker 与 Raspberry Pi Worker 构建的分布式请求路由原型，用于请求日志和负载均衡实验。",
+          "projects.gproject.tag":"后端 / 安全",
+          "projects.gproject.body":"基于 Django 的 Web 原型，探索资产验证、WebSocket 数据采集、Merkle Tree 与 zk-SNARK 验证思路。",
+          "skills.eyebrow":"05 · 技术能力","skills.title":"技术栈",
+          "skills.lead":"研究原型、后端系统与基础设施工作中使用过的主要技术。",
+          "skills.programming":"编程语言","skills.backend":"后端开发","skills.cloud":"云与基础设施","skills.research":"研究方向",
+          "common.repository":"代码仓库 →","common.demo":"在线演示 →",
+          "footer.label":"周凌霄 · 学术与工程履历"
+        },
+
+        ko: {
+          metaTitle: "Lingxiao Zhou — 연구 및 기술 포트폴리오",
+          metaDescription: "Lingxiao Zhou의 연구, 논문 및 엔지니어링 프로젝트 포트폴리오",
+          "nav.education":"학력","nav.thesis":"석사논문","nav.academic":"연구성과","nav.projects":"프로젝트","nav.skills":"기술",
+          "hero.kicker":"Research · Engineering Portfolio",
+          "hero.summary":"컴퓨터공학을 전공하며 클라우드 네이티브 시스템, 백엔드 개발, 네트워크, 자원 최적화와 강화학습을 연구하고 있습니다.",
+          "fact.university.label":"대학교","fact.university.value":"부산대학교",
+          "fact.status.label":"현재 상태","fact.status.value":"컴퓨터공학 석사과정 수료",
+          "fact.focus.label":"주요 분야","fact.focus.value":"Cloud · Backend · Optimization",
+          "education.eyebrow":"01 · 학력","education.title":"학업 과정",
+          "education.lead":"학부부터 대학원까지 컴퓨터공학을 전공하며 시스템, 네트워크, 클라우드 인프라와 최적화 분야를 중심으로 공부했습니다.",
+          "education.bs.short":"학사","education.bs.title":"컴퓨터공학 학사","education.bs.meta":"학부과정",
+          "education.bs.body":"프로그래밍, 자료구조, 운영체제, 컴퓨터 네트워크, 소프트웨어공학, 컴퓨터 시스템 등을 학습했습니다.",
+          "education.bs.archive":"학부 졸업과제 자료 →",
+          "education.ms.short":"석사","education.ms.title":"컴퓨터공학 석사","education.ms.meta":"수료",
+          "education.ms.body":"자원관리, 클라우드 네이티브 네트워킹, 시스템 보안, 최적화, 강화학습, 엣지 컴퓨팅을 중심으로 연구했습니다.",
+          "common.pnu":"부산대학교",
+          "thesis.eyebrow":"02 · 석사논문","thesis.sectionTitle":"석사학위 논문",
+          "thesis.lead":"자원이 제한된 엣지 환경에서 프라이버시 제약을 고려한 서비스 배치 문제를 연구합니다.",
+          "thesis.title":"최적화 및 안전 강화학습 기반 프라이버시 보호 엣지 서비스 배치",
+          "thesis.tags":"Edge Computing · Optimization · Safe Reinforcement Learning","thesis.status":"진행 중",
+          "thesis.b1":"ECU 용량 제약과 프라이버시 충돌 제약을 고려하여 서비스 배치 문제를 모델링합니다.",
+          "thesis.b2":"정수 최적화를 기준 방법으로 사용하고 순차 강화학습 기반 배치 방법과 비교합니다.",
+          "thesis.b3":"PPO 기반 안전 메커니즘과 DQN, DDQN 계열 방법을 비교하여 연구합니다.",
+          "thesis.b4":"여러 시나리오에서 실행 가능성, 자원 활용률과 제약 만족 여부를 평가합니다.",
+          "academic.eyebrow":"03 · 연구성과","academic.title":"연구 및 학술활동",
+          "academic.lead":"학술지 논문, 학술대회, 포스터 발표와 공동 연구 경험을 정리했습니다.",
+          "academic.journal.type":"학술지","academic.journal.title":"KCI 학술지 논문",
+          "academic.journal.body":"제1저자로 한국연구재단 KCI 등재 학술지 논문을 발표했습니다.",
+          "academic.kics.type":"학술대회","academic.kics.title":"한국통신학회 하계종합학술발표회",
+          "academic.kics.body":"한국통신학회 하계 학술대회에서 관련 연구를 논문 형태로 발표했습니다.",
+          "academic.icmu.type":"포스터","academic.icmu.title":"ICMU 2025 Poster Presentation",
+          "academic.icmu.body":"국제 학술대회 포스터 세션에서 연구 내용을 영어로 발표했습니다.",
+          "academic.net.type":"공동 연구","academic.net.title":"Kubernetes 네트워크 이상 탐지",
+          "academic.net.body":"Kubernetes 실험 환경을 구축하고 eBPF/Hubble 기반 L3/L4 Flow 데이터를 수집하여 이상 탐지 실험을 지원했습니다.",
+          "projects.eyebrow":"04 · 엔지니어링","projects.title":"주요 프로젝트",
+          "projects.lead":"연구 관심 분야를 실제 배포 가능한 소프트웨어와 인프라 프로젝트로 연결했습니다.",
+          "projects.cloud.subtitle":"Kubernetes / OpenStack 자원 관리 플랫폼","projects.featured":"주요 프로젝트",
+          "projects.cloud.body":"Kubernetes와 OpenStack 자원을 통합 관리하고 모니터링하기 위한 플랫폼으로 Django REST 백엔드, Vue 3 / TypeScript 대시보드, Kubernetes 연동, 인증 및 인프라 모니터링 기능을 구현했습니다.",
+          "projects.cloud.b1":"Cluster / Node / Pod / Container 상태와 CPU, Memory 자원을 모니터링합니다.",
+          "projects.cloud.b2":"JWT 인증과 Kubernetes ServiceAccount Token을 연동했습니다.",
+          "projects.cloud.b3":"Django REST API, Vue 3, TypeScript, MySQL, Redis를 사용했습니다.",
+          "projects.emotion.tag":"Full Stack / AI",
+          "projects.emotion.body":"FastAPI, SQLAlchemy, Vue 3, TypeScript, Docker와 OpenAI API를 활용한 연구용 웹 애플리케이션입니다.",
+          "projects.routing.tag":"분산 시스템",
+          "projects.routing.body":"Python aiohttp, Docker, Raspberry Pi Worker를 사용한 분산 요청 라우팅 프로토타입으로 요청 로그와 부하분산 실험을 진행했습니다.",
+          "projects.gproject.tag":"Backend / Security",
+          "projects.gproject.body":"Django 기반 웹 프로토타입으로 자산 검증, WebSocket 데이터 수집, Merkle Tree와 zk-SNARK 기반 검증 아이디어를 실험했습니다.",
+          "skills.eyebrow":"05 · 기술","skills.title":"기술 스택",
+          "skills.lead":"연구 프로토타입, 백엔드 시스템과 인프라 작업에서 사용한 주요 기술입니다.",
+          "skills.programming":"프로그래밍","skills.backend":"백엔드","skills.cloud":"클라우드 및 인프라","skills.research":"연구",
+          "common.repository":"Repository →","common.demo":"Live Demo →",
+          "footer.label":"Lingxiao Zhou · 연구 및 엔지니어링 포트폴리오"
+        }
+      };
+
+      function setLanguage(lang) {
+        if (!translations[lang]) lang = 'en';
+        const t = translations[lang];
+
+        document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+        document.title = t.metaTitle;
+        const desc = document.querySelector('meta[name="description"]');
+        if (desc) desc.setAttribute('content', t.metaDescription);
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (t[key] !== undefined) el.textContent = t[key];
+        });
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+          const active = btn.dataset.lang === lang;
+          btn.classList.toggle('active', active);
+          btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+
+        localStorage.setItem('portfolio-language', lang);
+      }
+
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+      });
+
+      const saved = localStorage.getItem('portfolio-language');
+      const browser = (navigator.language || '').toLowerCase();
+      const initial = saved || (browser.startsWith('zh') ? 'zh' : browser.startsWith('ko') ? 'ko' : 'en');
+      setLanguage(initial);
+    })();
+  </script>
 
   <script>
     (() => {
