@@ -911,9 +911,86 @@
       .hero{border-radius:0}
       .section{break-inside:avoid}
     }
+    /* Layout and reading hierarchy */
+    :root{--max:1200px;--radius:20px}
+    .shell{margin-top:24px}
+    .topbar{gap:16px}
+    .top-actions{min-width:0;gap:16px}
+    .nav{gap:14px;flex-wrap:wrap;font-size:14px}
+    .nav a{padding:8px 0;border-bottom:2px solid transparent}
+    .nav a[aria-current="location"]{color:var(--blue);border-color:var(--blue)}
+    .lang-switch{flex-shrink:0}
+    .hero{min-height:420px;padding:48px;gap:32px;grid-template-columns:minmax(0,1.7fr) minmax(240px,1fr);align-items:center}
+    h1{font-size:clamp(42px,5vw,68px);line-height:1.08}
+    .hero-sub{font-size:19px;max-width:640px}
+    .hero-side{align-content:center}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+    .primary-action,.secondary-action{display:inline-flex;align-items:center;min-height:44px;padding:10px 16px;border-radius:10px;font-size:14px;font-weight:700}
+    .primary-action{background:#fff;color:#17315f}
+    .secondary-action{border:1px solid #ffffff60;color:#fff}
+    .secondary-action:hover{color:#fff;background:#ffffff15}
+    .social-links{margin-top:18px}
+    .section{padding:40px;margin-top:24px;scroll-margin-top:116px}
+    .section-head{grid-template-columns:1fr;gap:8px;margin-bottom:24px}
+    h2{font-size:32px}
+    .section-lead{max-width:760px;font-size:16px}
+    .paper{min-height:180px}
+    .project{min-height:220px}
+    .project.featured{min-height:0}
+    .project:last-child:nth-child(even){grid-column:span 12}
+    .thesis:before{display:none}
+    .card-row>*{min-width:0}
+    .meta{white-space:normal;flex-shrink:0}
+    .project h3,.fact-value,.skill span{overflow-wrap:anywhere}
+    a:focus-visible,button:focus-visible{outline:3px solid #32c7d9;outline-offset:4px}
+    .skip-link{position:fixed;top:8px;left:12px;z-index:100;background:#fff;padding:10px 16px;transform:translateY(-160%)}
+    .skip-link:focus{transform:translateY(0)}
+    @media(max-width:980px){
+      .topbar{flex-wrap:wrap}
+      .top-actions{width:100%;justify-content:space-between}
+      .hero{grid-template-columns:1fr;padding:36px}
+      .hero-side{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .section{padding:32px;scroll-margin-top:164px}
+    }
+    @media(max-width:700px){
+      .shell{width:100%;margin:0}
+      .topbar{align-items:stretch;gap:10px;padding:12px 20px}
+      .brand{justify-content:flex-start}
+      .top-actions{display:grid;grid-template-columns:1fr auto;align-items:start;gap:10px}
+      .nav{display:flex;grid-column:1 / -1;grid-row:2;flex-wrap:nowrap;overflow-x:auto;gap:20px;width:100%;padding-bottom:2px}
+      .nav a{flex-shrink:0;min-height:44px;display:flex;align-items:center;font-size:13px}
+      .lang-switch{grid-column:2;grid-row:1;position:absolute;right:20px;top:10px}
+      .lang-btn{min-height:30px}
+      .hero{padding:32px 22px;text-align:left;gap:24px}
+      .hero-main{align-items:flex-start}
+      h1,.hero-sub{text-align:left}
+      .hero-sub{font-size:16px}
+      .hero-side{grid-template-columns:repeat(2,minmax(0,1fr));max-width:none}
+      .fact{text-align:left;padding:12px}
+      .fact-label{letter-spacing:.04em}
+      .section{padding:28px 22px;margin-top:12px;scroll-margin-top:128px}
+      .section-head{text-align:left;justify-items:start;gap:8px}
+      .eyebrow,h2,.section-lead{text-align:left}
+      .section-lead{margin-left:0;font-size:15px}
+      .timeline-year{text-align:left}
+      .card-row{align-items:flex-start;text-align:left}
+      .card-title,.card-sub,.thesis .card-title{text-align:left}
+      .paper{text-align:left;padding:20px}
+      .paper p,.project p{font-size:15px;text-align:left}
+      .project-top{align-items:flex-start;text-align:left;gap:10px}
+      .project h3,.project .card-sub{text-align:left}
+      .project-links{justify-content:flex-start;gap:16px}
+      .project-links a{min-height:44px;display:inline-flex;align-items:center}
+      .skills{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .skill{text-align:left;padding:16px}
+    }
+    @media(max-width:380px){.skills,.hero-side{grid-template-columns:1fr}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+    @media print{.skip-link,.hero-actions{display:none}.section{padding:24px;scroll-margin-top:0}}
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#content" data-i18n="common.skip">Skip to content</a>
   <div class="global-bg" aria-hidden="true">
     <div class="global-glow global-glow-a"></div>
     <div class="global-glow global-glow-b"></div>
@@ -923,23 +1000,23 @@
 
   <div class="shell">
 
-    <div class="topbar">
+    <header class="topbar">
       <a class="brand" href="#top"><span class="brand-dot"></span>Lingxiao Zhou</a>
       <div class="top-actions">
-        <div class="nav">
-          <a href="#education" data-i18n="nav.education">Education</a>
+        <nav class="nav" aria-label="Portfolio sections">
+          <a href="#projects" data-i18n="nav.projects">Projects</a>
           <a href="#thesis" data-i18n="nav.thesis">Thesis</a>
           <a href="#academic" data-i18n="nav.academic">Academic Work</a>
-          <a href="#projects" data-i18n="nav.projects">Projects</a>
+          <a href="#education" data-i18n="nav.education">Education</a>
           <a href="#skills" data-i18n="nav.skills">Skills</a>
-        </div>
+        </nav>
         <div class="lang-switch" aria-label="Language">
           <button class="lang-btn" type="button" data-lang="zh">中文</button>
           <button class="lang-btn active" type="button" data-lang="en">EN</button>
           <button class="lang-btn" type="button" data-lang="ko">한국어</button>
         </div>
       </div>
-    </div>
+    </header>
 
     <header class="hero" id="top">
       <canvas class="hero-canvas" aria-hidden="true"></canvas>
@@ -948,6 +1025,10 @@
         <div class="kicker" data-i18n="hero.kicker">Academic & Engineering Portfolio</div>
         <h1>Lingxiao Zhou</h1>
         <p class="hero-sub" data-i18n="hero.summary">Computer Engineering researcher and platform-oriented developer working across cloud-native systems, backend engineering, networking, resource optimization, and reinforcement learning.</p>
+        <div class="hero-actions">
+          <a class="primary-action" href="#projects" data-i18n="hero.projects">Explore projects →</a>
+          <a class="secondary-action" href="#thesis" data-i18n="hero.research">Explore research →</a>
+        </div>
         <div class="social-links" aria-label="Social links">
           <a class="social-link" href="https://github.com/Wk-P" target="_blank" rel="noreferrer">
             <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .7a11.3 11.3 0 0 0-3.6 22c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.4-1.3-5.4-5.6 0-1.2.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0C16.9 4.5 18 4.8 18 4.8c.6 1.6.2 2.8.1 3.1.8.9 1.2 1.9 1.2 3.1 0 4.3-2.8 5.3-5.4 5.6.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.3 11.3 0 0 0 12 .7Z"/></svg>
@@ -984,48 +1065,69 @@
       </div>
     </header>
 
-    <section class="section" id="education">
+    <main id="content" tabindex="-1">
+    <section class="section" id="projects">
       <div class="section-head">
-        <div class="eyebrow" data-i18n="education.eyebrow">01 · Education</div>
+        <div class="eyebrow" data-i18n="projects.eyebrow">01 · Engineering</div>
         <div>
-          <h2 data-i18n="education.title">Academic Journey</h2>
-          <p class="section-lead" data-i18n="education.lead">Computer Engineering from undergraduate study through graduate research, with a focus on systems, networking, cloud infrastructure, and optimization.</p>
+          <h2 data-i18n="projects.title">Selected Projects</h2>
+          <p class="section-lead" data-i18n="projects.lead">Systems and web projects that connect research interests with deployable engineering.</p>
         </div>
       </div>
 
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-year" data-i18n="education.bs.short">B.S.</div>
-          <div class="timeline-card">
-            <div class="card-row">
-              <div>
-                <h3 class="card-title" data-i18n="education.bs.title">B.S. in Computer Engineering</h3>
-                <div class="card-sub" data-i18n="common.pnu">Pusan National University</div>
-              </div>
-              <div class="meta" data-i18n="education.bs.meta">Undergraduate</div>
+      <div class="projects">
+        <article class="project featured">
+          <div class="project-top">
+            <div>
+              <h3>CloudPlatform</h3>
+              <div class="card-sub" data-i18n="projects.cloud.subtitle">Kubernetes / OpenStack Resource Management Platform</div>
             </div>
-            <div class="card-body">
-              <span data-i18n="education.bs.body">Core study in programming, data structures, operating systems, computer networks, software engineering, and computer systems.</span>
-              <div class="project-links">
-                <a href="https://github.com/Wk-P/2023_graduation_project" target="_blank" rel="noreferrer" data-i18n="education.bs.archive">Graduation Project Archive →</a>
-              </div>
-            </div>
+            <span class="tag" data-i18n="projects.featured">Featured</span>
           </div>
-        </div>
+          <p data-i18n="projects.cloud.body">Unified cloud resource management and monitoring platform with a Django REST backend, Vue 3 / TypeScript dashboard, Kubernetes integration, authentication, and infrastructure observability.</p>
+          <ul>
+            <li data-i18n="projects.cloud.b1">Cluster / Node / Pod / Container monitoring with CPU and memory visibility.</li>
+            <li data-i18n="projects.cloud.b2">JWT authentication and Kubernetes ServiceAccount token integration.</li>
+            <li data-i18n="projects.cloud.b3">Django REST API, Vue 3, TypeScript, MySQL, and Redis.</li>
+          </ul>
+          <div class="project-links">
+            <a href="https://github.com/Wk-P/CloudPlatform" target="_blank" rel="noreferrer" data-i18n="common.repository">Repository →</a>
+          </div>
+        </article>
 
-        <div class="timeline-item">
-          <div class="timeline-year" data-i18n="education.ms.short">M.S.</div>
-          <div class="timeline-card">
-            <div class="card-row">
-              <div>
-                <h3 class="card-title" data-i18n="education.ms.title">M.S. in Computer Engineering</h3>
-                <div class="card-sub">Pusan National University</div>
-              </div>
-              <div class="meta" data-i18n="education.ms.meta">Coursework Completed</div>
-            </div>
-            <div class="card-body" data-i18n="education.ms.body">Graduate study in resource management, cloud-native networking, system security, optimization, reinforcement learning, and edge computing.</div>
+        <article class="project">
+          <div class="project-top">
+            <h3>Emotion Talk Assistant</h3>
+            <span class="tag" data-i18n="projects.emotion.tag">Full Stack / AI</span>
           </div>
-        </div>
+          <p data-i18n="projects.emotion.body">Research web application using FastAPI, SQLAlchemy, Vue 3, TypeScript, Docker, and the OpenAI API.</p>
+          <div class="project-links">
+            <a href="https://github.com/Wk-P/emotion-talk-assistant" target="_blank" rel="noreferrer" data-i18n="common.repository">Repository →</a>
+            <a href="https://emotion.knettf.com" target="_blank" rel="noreferrer" data-i18n="common.demo">Live Demo →</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-top">
+            <h3>Routing Monitor / Docker Request</h3>
+            <span class="tag" data-i18n="projects.routing.tag">Distributed Systems</span>
+          </div>
+          <p data-i18n="projects.routing.body">Distributed request-routing prototype using Python aiohttp, Docker, Raspberry Pi workers, request logging, and load-balancing experiments.</p>
+          <div class="project-links">
+            <a href="https://github.com/Wk-P/Routing-Monitor-Docker-Request" target="_blank" rel="noreferrer" data-i18n="common.repository">Repository →</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-top">
+            <h3>Gproject</h3>
+            <span class="tag" data-i18n="projects.gproject.tag">Backend / Security</span>
+          </div>
+          <p data-i18n="projects.gproject.body">Django-based prototype exploring asset verification, WebSocket data collection, Merkle-tree concepts, and zk-SNARK-based verification ideas.</p>
+          <div class="project-links">
+            <a href="https://github.com/Wk-P/Gproject" target="_blank" rel="noreferrer" data-i18n="common.repository">Repository →</a>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -1093,68 +1195,48 @@
       </div>
     </section>
 
-    <section class="section" id="projects">
+    <section class="section" id="education">
       <div class="section-head">
-        <div class="eyebrow" data-i18n="projects.eyebrow">04 · Engineering</div>
+        <div class="eyebrow" data-i18n="education.eyebrow">04 · Education</div>
         <div>
-          <h2 data-i18n="projects.title">Selected Projects</h2>
-          <p class="section-lead" data-i18n="projects.lead">Systems and web projects that connect research interests with deployable engineering.</p>
+          <h2 data-i18n="education.title">Academic Journey</h2>
+          <p class="section-lead" data-i18n="education.lead">Computer Engineering from undergraduate study through graduate research, with a focus on systems, networking, cloud infrastructure, and optimization.</p>
         </div>
       </div>
 
-      <div class="projects">
-        <article class="project featured">
-          <div class="project-top">
-            <div>
-              <h3>CloudPlatform</h3>
-              <div class="card-sub" data-i18n="projects.cloud.subtitle">Kubernetes / OpenStack Resource Management Platform</div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year" data-i18n="education.bs.short">B.S.</div>
+          <div class="timeline-card">
+            <div class="card-row">
+              <div>
+                <h3 class="card-title" data-i18n="education.bs.title">B.S. in Computer Engineering</h3>
+                <div class="card-sub" data-i18n="common.pnu">Pusan National University</div>
+              </div>
+              <div class="meta" data-i18n="education.bs.meta">Undergraduate</div>
             </div>
-            <span class="tag" data-i18n="projects.featured">Featured</span>
+            <div class="card-body">
+              <span data-i18n="education.bs.body">Core study in programming, data structures, operating systems, computer networks, software engineering, and computer systems.</span>
+              <div class="project-links">
+                <a href="https://github.com/Wk-P/2023_graduation_project" target="_blank" rel="noreferrer" data-i18n="education.bs.archive">Graduation Project Archive →</a>
+              </div>
+            </div>
           </div>
-          <p data-i18n="projects.cloud.body">Unified cloud resource management and monitoring platform with a Django REST backend, Vue 3 / TypeScript dashboard, Kubernetes integration, authentication, and infrastructure observability.</p>
-          <ul>
-            <li data-i18n="projects.cloud.b1">Cluster / Node / Pod / Container monitoring with CPU and memory visibility.</li>
-            <li data-i18n="projects.cloud.b2">JWT authentication and Kubernetes ServiceAccount token integration.</li>
-            <li data-i18n="projects.cloud.b3">Django REST API, Vue 3, TypeScript, MySQL, and Redis.</li>
-          </ul>
-          <div class="project-links">
-            <a href="https://github.com/Wk-P/CloudPlatform" target="_blank" rel="noreferrer" data-i18n="common.repository">Repository →</a>
-          </div>
-        </article>
+        </div>
 
-        <article class="project">
-          <div class="project-top">
-            <h3>Emotion Talk Assistant</h3>
-            <span class="tag" data-i18n="projects.emotion.tag">Full Stack / AI</span>
+        <div class="timeline-item">
+          <div class="timeline-year" data-i18n="education.ms.short">M.S.</div>
+          <div class="timeline-card">
+            <div class="card-row">
+              <div>
+                <h3 class="card-title" data-i18n="education.ms.title">M.S. in Computer Engineering</h3>
+                <div class="card-sub" data-i18n="common.pnu">Pusan National University</div>
+              </div>
+              <div class="meta" data-i18n="education.ms.meta">Coursework Completed</div>
+            </div>
+            <div class="card-body" data-i18n="education.ms.body">Graduate study in resource management, cloud-native networking, system security, optimization, reinforcement learning, and edge computing.</div>
           </div>
-          <p data-i18n="projects.emotion.body">Research web application using FastAPI, SQLAlchemy, Vue 3, TypeScript, Docker, and the OpenAI API.</p>
-          <div class="project-links">
-            <a href="https://github.com/Wk-P/emotion-talk-assistant" target="_blank" rel="noreferrer" data-i18n="common.repository">Repository →</a>
-            <a href="https://emotion.knettf.com" target="_blank" rel="noreferrer" data-i18n="common.demo">Live Demo →</a>
-          </div>
-        </article>
-
-        <article class="project">
-          <div class="project-top">
-            <h3>Routing Monitor / Docker Request</h3>
-            <span class="tag" data-i18n="projects.routing.tag">Distributed Systems</span>
-          </div>
-          <p data-i18n="projects.routing.body">Distributed request-routing prototype using Python aiohttp, Docker, Raspberry Pi workers, request logging, and load-balancing experiments.</p>
-          <div class="project-links">
-            <a href="https://github.com/Wk-P/Routing-Monitor-Docker-Request" target="_blank" rel="noreferrer" data-i18n="common.repository">Repository →</a>
-          </div>
-        </article>
-
-        <article class="project">
-          <div class="project-top">
-            <h3>Gproject</h3>
-            <span class="tag" data-i18n="projects.gproject.tag">Backend / Security</span>
-          </div>
-          <p data-i18n="projects.gproject.body">Django-based prototype exploring asset verification, WebSocket data collection, Merkle-tree concepts, and zk-SNARK-based verification ideas.</p>
-          <div class="project-links">
-            <a href="https://github.com/Wk-P/Gproject" target="_blank" rel="noreferrer" data-i18n="common.repository">Repository →</a>
-          </div>
-        </article>
+        </div>
       </div>
     </section>
 
@@ -1175,6 +1257,8 @@
       </div>
     </section>
 
+    </main>
+
     <div class="footer">
       <span data-i18n="footer.label">Lingxiao Zhou · Academic & Engineering Portfolio</span>
       <span><a href="https://github.com/Wk-P" target="_blank" rel="noreferrer">github.com/Wk-P</a></span>
@@ -1187,6 +1271,7 @@
     (() => {
       const translations = {
         en: {
+          "common.skip":"Skip to content","hero.projects":"Explore projects →","hero.research":"Explore research →",
           metaTitle: "Lingxiao Zhou — Academic Portfolio",
           metaDescription: "Lingxiao Zhou — Academic and engineering portfolio",
           "nav.education":"Education","nav.thesis":"Thesis","nav.academic":"Academic Work","nav.projects":"Projects","nav.skills":"Skills",
@@ -1195,7 +1280,7 @@
           "fact.university.label":"University","fact.university.value":"Pusan National University",
           "fact.status.label":"Current Status","fact.status.value":"M.S. Coursework Completed",
           "fact.focus.label":"Focus","fact.focus.value":"Cloud · Backend · Optimization",
-          "education.eyebrow":"01 · Education","education.title":"Academic Journey",
+          "education.eyebrow":"04 · Education","education.title":"Academic Journey",
           "education.lead":"Computer Engineering from undergraduate study through graduate research, with a focus on systems, networking, cloud infrastructure, and optimization.",
           "education.bs.short":"B.S.","education.bs.title":"B.S. in Computer Engineering","education.bs.meta":"Undergraduate",
           "education.bs.body":"Core study in programming, data structures, operating systems, computer networks, software engineering, and computer systems.",
@@ -1221,7 +1306,7 @@
           "academic.icmu.body":"Presented research work in English in an international poster-session format.",
           "academic.net.type":"Research Collaboration","academic.net.title":"Kubernetes Network Anomaly Detection",
           "academic.net.body":"Built and operated the Kubernetes-side environment for eBPF/Hubble L3/L4 flow collection and anomaly-detection experiments.",
-          "projects.eyebrow":"04 · Engineering","projects.title":"Selected Projects",
+          "projects.eyebrow":"01 · Engineering","projects.title":"Selected Projects",
           "projects.lead":"Systems and web projects that connect research interests with deployable engineering.",
           "projects.cloud.subtitle":"Kubernetes / OpenStack Resource Management Platform","projects.featured":"Featured",
           "projects.cloud.body":"Unified cloud resource management and monitoring platform with a Django REST backend, Vue 3 / TypeScript dashboard, Kubernetes integration, authentication, and infrastructure observability.",
@@ -1242,6 +1327,7 @@
         },
 
         zh: {
+          "common.skip":"跳转至正文","hero.projects":"查看代表项目 →","hero.research":"了解研究方向 →",
           metaTitle: "周凌霄 — 学术与技术履历",
           metaDescription: "周凌霄的学术研究、论文与工程项目主页",
           "nav.education":"教育经历","nav.thesis":"硕士论文","nav.academic":"学术成果","nav.projects":"项目经历","nav.skills":"技术能力",
@@ -1250,7 +1336,7 @@
           "fact.university.label":"学校","fact.university.value":"釜山大学",
           "fact.status.label":"当前状态","fact.status.value":"计算机工学硕士课程结业",
           "fact.focus.label":"研究 / 求职方向","fact.focus.value":"云平台 · 后端 · 优化",
-          "education.eyebrow":"01 · 教育经历","education.title":"学习经历",
+          "education.eyebrow":"04 · 教育经历","education.title":"学习经历",
           "education.lead":"从本科到硕士阶段持续学习计算机工程，重点关注系统、网络、云基础设施与优化问题。",
           "education.bs.short":"本科","education.bs.title":"计算机工程学士","education.bs.meta":"本科阶段",
           "education.bs.body":"主要学习程序设计、数据结构、操作系统、计算机网络、软件工程与计算机系统等课程。",
@@ -1276,7 +1362,7 @@
           "academic.icmu.body":"在国际会议海报环节以英文介绍并展示研究工作。",
           "academic.net.type":"合作研究","academic.net.title":"Kubernetes 网络异常检测",
           "academic.net.body":"搭建并维护 Kubernetes 侧实验环境，使用 eBPF/Hubble 收集 L3/L4 流量数据，并支持异常检测实验。",
-          "projects.eyebrow":"04 · 工程实践","projects.title":"代表项目",
+          "projects.eyebrow":"01 · 工程实践","projects.title":"代表项目",
           "projects.lead":"将系统研究兴趣与可部署的软件和基础设施工程结合起来。",
           "projects.cloud.subtitle":"Kubernetes / OpenStack 资源管理平台","projects.featured":"重点项目",
           "projects.cloud.body":"面向 Kubernetes 与 OpenStack 的统一资源管理与监控平台，包含 Django REST 后端、Vue 3 / TypeScript 前端、Kubernetes 接入、认证和基础设施可观测能力。",
@@ -1297,6 +1383,7 @@
         },
 
         ko: {
+          "common.skip":"본문으로 이동","hero.projects":"프로젝트 보기 →","hero.research":"연구 살펴보기 →",
           metaTitle: "Lingxiao Zhou — 연구 및 기술 포트폴리오",
           metaDescription: "Lingxiao Zhou의 연구, 논문 및 엔지니어링 프로젝트 포트폴리오",
           "nav.education":"학력","nav.thesis":"석사논문","nav.academic":"연구성과","nav.projects":"프로젝트","nav.skills":"기술",
@@ -1305,7 +1392,7 @@
           "fact.university.label":"대학교","fact.university.value":"부산대학교",
           "fact.status.label":"현재 상태","fact.status.value":"컴퓨터공학 석사과정 수료",
           "fact.focus.label":"주요 분야","fact.focus.value":"Cloud · Backend · Optimization",
-          "education.eyebrow":"01 · 학력","education.title":"학업 과정",
+          "education.eyebrow":"04 · 학력","education.title":"학업 과정",
           "education.lead":"학부부터 대학원까지 컴퓨터공학을 전공하며 시스템, 네트워크, 클라우드 인프라와 최적화 분야를 중심으로 공부했습니다.",
           "education.bs.short":"학사","education.bs.title":"컴퓨터공학 학사","education.bs.meta":"학부과정",
           "education.bs.body":"프로그래밍, 자료구조, 운영체제, 컴퓨터 네트워크, 소프트웨어공학, 컴퓨터 시스템 등을 학습했습니다.",
@@ -1331,7 +1418,7 @@
           "academic.icmu.body":"국제 학술대회 포스터 세션에서 연구 내용을 영어로 발표했습니다.",
           "academic.net.type":"공동 연구","academic.net.title":"Kubernetes 네트워크 이상 탐지",
           "academic.net.body":"Kubernetes 실험 환경을 구축하고 eBPF/Hubble 기반 L3/L4 Flow 데이터를 수집하여 이상 탐지 실험을 지원했습니다.",
-          "projects.eyebrow":"04 · 엔지니어링","projects.title":"주요 프로젝트",
+          "projects.eyebrow":"01 · 엔지니어링","projects.title":"주요 프로젝트",
           "projects.lead":"연구 관심 분야를 실제 배포 가능한 소프트웨어와 인프라 프로젝트로 연결했습니다.",
           "projects.cloud.subtitle":"Kubernetes / OpenStack 자원 관리 플랫폼","projects.featured":"주요 프로젝트",
           "projects.cloud.body":"Kubernetes와 OpenStack 자원을 통합 관리하고 모니터링하기 위한 플랫폼으로 Django REST 백엔드, Vue 3 / TypeScript 대시보드, Kubernetes 연동, 인증 및 인프라 모니터링 기능을 구현했습니다.",
@@ -1355,6 +1442,7 @@
       function setLanguage(lang) {
         if (!translations[lang]) lang = 'en';
         const t = translations[lang];
+        try { localStorage.setItem('portfolio-language', lang); } catch {}
 
         document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
         document.title = t.metaTitle;
@@ -1378,7 +1466,8 @@
         btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
       });
 
-      const initial = 'en';
+      let initial = 'en';
+      try { initial = localStorage.getItem('portfolio-language') || 'en'; } catch {}
       setLanguage(initial);
     })();
   </script>
@@ -1548,5 +1637,31 @@
     })();
   </script>
 
+  <script>
+    (() => {
+      const links = [...document.querySelectorAll('.nav a')];
+      const sections = [...document.querySelectorAll('main > section')];
+      function updateNavigation() {
+        const offset = document.querySelector('.topbar').getBoundingClientRect().bottom + 32;
+        let current = null;
+        for (const section of sections) {
+          if (section.getBoundingClientRect().top <= offset) current = section;
+        }
+        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) current = sections.at(-1);
+        links.forEach(link => {
+          if (current && link.hash === '#' + current.id) link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
+        });
+      }
+      let scheduled = false;
+      window.addEventListener('scroll', () => {
+        if (scheduled) return;
+        scheduled = true;
+        requestAnimationFrame(() => { updateNavigation(); scheduled = false; });
+      }, {passive:true});
+      window.addEventListener('resize', updateNavigation, {passive:true});
+      updateNavigation();
+    })();
+  </script>
 </body>
 </html>
