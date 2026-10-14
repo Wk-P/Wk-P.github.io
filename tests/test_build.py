@@ -66,6 +66,12 @@ print("hello")
         self.assertEqual(about.count('class="site-header"'), 1)
         self.assertIn('href="/about/" aria-current="page"', about)
         self.assertNotIn('global-canvas', about)
+        for route in ['index.html', 'archive/index.html', 'about/index.html', 'posts/published/index.html', '404.html']:
+            text = (out / route).read_text()
+            self.assertEqual(text.count('class="lang-switch"'), 1, route)
+            self.assertIn('data-lang="zh"', text)
+            self.assertIn('data-lang="ko"', text)
+        self.assertIn('data-content-language="en"', article)
 
     def test_preview_marks_drafts_but_keeps_feed_clean(self):
         self.post('preview', draft=True)

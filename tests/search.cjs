@@ -9,13 +9,13 @@ const posts = [
 ];
 const input = {value:'',addEventListener(event,fn){this.change=fn;}};
 const form = {querySelector(){return input;},addEventListener(event,fn){this.submit=fn;}};
-const count = {}, empty = {};
+const count = {dataset:{totalCount:"2"}}, empty = {};
 const context = {
-  URL, URLSearchParams,
-  location:{href:'https://wk-p.github.io/?q=python',search:'?q=python'},
+  URL, URLSearchParams, CustomEvent: class { constructor(name,data){ this.type=name; this.detail=data.detail; } }, Intl,
+  location:{href:'https://wk-p.github.io/?q=python',search:'?q=python',pathname:'/'},
   history:{replaceState(a,b,url){this.url=String(url);}},
-  window:{addEventListener(){}},
-  document:{querySelector(sel){return {'form[data-search]':form,'[data-count]':count,'[data-empty]':empty}[sel];},querySelectorAll(sel){return sel==='[data-tag]'?buttons:sel==='[data-post]'?posts:[];}}
+  window:{addEventListener(){}}, localStorage:{getItem(){return 'en'},setItem(){}},
+  document:{documentElement:{},dispatchEvent(){},querySelector(sel){return {'form[data-search]':form,'[data-count]':count,'[data-empty]':empty}[sel];},querySelectorAll(sel){return sel==='[data-tag]'?buttons:sel==='[data-post]'?posts:[];}}
 };
 vm.runInNewContext(fs.readFileSync('assets/blog.js','utf8'),context);
 assert.equal(count.textContent,'1 article');

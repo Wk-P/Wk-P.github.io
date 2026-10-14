@@ -11,11 +11,11 @@
       'home.noResults':'No matching articles','home.emptyTitle':'The first post is on its way.','home.noResultsHint':'Try another keyword or select All topics.',
       'home.emptyHint':'This is the home for upcoming engineering and research notes. Explore my projects and background on the About page.',
       'home.reset':'Reset filters','home.search':'Find an article','home.searchHint':'Search across titles and article content.',
-      'home.tags':'Browse by tag','home.interests':'Areas of interest','home.cloud':'Cloud & infrastructure','home.backend':'Backend systems',
+      'home.tags':'Browse by tag','home.all':'All','home.interests':'Areas of interest','home.cloud':'Cloud & infrastructure','home.backend':'Backend systems',
       'home.rl':'Optimization & safe RL','home.beyond':'Beyond the blog','home.beyondDescription':'Projects, academic work, and an ongoing thesis.',
       'home.projects':'Selected projects ↗','home.thesis':'Thesis workspace ↗','home.follow':'Follow along',
       'home.followDescription':'Read new posts in your preferred feed reader.','home.rss':'Subscribe via RSS ↗',
-      'article.all':'← All articles','article.back':'← Back to the blog','article.toc':'On this page','article.read':'Read article ↗',
+      'article.all':'← All articles','article.back':'← Back to the blog','article.toc':'On this page','article.read':'Read article ↗','article.draft':'Draft preview','article.draftShort':'Draft',
       'article.draftNotice':'Draft preview — this article is excluded from the published site and RSS feed.',
       'archive.description':'All articles, organized by year.','archive.eyebrow':'The notebook','archive.title':'Writing archive','archive.empty':'No published articles yet.',
       'error.title':'A missing page.','error.description':'The link may have changed. Find the latest writing on the blog.','error.back':'Return to the blog →',
@@ -34,11 +34,11 @@
       'home.noResults':'没有找到相关文章','home.emptyTitle':'第一篇文章即将发布。','home.noResultsHint':'试试其他关键词，或选择“全部”。',
       'home.emptyHint':'这里将发布工程与研究笔记。你也可以先查看我的项目和经历。',
       'home.reset':'清除筛选','home.search':'搜索文章','home.searchHint':'可搜索标题、标签和正文。',
-      'home.tags':'按标签浏览','home.interests':'关注领域','home.cloud':'云与基础设施','home.backend':'后端系统',
+      'home.tags':'按标签浏览','home.all':'全部','home.interests':'关注领域','home.cloud':'云与基础设施','home.backend':'后端系统',
       'home.rl':'优化与安全强化学习','home.beyond':'博客之外','home.beyondDescription':'项目、学术经历与硕士论文。',
       'home.projects':'查看项目 ↗','home.thesis':'硕士论文 ↗','home.follow':'订阅更新',
       'home.followDescription':'在你常用的阅读器中接收新文章。','home.rss':'订阅 RSS ↗',
-      'article.all':'← 所有文章','article.back':'← 返回博客','article.toc':'本页目录','article.read':'阅读文章 ↗',
+      'article.all':'← 所有文章','article.back':'← 返回博客','article.toc':'本页目录','article.read':'阅读文章 ↗','article.draft':'草稿预览','article.draftShort':'草稿',
       'article.draftNotice':'草稿预览：本文不会出现在正式网站或 RSS 中。',
       'archive.description':'按年份浏览全部文章。','archive.eyebrow':'笔记','archive.title':'文章归档','archive.empty':'暂无已发布文章。',
       'error.title':'页面未找到。','error.description':'链接可能已变更，请返回博客查看最新内容。','error.back':'返回博客 →',
@@ -57,11 +57,11 @@
       'home.noResults':'검색 결과가 없습니다','home.emptyTitle':'첫 글을 준비하고 있습니다.','home.noResultsHint':'다른 검색어를 입력하거나 전체를 선택해 보세요.',
       'home.emptyHint':'앞으로 엔지니어링과 연구 노트를 게시할 예정입니다. 프로젝트와 이력을 먼저 살펴보세요.',
       'home.reset':'필터 초기화','home.search':'글 검색','home.searchHint':'제목, 태그, 본문을 검색할 수 있습니다.',
-      'home.tags':'태그별 보기','home.interests':'관심 분야','home.cloud':'클라우드 및 인프라','home.backend':'백엔드 시스템',
+      'home.tags':'태그별 보기','home.all':'전체','home.interests':'관심 분야','home.cloud':'클라우드 및 인프라','home.backend':'백엔드 시스템',
       'home.rl':'최적화와 안전 강화학습','home.beyond':'블로그 외 활동','home.beyondDescription':'프로젝트, 학술 활동과 석사논문.',
       'home.projects':'프로젝트 보기 ↗','home.thesis':'석사논문 ↗','home.follow':'새 글 받기',
       'home.followDescription':'사용하는 피드 리더에서 새 글을 받아보세요.','home.rss':'RSS 구독 ↗',
-      'article.all':'← 모든 글','article.back':'← 블로그로','article.toc':'목차','article.read':'글 읽기 ↗',
+      'article.all':'← 모든 글','article.back':'← 블로그로','article.toc':'목차','article.read':'글 읽기 ↗','article.draft':'초안 미리보기','article.draftShort':'초안',
       'article.draftNotice':'초안 미리보기: 이 글은 공개 사이트와 RSS에 포함되지 않습니다.',
       'archive.description':'연도별로 모든 글을 볼 수 있습니다.','archive.eyebrow':'노트','archive.title':'글 목록','archive.empty':'게시된 글이 없습니다.',
       'error.title':'페이지를 찾을 수 없습니다.','error.description':'주소가 바뀌었을 수 있습니다. 블로그에서 최신 글을 확인하세요.','error.back':'블로그로 돌아가기 →',
@@ -96,6 +96,12 @@
     if (input) input.placeholder = t['search.placeholder'];
     const clear = document.querySelector('[data-clear]');
     if (clear) clear.setAttribute('aria-label', t['search.clear']);
+    const all = document.querySelector('[data-tag="All"]');
+    if (all) all.textContent = t['home.all'];
+    document.querySelectorAll('a.read-link').forEach(link => {
+      const title = link.closest('[data-post]')?.querySelector('h3')?.textContent || '';
+      link.setAttribute('aria-label', `${t['article.read']} ${title}`);
+    });
     document.querySelectorAll('[data-read-minutes]').forEach(el => {
       el.textContent = t['read.time'](Number(el.dataset.readMinutes));
     });
@@ -115,6 +121,9 @@
       original.textContent = t['content.original']({en:'English',zh:'中文',ko:'한국어'}[authored]);
     }
     document.querySelectorAll('.copy-code').forEach(btn => { btn.textContent = t['toc.copy']; });
+    const pageNames = {'/':'nav.blog','/archive/':'nav.archive','/about/':'nav.about','/404.html':'error.title'};
+    const route = location.pathname;
+    if (pageNames[route]) document.title = `${t[pageNames[route]]} · ${t['common.name']}`;
     document.dispatchEvent(new CustomEvent('blog:language', {detail:{lang}}));
   }
   document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));

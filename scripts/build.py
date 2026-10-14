@@ -76,6 +76,9 @@ def page(title: str, description: str, body: str, route: str, active: str = 'Blo
     for phrase, key in labels.items():
         body = re.sub(r'(<[^<>]+)>' + re.escape(phrase) + r'(<)', lambda m: m.group(1) + f' data-i18n="{key}">' + phrase + m.group(2), body)
     body = body.replace('<h1>Notes from building.<br>Questions worth exploring.</h1>', '<h1 data-i18n="home.title">Notes from building.<br>Questions worth exploring.</h1>')
+    body = body.replace('> Engineering & research notes</div>', ' data-i18n="home.eyebrow">Engineering & research notes</div>')
+    body = body.replace('<h3>The first post is on its way.</h3>', '<h3 data-i18n="home.emptyTitle">The first post is on its way.</h3>')
+    body = body.replace('<p>This is the home for upcoming engineering and research notes. Explore my projects and background on the About page.</p>', '<p data-i18n="home.emptyHint">This is the home for upcoming engineering and research notes. Explore my projects and background on the About page.</p>')
     nav = ''.join(f'<a href="{url}"' + (' aria-current="page"' if name == active else '') + f'>{name}</a>'
                   for name, url in [('Blog', '/'), ('Archive', '/archive/'), ('About', '/about/')])
     nav = nav.replace('>Blog</a>', ' data-i18n="nav.blog">Blog</a>').replace('>Archive</a>', ' data-i18n="nav.archive">Archive</a>').replace('>About</a>', ' data-i18n="nav.about">About</a>')
@@ -145,7 +148,7 @@ def build(include_drafts: bool = False) -> None:
     write('.nojekyll', '')
     cards = []
     for post in posts:
-        badge = '<span class="draft">Draft preview</span>' if post.get('draft') else ''
+        badge = '<span class="draft" data-i18n="article.draft">Draft preview</span>' if post.get('draft') else ''
         search = esc((' '.join([post['title'], post['description'], *post['tags'], post['text']])).lower(), quote=True)
         cards.append(f'''<article class="post-card" data-post data-search="{search}" data-tags="{esc(json.dumps(post['tags']), quote=True)}">
 <div class="post-meta"><time datetime="{post['date']}">{post['date'].strftime('%b %d, %Y')}</time><span data-read-minutes="{post['minutes']}">{post['minutes']} min read</span>{badge}</div>
@@ -183,7 +186,7 @@ def build(include_drafts: bool = False) -> None:
         if post['date'].year != year:
             year = post['date'].year
             archive += f'<h2 class="archive-year">{year}</h2>'
-        badge = '<span class="draft">Draft</span>' if post.get('draft') else ''
+        badge = '<span class="draft" data-i18n="article.draftShort">Draft</span>' if post.get('draft') else ''
         archive += f'<div class="archive-row"><time datetime="{post["date"]}">{post["date"].strftime("%b %d")}</time><a href="{post["route"]}">{esc(post["title"])}</a>{badge}</div>'
     write('archive/index.html', page('Archive', 'All articles, organized by year.', f'<section class="page-content"><div class="eyebrow">The notebook</div><h1>Writing archive</h1><p>All articles, organized by year.</p>{archive or "<p>No published articles yet.</p>"}</section>', '/archive/', 'Archive'))
     about = (ROOT / 'templates/about.html').read_text(encoding='utf-8')

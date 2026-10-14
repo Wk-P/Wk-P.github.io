@@ -58,6 +58,17 @@ A normal build shows an honest empty state until you publish your first post.
 Search matches article titles, summaries, tags, and body text. Filters and
 search terms are reflected in the URL for sharing.
 
+## Languages
+
+The shared header lets readers choose English, Chinese, or Korean on the blog,
+article pages, archive, About page, and 404 page. The choice is saved in the
+browser and reused on each page. About content has translations in all three
+languages. Articles keep the language they were written in: add `language =
+"en"`, `"zh"`, or `"ko"` to a post's frontmatter (English is the default).
+When an article has no translation for the selected interface language, a
+notice identifies the original language. The `/thesis/` site is maintained in
+a separate repository and has its own interface.
+
 ## Structure
 
 - `content/posts/` — Markdown articles with TOML metadata.
