@@ -61,6 +61,11 @@ print("hello")
         self.assertNotIn('private-draft', (out / 'sitemap.xml').read_text())
         self.assertFalse((out / 'thesis').exists())
         self.assertTrue((out / 'about/index.html').exists())
+        about = (out / 'about/index.html').read_text()
+        self.assertIn('href="/assets/blog.css"', about)
+        self.assertEqual(about.count('class="site-header"'), 1)
+        self.assertIn('href="/about/" aria-current="page"', about)
+        self.assertNotIn('global-canvas', about)
 
     def test_preview_marks_drafts_but_keeps_feed_clean(self):
         self.post('preview', draft=True)

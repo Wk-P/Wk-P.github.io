@@ -116,12 +116,12 @@ def build(include_drafts: bool = False) -> None:
     all_tags = sorted({t for p in posts for t in p['tags']})
     filters = ''.join(f'<button type="button" data-tag="{esc(t, quote=True)}" aria-pressed="{str(t == "All").lower()}">{esc(t)}</button>' for t in ['All', *all_tags])
     preview_notice = '<div class="notice">Local preview includes unpublished drafts.</div>' if include_drafts else ''
-    body = f'''<section class="intro"><div><div class="eyebrow">Technical blog / Engineering & research</div><h1>Notes from building.<br>Questions worth exploring.</h1>
+    body = f'''<section class="intro"><div><div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Engineering & research notes</div><h1>Notes from building.<br>Questions worth exploring.</h1>
 <p>Cloud-native systems, backend engineering, and the research behind them. A place to think in public and write things down.</p></div>
 <aside class="intro-aside"><b>Hello, I’m Lingxiao.</b><p>Computer Engineering researcher and platform-oriented developer at Pusan National University.</p><a class="text-link" href="/about/">More about me ↗</a></aside></section>
 <div class="journal"><section aria-labelledby="latest"><div class="section-top"><h2 id="latest">Latest writing</h2><span class="count" data-count aria-live="polite">{len(posts)} articles</span></div>
-{preview_notice}{''.join(cards)}<div class="empty" data-empty {'hidden' if posts else ''}><h3>{'No matching articles' if posts else 'The first post is on its way.'}</h3><p>{'Try another keyword or select All topics.' if posts else 'This is the home for upcoming engineering and research notes. Explore my projects and background on the About page.'}</p></div></section>
-<aside class="sidebar"><h3><label for="search">Find an article</label></h3><form class="search" data-search role="search"><input id="search" name="q" type="search" placeholder="Search notes…" autocomplete="off"></form>
+{preview_notice}{''.join(cards)}<div class="empty" data-empty {'hidden' if posts else ''}><h3>{'No matching articles' if posts else 'The first post is on its way.'}</h3><p>{'Try another keyword or select All topics.' if posts else 'This is the home for upcoming engineering and research notes. Explore my projects and background on the About page.'}</p><button class="reset-button" type="button" data-reset>Reset filters</button></div></section>
+<aside class="sidebar"><h3><label for="search">Find an article</label></h3><form class="search" data-search role="search"><input id="search" name="q" type="search" placeholder="Search title, topic, or keyword…" autocomplete="off"><button type="button" data-clear aria-label="Clear search" hidden>×</button></form><p class="search-hint">Search across titles and article content.</p>
 <h3>Browse by tag</h3><div class="filters" role="group" aria-label="Filter articles by tag">{filters}</div>
 <div class="sidebar-topics"><h3>Areas of interest</h3><ul class="topic-list"><li>Cloud & infrastructure</li><li>Backend systems</li><li>Optimization & safe RL</li></ul></div>
 <div class="sidebar-block"><h3>Beyond the blog</h3><p>Projects, academic work, and an ongoing thesis.</p><a class="text-link" href="/about/#projects">Selected projects ↗</a><br><a class="text-link" href="/thesis/">Thesis workspace ↗</a></div>
@@ -137,9 +137,7 @@ def build(include_drafts: bool = False) -> None:
         archive += f'<div class="archive-row"><time datetime="{post["date"]}">{post["date"].strftime("%b %d")}</time><a href="{post["route"]}">{esc(post["title"])}</a>{badge}</div>'
     write('archive/index.html', page('Archive', 'All articles, organized by year.', f'<section class="page-content"><div class="eyebrow">The notebook</div><h1>Writing archive</h1><p>All articles, organized by year.</p>{archive or "<p>No published articles yet.</p>"}</section>', '/archive/', 'Archive'))
     about = (ROOT / 'templates/about.html').read_text(encoding='utf-8')
-    about = about.replace('<body>', '<body><a href="/" style="display:block;position:relative;z-index:2;padding:16px 28px;color:#315efb;font-weight:700">← Back to the technical blog</a>', 1)
-    about = about.replace('</head>', '<link rel="canonical" href="https://wk-p.github.io/about/">' + ICONS + '</head>')
-    write('about/index.html', about)
+    write('about/index.html', page('About', 'Lingxiao Zhou’s background, research, and selected engineering projects.', about, '/about/', 'About'))
     write('404.html', page('Page not found', 'This page could not be found.', '<section class="page-content"><div class="eyebrow">404</div><h1>A missing page.</h1><p>The link may have changed. Find the latest writing on the blog.</p><a class="text-link" href="/">Return to the blog →</a></section>', '/404.html', active='', extra='<meta name="robots" content="noindex">'))
     published = [p for p in posts if not p.get('draft')]
     rss = ET.Element('rss', version='2.0')

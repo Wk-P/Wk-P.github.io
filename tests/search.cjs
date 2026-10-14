@@ -15,7 +15,7 @@ const context = {
   location:{href:'https://wk-p.github.io/?q=python',search:'?q=python'},
   history:{replaceState(a,b,url){this.url=String(url);}},
   window:{addEventListener(){}},
-  document:{querySelector(sel){return {'[data-search]':form,'[data-count]':count,'[data-empty]':empty}[sel];},querySelectorAll(sel){return sel==='[data-tag]'?buttons:posts;}}
+  document:{querySelector(sel){return {'form[data-search]':form,'[data-count]':count,'[data-empty]':empty}[sel];},querySelectorAll(sel){return sel==='[data-tag]'?buttons:sel==='[data-post]'?posts:[];}}
 };
 vm.runInNewContext(fs.readFileSync('assets/blog.js','utf8'),context);
 assert.equal(count.textContent,'1 article');
