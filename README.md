@@ -1,37 +1,82 @@
-# Lingxiao Zhou — Portfolio
+# Lingxiao Zhou — Technical Blog
 
-Platform / Backend / Cloud-Native Developer  
-Pusan National University · Computer Engineering M.S.
+English-first notes on cloud-native systems, backend engineering, and research.
 
-## Portfolio
+- Website: https://wk-p.github.io/
+- Repository: https://github.com/Wk-P/Wk-P.github.io
+- Local checkout: `/Users/soar009/Projects/profile`
+- `/thesis/` is served by a separate project. Do not add its files here.
 
-**GitHub Pages:** https://wk-p.github.io
+## Local preview
 
-## Repository scope
+Requires Python 3.11 or newer.
 
-This repository maintains the root homepage at `https://wk-p.github.io/`.
-The `/thesis/` route belongs to a separate project and is maintained in its own repository.
-Do not copy the thesis project into this repository.
+```sh
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python scripts/build.py --drafts
+.venv/bin/python -m http.server 8000 --directory dist
+```
 
-Local checkout: `/Users/soar009/Projects/profile`.
-The homepage content, styles, and language switching live in `index.html`.
-Changes pushed to `main` are published by `.github/workflows/pages.yml`.
+Open http://localhost:8000. Rebuild after changing content or styles.
+The `--drafts` flag includes clearly marked drafts in local preview only.
 
-To preview locally, run `python3 -m http.server 8000` from this directory
-and open `http://localhost:8000`.
+## Write a post
 
-## Featured Projects
+Create `content/posts/my-post-title.md` with this format:
 
-- [CloudPlatform](https://github.com/Wk-P/CloudPlatform) — Kubernetes/OpenStack resource management & monitoring platform
-- [Emotion Talk Assistant](https://github.com/Wk-P/emotion-talk-assistant) — FastAPI + Vue + OpenAI API web application
-- [Routing-Monitor-Docker-Request](https://github.com/Wk-P/Routing-Monitor-Docker-Request) — distributed request routing / load-balancing prototype
-- [Gproject](https://github.com/Wk-P/Gproject) — Django backend prototype with Merkle Tree / zk-SNARK concepts
+```markdown
++++
+title = "My post title"
+date = "2026-10-14"
+description = "A short, specific summary of the post."
+tags = ["Kubernetes", "Backend"]
+draft = true
++++
 
-## Main Stack
+Opening paragraph.
 
-Python · Django · FastAPI · Vue · TypeScript · Docker · Kubernetes · Linux · MySQL · Redis
+## The problem
 
-## Research
+Explain the context, then show a reproducible example.
 
-- Privacy-Preserving Edge Service Placement by Optimization and Safe Reinforcement Learning
-- eBPF / Hubble based network monitoring and anomaly-detection experiments
+## What I learned
+
+Document the result and its limitations.
+```
+
+The filename becomes `/posts/my-post-title/`. Use lowercase letters,
+numbers, and hyphens. Set `draft = false` when ready to publish.
+Use `##` and `###` headings to generate the article table of contents.
+Markdown supports fenced code blocks, tables, images, and links.
+Store images in `assets/` and reference them as `/assets/filename.png`.
+Markdown authors may include raw HTML; only commit content you trust.
+
+The included `hello-world.md` is an editable opening draft, not a published article.
+A normal build shows an honest empty state until you publish your first post.
+Search matches article titles, summaries, tags, and body text. Filters and
+search terms are reflected in the URL for sharing.
+
+## Structure
+
+- `content/posts/` — Markdown articles with TOML metadata.
+- `assets/blog.css` — blog layout and typography.
+- `assets/blog.js` — search and tag filters.
+- `templates/about.html` — existing multilingual portfolio at `/about/`.
+- `scripts/build.py` — generator for pages, RSS, sitemap, and 404.
+- `dist/` — generated website; ignored by Git.
+
+## Check and publish
+
+```sh
+.venv/bin/python -m unittest discover -s tests
+node --check assets/blog.js
+node tests/search.cjs
+.venv/bin/python scripts/build.py
+```
+
+Commit and push to `main` to trigger `.github/workflows/pages.yml`.
+GitHub Actions builds **without drafts** and uploads only `dist/` to Pages.
+The homepage is generated from `scripts/build.py`; do not edit generated files.
+RSS (`/feed.xml`) and the sitemap include published articles only.
+No server, database, or account is required for readers.
