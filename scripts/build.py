@@ -17,6 +17,11 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'dist'
 BASE = 'https://wk-p.github.io'
 esc = html.escape
+ICONS = '''<link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/icons/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" sizes="180x180">
+<link rel="manifest" href="/assets/icons/site.webmanifest">'''
 
 
 def write(path: str, content: str) -> None:
@@ -34,7 +39,7 @@ def page(title: str, description: str, body: str, route: str, active: str = 'Blo
 <link rel="canonical" href="{BASE}{route}"><meta property="og:title" content="{esc(title, quote=True)}">
 <meta property="og:description" content="{esc(description, quote=True)}"><meta property="og:url" content="{BASE}{route}">
 <meta property="og:type" content="{'article' if route.startswith('/posts/') else 'website'}">
-<meta name="theme-color" content="#faf9f6"><link rel="stylesheet" href="/assets/blog.css">
+<meta name="theme-color" content="#faf9f6"><link rel="stylesheet" href="/assets/blog.css">{ICONS}
 <link rel="alternate" type="application/rss+xml" title="Lingxiao Zhou — Technical Blog" href="/feed.xml">{extra}
 </head><body><a class="skip" href="#content">Skip to content</a><div class="wrap">
 <header class="site-header"><a class="wordmark" href="/">Lingxiao Zhou<span> / notes</span></a>
@@ -86,6 +91,7 @@ def build(include_drafts: bool = False) -> None:
         shutil.rmtree(OUT)
     OUT.mkdir()
     shutil.copytree(ROOT / 'assets', OUT / 'assets')
+    shutil.copyfile(ROOT / 'assets/icons/favicon.ico', OUT / 'favicon.ico')
     write('.nojekyll', '')
     cards = []
     for post in posts:
@@ -132,7 +138,7 @@ def build(include_drafts: bool = False) -> None:
     write('archive/index.html', page('Archive', 'All articles, organized by year.', f'<section class="page-content"><div class="eyebrow">The notebook</div><h1>Writing archive</h1><p>All articles, organized by year.</p>{archive or "<p>No published articles yet.</p>"}</section>', '/archive/', 'Archive'))
     about = (ROOT / 'templates/about.html').read_text(encoding='utf-8')
     about = about.replace('<body>', '<body><a href="/" style="display:block;position:relative;z-index:2;padding:16px 28px;color:#315efb;font-weight:700">← Back to the technical blog</a>', 1)
-    about = about.replace('</head>', '<link rel="canonical" href="https://wk-p.github.io/about/"></head>')
+    about = about.replace('</head>', '<link rel="canonical" href="https://wk-p.github.io/about/">' + ICONS + '</head>')
     write('about/index.html', about)
     write('404.html', page('Page not found', 'This page could not be found.', '<section class="page-content"><div class="eyebrow">404</div><h1>A missing page.</h1><p>The link may have changed. Find the latest writing on the blog.</p><a class="text-link" href="/">Return to the blog →</a></section>', '/404.html', active='', extra='<meta name="robots" content="noindex">'))
     published = [p for p in posts if not p.get('draft')]
