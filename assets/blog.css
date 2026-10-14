@@ -8,3 +8,5 @@
 @media(max-width:380px){.navigation{flex-wrap:wrap;justify-content:flex-start}.navigation a{padding:6px 7px}.wordmark{font-size:16px}.intro h1{font-size:36px}.hero-side,.skills{grid-template-columns:1fr}.fact:nth-last-child(2){border-bottom:1px solid var(--line)}.post-bottom{flex-wrap:wrap}.about-toolbar{flex-wrap:wrap}}
 @media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}a,button,.post-card{transition:color .15s,background .15s,border-color .15s}}
 @media print{.navigation,.sidebar,.hero-actions,.social-links,.about-toolbar,.section-nav,.copy-code,.skip,footer{display:none}.wrap{width:100%}.intro,.journal,.article-layout,.about-page .hero{display:block}.toc{position:static}.post-card,.project,.paper,.timeline-card{box-shadow:none;break-inside:avoid}body{background:white}.prose pre{white-space:pre-wrap}}
+
+.wordmark .author-name{color:var(--ink);font-weight:750}

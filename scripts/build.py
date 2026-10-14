@@ -44,10 +44,10 @@ def page(title: str, description: str, body: str, route: str, active: str = 'Blo
 <meta name="theme-color" content="#faf9f6"><link rel="stylesheet" href="/assets/blog.css">{ICONS}
 <link rel="alternate" type="application/rss+xml" title="Lingxiao Zhou — Technical Blog" href="/feed.xml">{extra}
 </head><body><a class="skip" href="#content">Skip to content</a><div class="wrap">
-<header class="site-header"><a class="wordmark" href="/">Lingxiao Zhou<span> / notes</span></a>
+<header class="site-header"><a class="wordmark" href="/"><span class="author-name" data-i18n="common.name">Lingxiao Zhou</span><span> / notes</span></a>
 <nav class="navigation" aria-label="Main navigation">{nav}<a href="{BASE}/thesis/">Thesis ↗</a><a class="nav-external" href="https://github.com/Wk-P" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav></header>
 <main id="content" tabindex="-1">{body}</main>
-<footer><span>© {dt.date.today().year} Lingxiao Zhou · Built for writing and learning.</span><div class="footer-links"><a href="/feed.xml">RSS feed ↗</a><a href="mailto:weekend2000119@gmail.com">Email ↗</a></div></footer>
+<footer><span>© {dt.date.today().year} <span data-i18n="common.name">Lingxiao Zhou</span> · Built for writing and learning.</span><div class="footer-links"><a href="/feed.xml">RSS feed ↗</a><a href="mailto:weekend2000119@gmail.com">Email ↗</a></div></footer>
 </div><script src="/assets/blog.js" defer></script></body></html>'''
 
 

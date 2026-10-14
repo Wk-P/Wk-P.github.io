@@ -7,7 +7,7 @@
 <header class="hero" id="top">
       <div class="hero-main">
         <div class="kicker" data-i18n="hero.kicker">Academic & Engineering Portfolio</div>
-        <h1>Lingxiao Zhou</h1>
+        <h1 data-i18n="common.name">Lingxiao Zhou</h1>
         <p class="hero-sub" data-i18n="hero.summary">Computer Engineering researcher and platform-oriented developer working across cloud-native systems, backend engineering, networking, resource optimization, and reinforcement learning.</p>
         <div class="hero-actions">
           <a class="primary-action" href="#projects" data-i18n="hero.projects">Explore projects →</a>
@@ -253,6 +253,7 @@
     (() => {
       const translations = {
         en: {
+          "common.name":"Lingxiao Zhou",
           "common.skip":"Skip to content","hero.projects":"Explore projects →","hero.research":"Explore research →",
           metaTitle: "Lingxiao Zhou — Academic Portfolio",
           metaDescription: "Lingxiao Zhou — Academic and engineering portfolio",
@@ -309,6 +310,7 @@
         },
 
         zh: {
+          "common.name":"周凌霄",
           "common.skip":"跳转至正文","hero.projects":"查看代表项目 →","hero.research":"了解研究方向 →",
           metaTitle: "周凌霄 — 学术与技术履历",
           metaDescription: "周凌霄的学术研究、论文与工程项目主页",
@@ -365,6 +367,7 @@
         },
 
         ko: {
+          "common.name":"Lingxiao Zhou",
           "common.skip":"본문으로 이동","hero.projects":"프로젝트 보기 →","hero.research":"연구 살펴보기 →",
           metaTitle: "Lingxiao Zhou — 연구 및 기술 포트폴리오",
           metaDescription: "Lingxiao Zhou의 연구, 논문 및 엔지니어링 프로젝트 포트폴리오",
@@ -424,6 +427,7 @@
       function setLanguage(lang) {
         if (!translations[lang]) lang = 'en';
         const t = translations[lang];
+        document.title = t.metaTitle;
         try { localStorage.setItem('portfolio-language', lang); } catch {}
 
         document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
