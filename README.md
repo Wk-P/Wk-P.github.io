@@ -14,11 +14,12 @@ Requires Python 3.11 or newer.
 ```sh
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
-.venv/bin/python scripts/build.py --drafts
-.venv/bin/python -m http.server 8000 --directory dist
+.venv/bin/python scripts/preview.py
 ```
 
-Open http://localhost:8000. Rebuild after changing content or styles.
+Open http://127.0.0.1:8014/. If the port is occupied, add `--port 8015`.
+Serve the generated `dist/` directory, not the repository root.
+Rebuild after changing content or styles.
 The `--drafts` flag includes clearly marked drafts in local preview only.
 
 ## Write a post
