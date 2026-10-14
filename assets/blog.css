@@ -10,3 +10,6 @@
 @media print{.navigation,.sidebar,.hero-actions,.social-links,.about-toolbar,.section-nav,.copy-code,.skip,footer{display:none}.wrap{width:100%}.intro,.journal,.article-layout,.about-page .hero{display:block}.toc{position:static}.post-card,.project,.paper,.timeline-card{box-shadow:none;break-inside:avoid}body{background:white}.prose pre{white-space:pre-wrap}}
 
 .wordmark .author-name{color:var(--ink);font-weight:750}
+.header-actions{display:flex;align-items:center;gap:14px;min-width:0}.header-actions .lang-switch{flex-shrink:0}.content-language{font-family:Inter,system-ui,sans-serif;font-size:13px;line-height:1.6;padding:12px 15px;margin-bottom:24px;border:1px solid var(--line);border-radius:9px;color:var(--muted);background:var(--soft)}
+@media(max-width:980px){.site-header{flex-wrap:wrap}.header-actions{width:100%;justify-content:space-between}}
+@media(max-width:740px){.header-actions{flex-wrap:wrap;gap:10px}.navigation{width:100%;overflow-x:auto;justify-content:flex-start}.header-actions .lang-switch{margin-left:auto}}

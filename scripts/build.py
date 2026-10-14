@@ -33,8 +33,52 @@ def write(path: str, content: str) -> None:
 def page(title: str, description: str, body: str, route: str, active: str = 'Blog', extra: str = '') -> str:
     # The thesis is maintained separately and is not served by this preview.
     body = body.replace('href="/thesis/"', f'href="{BASE}/thesis/"')
+    labels = {
+        'Engineering & research notes': 'home.eyebrow',
+        'Notes from building.<br>Questions worth exploring.': 'home.title',
+        'Cloud-native systems, backend engineering, and the research behind them. A place to think in public and write things down.': 'home.description',
+        'Hello, I’m Lingxiao.': 'home.hello',
+        'Computer Engineering researcher and platform-oriented developer at Pusan National University.': 'home.bio',
+        'More about me ↗': 'home.about',
+        'Latest writing': 'home.latest',
+        'Local preview includes unpublished drafts.': 'home.preview',
+        'No matching articles': 'home.noResults',
+        'The first post is on its way.': 'home.emptyTitle',
+        'Try another keyword or select All topics.': 'home.noResultsHint',
+        'This is the home for upcoming engineering and research notes. Explore my projects and background on the About page.': 'home.emptyHint',
+        'Reset filters': 'home.reset',
+        'Find an article': 'home.search',
+        'Search across titles and article content.': 'home.searchHint',
+        'Browse by tag': 'home.tags',
+        'Areas of interest': 'home.interests',
+        'Cloud & infrastructure': 'home.cloud',
+        'Backend systems': 'home.backend',
+        'Optimization & safe RL': 'home.rl',
+        'Beyond the blog': 'home.beyond',
+        'Projects, academic work, and an ongoing thesis.': 'home.beyondDescription',
+        'Selected projects ↗': 'home.projects',
+        'Thesis workspace ↗': 'home.thesis',
+        'Follow along': 'home.follow',
+        'Read new posts in your preferred feed reader.': 'home.followDescription',
+        'Subscribe via RSS ↗': 'home.rss',
+        '← All articles': 'article.all',
+        '← Back to the blog': 'article.back',
+        'On this page': 'article.toc',
+        'Draft preview — this article is excluded from the published site and RSS feed.': 'article.draftNotice',
+        'All articles, organized by year.': 'archive.description',
+        'The notebook': 'archive.eyebrow',
+        'Writing archive': 'archive.title',
+        'No published articles yet.': 'archive.empty',
+        'A missing page.': 'error.title',
+        'The link may have changed. Find the latest writing on the blog.': 'error.description',
+        'Return to the blog →': 'error.back',
+    }
+    for phrase, key in labels.items():
+        body = re.sub(r'(<[^<>]+)>' + re.escape(phrase) + r'(<)', lambda m: m.group(1) + f' data-i18n="{key}">' + phrase + m.group(2), body)
+    body = body.replace('<h1>Notes from building.<br>Questions worth exploring.</h1>', '<h1 data-i18n="home.title">Notes from building.<br>Questions worth exploring.</h1>')
     nav = ''.join(f'<a href="{url}"' + (' aria-current="page"' if name == active else '') + f'>{name}</a>'
                   for name, url in [('Blog', '/'), ('Archive', '/archive/'), ('About', '/about/')])
+    nav = nav.replace('>Blog</a>', ' data-i18n="nav.blog">Blog</a>').replace('>Archive</a>', ' data-i18n="nav.archive">Archive</a>').replace('>About</a>', ' data-i18n="nav.about">About</a>')
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)} · Lingxiao Zhou</title><meta name="description" content="{esc(description, quote=True)}">
@@ -43,11 +87,12 @@ def page(title: str, description: str, body: str, route: str, active: str = 'Blo
 <meta property="og:type" content="{'article' if route.startswith('/posts/') else 'website'}">
 <meta name="theme-color" content="#faf9f6"><link rel="stylesheet" href="/assets/blog.css">{ICONS}
 <link rel="alternate" type="application/rss+xml" title="Lingxiao Zhou — Technical Blog" href="/feed.xml">{extra}
-</head><body><a class="skip" href="#content">Skip to content</a><div class="wrap">
+</head><body><a class="skip" href="#content" data-i18n="common.skip">Skip to content</a><div class="wrap">
 <header class="site-header"><a class="wordmark" href="/"><span class="author-name" data-i18n="common.name">Lingxiao Zhou</span><span> / notes</span></a>
-<nav class="navigation" aria-label="Main navigation">{nav}<a href="{BASE}/thesis/">Thesis ↗</a><a class="nav-external" href="https://github.com/Wk-P" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav></header>
+<div class="header-actions"><nav class="navigation" aria-label="Main navigation">{nav}<a href="{BASE}/thesis/" data-i18n="nav.thesis">Thesis ↗</a><a class="nav-external" href="https://github.com/Wk-P" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav>
+<div class="lang-switch" role="group" aria-label="Language"><button class="lang-btn" type="button" data-lang="zh" lang="zh-CN" aria-pressed="false">中文</button><button class="lang-btn active" type="button" data-lang="en" lang="en" aria-pressed="true">EN</button><button class="lang-btn" type="button" data-lang="ko" lang="ko" aria-pressed="false">한국어</button></div></div></header>
 <main id="content" tabindex="-1">{body}</main>
-<footer><span>© {dt.date.today().year} <span data-i18n="common.name">Lingxiao Zhou</span> · Built for writing and learning.</span><div class="footer-links"><a href="/feed.xml">RSS feed ↗</a><a href="mailto:weekend2000119@gmail.com">Email ↗</a></div></footer>
+<footer><span>© {dt.date.today().year} <span data-i18n="common.name">Lingxiao Zhou</span> · <span data-i18n="footer.tagline">Built for writing and learning.</span></span><div class="footer-links"><a href="/feed.xml" data-i18n="footer.rss">RSS feed ↗</a><a href="mailto:weekend2000119@gmail.com" data-i18n="footer.email">Email ↗</a></div></footer>
 </div><script src="/assets/blog.js" defer></script></body></html>'''
 
 
@@ -78,7 +123,10 @@ def load_posts(include_drafts: bool) -> list[dict]:
         md = markdown.Markdown(extensions=['fenced_code', 'tables', 'toc', 'sane_lists'], output_format='html')
         rendered = md.convert(parts[2])
         plain = html.unescape(re.sub(r'<[^>]+>', ' ', rendered))
-        posts.append({**meta, 'date': date, 'slug': slug, 'body': rendered, 'toc': md.toc,
+        language = meta.get('language', 'en')
+        if language not in {'en', 'zh', 'ko'}:
+            raise ValueError(f'{path.name}: language must be en, zh, or ko')
+        posts.append({**meta, 'date': date, 'slug': slug, 'body': rendered, 'toc': md.toc, 'language': language,
                       'text': plain, 'minutes': max(1, round(len(plain.split()) / 200)), 'route': f'/posts/{slug}/'})
     return sorted(posts, key=lambda p: (p['date'], p['slug']), reverse=True)
 
@@ -100,16 +148,16 @@ def build(include_drafts: bool = False) -> None:
         badge = '<span class="draft">Draft preview</span>' if post.get('draft') else ''
         search = esc((' '.join([post['title'], post['description'], *post['tags'], post['text']])).lower(), quote=True)
         cards.append(f'''<article class="post-card" data-post data-search="{search}" data-tags="{esc(json.dumps(post['tags']), quote=True)}">
-<div class="post-meta"><time datetime="{post['date']}">{post['date'].strftime('%b %d, %Y')}</time><span>{post['minutes']} min read</span>{badge}</div>
+<div class="post-meta"><time datetime="{post['date']}">{post['date'].strftime('%b %d, %Y')}</time><span data-read-minutes="{post['minutes']}">{post['minutes']} min read</span>{badge}</div>
 <h3><a href="{post['route']}">{esc(post['title'])}</a></h3><p>{esc(post['description'])}</p>
-<div class="post-bottom">{tags(post)}<a class="read-link" href="{post['route']}" aria-label="{esc('Read '+post['title'], quote=True)}">Read article ↗</a></div></article>''')
+<div class="post-bottom">{tags(post)}<a class="read-link" href="{post['route']}" aria-label="{esc('Read '+post['title'], quote=True)}" data-i18n="article.read">Read article ↗</a></div></article>''')
         notice = '<div class="notice">Draft preview — this article is excluded from the published site and RSS feed.</div>' if post.get('draft') else ''
         structured = json.dumps({'@context': 'https://schema.org', '@type': 'BlogPosting', 'headline': post['title'],
                                 'description': post['description'], 'datePublished': str(post['date']),
                                 'author': {'@type': 'Person', 'name': 'Lingxiao Zhou'}, 'url': BASE + post['route']}).replace('<', '\\u003c')
         body = f'''<header class="article-head"><a class="back-link" href="/">← All articles</a><h1>{esc(post['title'])}</h1>
-<p class="description">{esc(post['description'])}</p><div class="post-meta"><time datetime="{post['date']}">{post['date'].strftime('%B %d, %Y')}</time><span>{post['minutes']} min read</span>{badge}</div>{tags(post)}</header>
-<div class="article-layout"><article class="prose">{notice}{post['body']}<hr><p><a href="/">← Back to the blog</a></p></article>
+<p class="description">{esc(post['description'])}</p><div class="post-meta"><time datetime="{post['date']}">{post['date'].strftime('%B %d, %Y')}</time><span data-read-minutes="{post['minutes']}">{post['minutes']} min read</span>{badge}</div>{tags(post)}</header>
+<div class="article-layout"><article class="prose" lang="{'zh-CN' if post['language'] == 'zh' else post['language']}"><div class="content-language" data-content-language="{post['language']}" hidden></div>{notice}{post['body']}<hr><p><a href="/">← Back to the blog</a></p></article>
 <aside class="toc" aria-label="Table of contents"><h2>On this page</h2>{post['toc']}</aside></div>'''
         extra = f'<script type="application/ld+json">{structured}</script>'
         if post.get('draft'):
@@ -121,7 +169,7 @@ def build(include_drafts: bool = False) -> None:
     body = f'''<section class="intro"><div><div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Engineering & research notes</div><h1>Notes from building.<br>Questions worth exploring.</h1>
 <p>Cloud-native systems, backend engineering, and the research behind them. A place to think in public and write things down.</p></div>
 <aside class="intro-aside"><b>Hello, I’m Lingxiao.</b><p>Computer Engineering researcher and platform-oriented developer at Pusan National University.</p><a class="text-link" href="/about/">More about me ↗</a></aside></section>
-<div class="journal"><section aria-labelledby="latest"><div class="section-top"><h2 id="latest">Latest writing</h2><span class="count" data-count aria-live="polite">{len(posts)} articles</span></div>
+<div class="journal"><section aria-labelledby="latest"><div class="section-top"><h2 id="latest">Latest writing</h2><span class="count" data-count aria-live="polite" data-total-count="{len(posts)}">{len(posts)} articles</span></div>
 {preview_notice}{''.join(cards)}<div class="empty" data-empty {'hidden' if posts else ''}><h3>{'No matching articles' if posts else 'The first post is on its way.'}</h3><p>{'Try another keyword or select All topics.' if posts else 'This is the home for upcoming engineering and research notes. Explore my projects and background on the About page.'}</p><button class="reset-button" type="button" data-reset>Reset filters</button></div></section>
 <aside class="sidebar"><h3><label for="search">Find an article</label></h3><form class="search" data-search role="search"><input id="search" name="q" type="search" placeholder="Search title, topic, or keyword…" autocomplete="off"><button type="button" data-clear aria-label="Clear search" hidden>×</button></form><p class="search-hint">Search across titles and article content.</p>
 <h3>Browse by tag</h3><div class="filters" role="group" aria-label="Filter articles by tag">{filters}</div>
