@@ -77,7 +77,6 @@ onUnmounted(() => {
 
       <template v-else-if="currentPage === 'research'">
         <header class="page-heading"><p class="eyebrow">{{ t('researchLabel') }}</p><h1>{{ t('nav.research') }}</h1><p>{{ t('academic.lead') }}</p></header>
-        <section class="thesis-feature" id="thesis"><span class="eyebrow">{{ t('thesisLabel') }} · {{ t('thesis.status') }}</span><h2>{{ t('thesis.title') }}</h2><p>{{ t('thesis.lead') }}</p><a class="button primary" :href="thesisUrl">{{ t('thesis.open') }}</a></section>
         <section class="paper-list" id="academic" :aria-label="t('academic.title')">
           <article v-for="(paper, index) in papers" :id="`paper-${paper.id}`" :key="paper.id" class="paper-row"><span class="row-number">0{{ index + 1 }}</span><div><p class="eyebrow">{{ paper.venue }}</p><h2>{{ paper.title }}</h2><p class="authors">{{ paper.authors }}</p><a :href="paper.pdf" target="_blank" rel="noreferrer">{{ t('paper.pdf') }}</a></div></article>
         </section>
@@ -116,6 +115,6 @@ onUnmounted(() => {
       <section v-else class="page-heading"><p class="eyebrow">404</p><h1>{{ t('missing') }}</h1><a href="/">{{ t('back') }}</a></section>
     </main>
 
-    <footer><span>© {{ new Date().getFullYear() }} Lingxiao Zhou</span><div><a v-if="posts.length || currentPage === 'blog'" href="/blog/">{{ t('blog') }}</a><a :href="thesisUrl">{{ t('thesisLabel') }} ↗</a><a :href="`mailto:${email}`">{{ t('email') }} ↗</a><a :href="githubUrl" target="_blank" rel="noreferrer">GitHub ↗</a></div></footer>
+    <footer><span>© {{ new Date().getFullYear() }} Lingxiao Zhou</span><div><a v-if="posts.length || currentPage === 'blog'" href="/blog/">{{ t('blog') }}</a><a href="/research/">{{ t('researchLabel') }}</a><a :href="thesisUrl">{{ t('thesisLabel') }} ↗</a><a :href="`mailto:${email}`">{{ t('email') }} ↗</a><a :href="githubUrl" target="_blank" rel="noreferrer">GitHub ↗</a></div></footer>
   </div>
 </template>

@@ -56,7 +56,7 @@ export const skills = [
 ]
 
 export const navigation = [
-  { path: '/research/', key: 'nav.research' },
+  { path: thesisUrl, key: 'nav.thesis' },
   { path: '/education/', key: 'nav.education' },
   { path: '/about/', key: 'nav.personal' },
   { path: '/projects/', key: 'nav.projects' },

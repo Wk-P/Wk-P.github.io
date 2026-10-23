@@ -26,14 +26,14 @@ npm run preview
 ## Pages
 
 - `/` — concise introduction and three featured projects.
-- `/research/` — master's thesis link and three paper PDFs.
+- `/research/` — three conference paper PDFs.
 - `/education/` — high school, bachelor's, and expected master's graduation.
 - `/about/` — personal background, contact details, and skills.
 - `/projects/` — five projects; details expand on demand.
 - `/blog/`, `/archive/`, `/posts/<slug>/` — Markdown notes.
 - **`/thesis/` is a separate GitHub Pages project. Do not add files or a Vue route for it.**
 
-The main navigation keeps research, education, and personal information first.
+The main navigation links directly to the separate `/thesis/` site first, followed by education and personal information. Conference papers remain on `/research/`.
 Old `/#academic`, `/#projects`, and `/about/#education` bookmarks still open the relevant content.
 The writing block stays hidden on the homepage until there are published notes.
 

@@ -5,7 +5,7 @@ Use a quiet, compact layout with warm paper (`#f7f8f5`), dark green ink
 Use system fonts, a 1040px content area, and responsive gutters.
 
 The header contains the name, four destinations, and one language switch.
-Order destinations as research, education, personal information, and projects.
+Order destinations as the separate `/thesis/` site, education, personal information, and projects. Keep conference papers on `/research/`, linked from the homepage and footer.
 Use the footer for thesis, GitHub, email, and published notes.
 
 The homepage contains one introduction, three featured projects, and a research

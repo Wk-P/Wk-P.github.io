@@ -30,6 +30,6 @@ test('legacy links resolve and thesis path stays separate', () => {
   assert.equal(resolvePage('/', '#projects'), 'projects')
   assert.equal(resolvePage('/archive/'), 'blog')
   assert.equal(resolvePage('/unknown/'), 'missing')
-  assert.deepEqual(navigation.slice(0, 3).map(item => item.path), ['/research/', '/education/', '/about/'])
+  assert.deepEqual(navigation.slice(0, 3).map(item => item.path), [thesisUrl, '/education/', '/about/'])
   assert.equal(papers.length, 3)
 })
