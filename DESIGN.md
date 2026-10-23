@@ -1,6 +1,6 @@
-# Blog design system
+# Portfolio design system
 
-All root-blog pages use `assets/blog.css`, the shared header/footer, and the
+All portfolio and blog pages use `assets/blog.css`, the shared header/footer, and the
 same semantic color tokens. `/thesis/` is a separately maintained website.
 
 ## Palette
@@ -39,3 +39,7 @@ Use 8px-based spacing, restrained borders, and rounded surfaces.
 - Motion respects the system reduced-motion preference.
 
 Local previews may show draft articles. Production builds exclude them.
+
+## Portfolio hierarchy
+
+Lead with name, Backend / Cloud positioning, PNU graduate status, and Projects / Research / GitHub actions. Order engineering cards as CloudPlatform, Femoup MVP, Kubernetes security infrastructure, Docker load balancing, and Emotion Talk Assistant. Label client MVPs and research prototypes explicitly. Follow with thesis, three paper PDFs, skills, and email / GitHub contact. Education and collapsed secondary prototypes remain on About. Writing appears at the bottom of the homepage only when posts exist; `/blog/` retains search and filters.

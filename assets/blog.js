@@ -71,6 +71,12 @@
       'content.original':name=>`이 글은 아직 번역되지 않아 ${name}(으)로 표시됩니다.`
     }
   };
+  for (const lang of ['en', 'zh', 'ko']) {
+    Object.assign(copy[lang], window.portfolioCopy?.[lang] || {});
+  }
+  Object.assign(copy.en, {'nav.portfolio':'Portfolio','footer.tagline':'Backend · Cloud · Research.'});
+  Object.assign(copy.zh, {'nav.portfolio':'作品集','footer.tagline':'后端 · 云平台 · 研究'});
+  Object.assign(copy.ko, {'nav.portfolio':'포트폴리오','footer.tagline':'백엔드 · 클라우드 · 연구'});
   function getLanguage() {
     try { const saved = localStorage.getItem('portfolio-language'); if (copy[saved]) return saved; } catch {}
     return 'en';
@@ -121,9 +127,10 @@
       original.textContent = t['content.original']({en:'English',zh:'中文',ko:'한국어'}[authored]);
     }
     document.querySelectorAll('.copy-code').forEach(btn => { btn.textContent = t['toc.copy']; });
-    const pageNames = {'/':'nav.blog','/archive/':'nav.archive','/about/':'nav.about','/404.html':'error.title'};
+    const pageNames = {'/':'nav.portfolio','/blog/':'nav.blog','/archive/':'nav.archive','/about/':'nav.about','/404.html':'error.title'};
     const route = location.pathname;
-    if (pageNames[route]) document.title = `${t[pageNames[route]]} · ${t['common.name']}`;
+    if (route === '/') document.title = `Backend / Cloud Engineer · ${t['common.name']}`;
+    else if (pageNames[route]) document.title = `${t[pageNames[route]]} · ${t['common.name']}`;
     document.dispatchEvent(new CustomEvent('blog:language', {detail:{lang}}));
   }
   document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));

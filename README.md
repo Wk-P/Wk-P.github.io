@@ -1,6 +1,6 @@
-# Lingxiao Zhou — Technical Blog
+# Lingxiao Zhou — Backend / Cloud Portfolio
 
-English-first notes on cloud-native systems, backend engineering, and research.
+English, Chinese, and Korean portfolio featuring backend platforms, client MVP development, cloud infrastructure, and research.
 
 - Website: https://wk-p.github.io/
 - Repository: https://github.com/Wk-P/Wk-P.github.io
@@ -54,7 +54,7 @@ Store images in `assets/` and reference them as `/assets/filename.png`.
 Markdown authors may include raw HTML; only commit content you trust.
 
 The included `hello-world.md` is an editable opening draft, not a published article.
-A normal build shows an honest empty state until you publish your first post.
+The homepage hides the writing section until a post is published. The full blog and its search remain available at `/blog/`.
 Search matches article titles, summaries, tags, and body text. Filters and
 search terms are reflected in the URL for sharing.
 
@@ -74,7 +74,9 @@ a separate repository and has its own interface.
 - `content/posts/` — Markdown articles with TOML metadata.
 - `assets/blog.css` — blog layout and typography.
 - `assets/blog.js` — search and tag filters.
-- `templates/about.html` — existing multilingual portfolio at `/about/`.
+- `templates/about.html` — shared portfolio content for `/` and `/about/`; the homepage omits education and other prototypes.
+- `assets/portfolio-i18n.js` — English, Chinese, and Korean portfolio copy.
+- `assets/papers/` — three research PDFs with stable filenames.
 - `scripts/build.py` — generator for pages, RSS, sitemap, and 404.
 - `dist/` — generated website; ignored by Git.
 
@@ -89,6 +91,7 @@ node tests/search.cjs
 
 Commit and push to `main` to trigger `.github/workflows/pages.yml`.
 GitHub Actions builds **without drafts** and uploads only `dist/` to Pages.
-The homepage is generated from `scripts/build.py`; do not edit generated files.
+The homepage is generated from `templates/about.html` through `scripts/build.py`; do not edit generated files.
+Keep English HTML defaults and the three language dictionaries aligned when changing portfolio copy.
 RSS (`/feed.xml`) and the sitemap include published articles only.
 No server, database, or account is required for readers.

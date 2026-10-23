@@ -13,3 +13,27 @@
 .header-actions{display:flex;align-items:center;gap:14px;min-width:0}.header-actions .lang-switch{flex-shrink:0}.content-language{font-family:Inter,system-ui,sans-serif;font-size:13px;line-height:1.6;padding:12px 15px;margin-bottom:24px;border:1px solid var(--line);border-radius:9px;color:var(--muted);background:var(--soft)}
 @media(max-width:980px){.site-header{flex-wrap:wrap}.header-actions{width:100%;justify-content:space-between}}
 @media(max-width:740px){.header-actions{flex-wrap:wrap;gap:10px}.navigation{width:100%;overflow-x:auto;justify-content:flex-start}.header-actions .lang-switch{margin-left:auto}}
+
+/* Portfolio: lead with role and engineering evidence. */
+.about-page .hero{padding:64px 0 48px;gap:56px}
+.about-page h1{font-family:Inter,system-ui,sans-serif;font-size:clamp(44px,6vw,76px);font-weight:750;letter-spacing:-.055em;line-height:1.08}
+.hero-degree{font-size:14px;color:var(--accent);font-weight:600;margin:0 0 18px}
+.hero-sub{font-size:19px;line-height:1.7;margin:0;max-width:620px}
+.about-page .hero-side{border-top:3px solid var(--accent)}
+.about-page .project.featured{grid-column:auto;border-top:3px solid var(--accent)}
+.about-page .projects{align-items:stretch}
+.about-page .project:last-child:nth-child(even){grid-column:auto}
+.about-page .project-top{flex-wrap:wrap;gap:10px}
+.about-page .project-top .tag{font-size:10px;letter-spacing:.04em}
+.about-page .project ul{margin-bottom:0}
+.about-page .project-status{font-size:12px;border-top:1px solid var(--line);padding-top:12px;margin-top:auto}
+.other-projects{margin-top:24px}
+.other-projects summary{cursor:pointer;color:var(--accent);font-weight:600;min-height:44px;padding:10px 0}
+.other-projects .project{margin-top:12px}
+.research-grid .paper{display:flex;flex-direction:column}
+.research-grid .paper h3{font-size:18px;line-height:1.5;letter-spacing:-.02em}
+.research-grid .paper p{font-size:13px}
+.contact{background:var(--soft);border:1px solid var(--line)!important;border-radius:var(--radius);padding:32px!important;margin:32px 0}
+.contact h2{font-size:28px;margin:0 0 12px}
+.contact p{color:var(--muted);max-width:680px}
+@media(max-width:740px){.about-page .hero{padding:36px 0;gap:28px}.about-page h1{font-size:clamp(40px,10vw,62px)}.hero-sub{font-size:17px}.about-page .project-top .tag{white-space:normal;flex-shrink:1}.contact{padding:24px!important}}

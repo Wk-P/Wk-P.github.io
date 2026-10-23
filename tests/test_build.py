@@ -82,7 +82,31 @@ print("hello")
         self.assertEqual(ET.parse(build.OUT / 'feed.xml').findall('./channel/item'), [])
         build.build()
         self.assertFalse((build.OUT / 'posts/preview').exists())
-        self.assertIn('The first post is on its way.', (build.OUT / 'index.html').read_text())
+        self.assertNotIn('The first post is on its way.', (build.OUT / 'index.html').read_text())
+        self.assertIn('The first post is on its way.', (build.OUT / 'blog/index.html').read_text())
+
+    def test_portfolio_prioritizes_experience_and_links_real_papers(self):
+        build.build()
+        home = (build.OUT / 'index.html').read_text()
+        about = (build.OUT / 'about/index.html').read_text()
+        self.assertIn('href="/" aria-current="page"', home)
+        self.assertIn('Backend / Cloud Engineer', home)
+        self.assertNotIn('data-count', home)
+        self.assertNotIn('Gproject', home)
+        self.assertIn('Gproject', about)
+        self.assertNotIn('KCI', home + about)
+        self.assertLess(home.index('CloudPlatform'), home.index('Femoup MVP'))
+        self.assertLess(home.index('Femoup MVP'), home.index('Kubernetes / Private Cloud Security'))
+        self.assertIn('https://wk-p.github.io/thesis/', home)
+        import re
+        papers = re.findall(r'href="(/assets/papers/[^" ]+\.pdf)"', home)
+        self.assertEqual(len(papers), 3)
+        for paper in papers:
+            self.assertTrue((build.OUT / paper.lstrip('/')).read_bytes().startswith(b'%PDF'))
+        self.assertIn('/blog/', (build.OUT / 'sitemap.xml').read_text())
+        self.post('published')
+        build.build()
+        self.assertIn('home-writing', (build.OUT / 'index.html').read_text())
 
     def test_invalid_content_preserves_previous_output(self):
         self.post('valid'); build.build()

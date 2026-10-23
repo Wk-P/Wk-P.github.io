@@ -80,8 +80,8 @@ def page(title: str, description: str, body: str, route: str, active: str = 'Blo
     body = body.replace('<h3>The first post is on its way.</h3>', '<h3 data-i18n="home.emptyTitle">The first post is on its way.</h3>')
     body = body.replace('<p>This is the home for upcoming engineering and research notes. Explore my projects and background on the About page.</p>', '<p data-i18n="home.emptyHint">This is the home for upcoming engineering and research notes. Explore my projects and background on the About page.</p>')
     nav = ''.join(f'<a href="{url}"' + (' aria-current="page"' if name == active else '') + f'>{name}</a>'
-                  for name, url in [('Blog', '/'), ('Archive', '/archive/'), ('About', '/about/')])
-    nav = nav.replace('>Blog</a>', ' data-i18n="nav.blog">Blog</a>').replace('>Archive</a>', ' data-i18n="nav.archive">Archive</a>').replace('>About</a>', ' data-i18n="nav.about">About</a>')
+                  for name, url in [('Portfolio', '/'), ('Blog', '/blog/'), ('About', '/about/')])
+    nav = nav.replace('>Portfolio</a>', ' data-i18n="nav.portfolio">Portfolio</a>').replace('>Blog</a>', ' data-i18n="nav.blog">Blog</a>').replace('>Archive</a>', ' data-i18n="nav.archive">Archive</a>').replace('>About</a>', ' data-i18n="nav.about">About</a>')
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)} · Lingxiao Zhou</title><meta name="description" content="{esc(description, quote=True)}">
@@ -91,12 +91,12 @@ def page(title: str, description: str, body: str, route: str, active: str = 'Blo
 <meta name="theme-color" content="#faf9f6"><link rel="stylesheet" href="/assets/blog.css">{ICONS}
 <link rel="alternate" type="application/rss+xml" title="Lingxiao Zhou — Technical Blog" href="/feed.xml">{extra}
 </head><body><a class="skip" href="#content" data-i18n="common.skip">Skip to content</a><div class="wrap">
-<header class="site-header"><a class="wordmark" href="/"><span class="author-name" data-i18n="common.name">Lingxiao Zhou</span><span> / notes</span></a>
+<header class="site-header"><a class="wordmark" href="/"><span class="author-name" data-i18n="common.name">Lingxiao Zhou</span><span> / portfolio</span></a>
 <div class="header-actions"><nav class="navigation" aria-label="Main navigation">{nav}<a href="{BASE}/thesis/" data-i18n="nav.thesis">Thesis ↗</a><a class="nav-external" href="https://github.com/Wk-P" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav>
 <div class="lang-switch" role="group" aria-label="Language"><button class="lang-btn" type="button" data-lang="zh" lang="zh-CN" aria-pressed="false">中文</button><button class="lang-btn active" type="button" data-lang="en" lang="en" aria-pressed="true">EN</button><button class="lang-btn" type="button" data-lang="ko" lang="ko" aria-pressed="false">한국어</button></div></div></header>
 <main id="content" tabindex="-1">{body}</main>
-<footer><span>© {dt.date.today().year} <span data-i18n="common.name">Lingxiao Zhou</span> · <span data-i18n="footer.tagline">Built for writing and learning.</span></span><div class="footer-links"><a href="/feed.xml" data-i18n="footer.rss">RSS feed ↗</a><a href="mailto:weekend2000119@gmail.com" data-i18n="footer.email">Email ↗</a></div></footer>
-</div><script src="/assets/blog.js" defer></script></body></html>'''
+<footer><span>© {dt.date.today().year} <span data-i18n="common.name">Lingxiao Zhou</span> · <span data-i18n="footer.tagline">Backend · Cloud · Research.</span></span><div class="footer-links"><a href="/feed.xml" data-i18n="footer.rss">RSS feed ↗</a><a href="mailto:weekend2000119@gmail.com" data-i18n="footer.email">Email ↗</a></div></footer>
+</div><script src="/assets/portfolio-i18n.js" defer></script><script src="/assets/blog.js" defer></script></body></html>'''
 
 
 def load_posts(include_drafts: bool) -> list[dict]:
@@ -158,9 +158,9 @@ def build(include_drafts: bool = False) -> None:
         structured = json.dumps({'@context': 'https://schema.org', '@type': 'BlogPosting', 'headline': post['title'],
                                 'description': post['description'], 'datePublished': str(post['date']),
                                 'author': {'@type': 'Person', 'name': 'Lingxiao Zhou'}, 'url': BASE + post['route']}).replace('<', '\\u003c')
-        body = f'''<header class="article-head"><a class="back-link" href="/">← All articles</a><h1>{esc(post['title'])}</h1>
+        body = f'''<header class="article-head"><a class="back-link" href="/blog/">← All articles</a><h1>{esc(post['title'])}</h1>
 <p class="description">{esc(post['description'])}</p><div class="post-meta"><time datetime="{post['date']}">{post['date'].strftime('%B %d, %Y')}</time><span data-read-minutes="{post['minutes']}">{post['minutes']} min read</span>{badge}</div>{tags(post)}</header>
-<div class="article-layout"><article class="prose" lang="{'zh-CN' if post['language'] == 'zh' else post['language']}"><div class="content-language" data-content-language="{post['language']}" hidden></div>{notice}{post['body']}<hr><p><a href="/">← Back to the blog</a></p></article>
+<div class="article-layout"><article class="prose" lang="{'zh-CN' if post['language'] == 'zh' else post['language']}"><div class="content-language" data-content-language="{post['language']}" hidden></div>{notice}{post['body']}<hr><p><a href="/blog/">← Back to the blog</a></p></article>
 <aside class="toc" aria-label="Table of contents"><h2>On this page</h2>{post['toc']}</aside></div>'''
         extra = f'<script type="application/ld+json">{structured}</script>'
         if post.get('draft'):
@@ -178,8 +178,17 @@ def build(include_drafts: bool = False) -> None:
 <h3>Browse by tag</h3><div class="filters" role="group" aria-label="Filter articles by tag">{filters}</div>
 <div class="sidebar-topics"><h3>Areas of interest</h3><ul class="topic-list"><li>Cloud & infrastructure</li><li>Backend systems</li><li>Optimization & safe RL</li></ul></div>
 <div class="sidebar-block"><h3>Beyond the blog</h3><p>Projects, academic work, and an ongoing thesis.</p><a class="text-link" href="/about/#projects">Selected projects ↗</a><br><a class="text-link" href="/thesis/">Thesis workspace ↗</a></div>
-<div class="sidebar-block"><h3>Follow along</h3><p>Read new posts in your preferred feed reader.</p><a class="text-link" href="/feed.xml">Subscribe via RSS ↗</a></div></aside></div>'''
-    write('index.html', page('Technical Blog', 'Lingxiao Zhou’s notes on cloud-native systems, backend engineering, and research.', body, '/'))
+<div class="sidebar-block"><h3>Follow along</h3><a class="text-link" href="/archive/" data-i18n="nav.archive">Archive</a><p>Read new posts in your preferred feed reader.</p><a class="text-link" href="/feed.xml">Subscribe via RSS ↗</a></div></aside></div>'''
+    write('blog/index.html', page('Technical Blog', 'Lingxiao Zhou’s notes on cloud-native systems, backend engineering, and research.', body, '/blog/'))
+    portfolio = (ROOT / 'templates/about.html').read_text(encoding='utf-8')
+    home = re.sub(r'<section class="section" id="education">.*?</section>', '', portfolio, flags=re.S)
+    home = re.sub(r'<details class="other-projects">.*?</details>', '', home, flags=re.S)
+    home = home.replace('<a href="#education" data-i18n="nav.education">Education</a>', '')
+    if posts:
+        writing = '<section class="section home-writing"><div class="section-top"><h2 data-i18n="home.latest">Latest writing</h2><a class="text-link" href="/blog/" data-i18n="nav.blog">Blog</a></div>' + ''.join(cards[:2]) + '</section>'
+        end = home.rfind('</div>')
+        home = home[:end] + writing + home[end:]
+    write('index.html', page('Backend / Cloud Engineer', 'Lingxiao Zhou — Backend / Cloud Engineer. Selected platforms, client MVP development, cloud infrastructure, and research at Pusan National University.', home, '/', 'Portfolio'))
     archive = ''
     year = None
     for post in posts:
@@ -203,7 +212,7 @@ def build(include_drafts: bool = False) -> None:
             ET.SubElement(item, key).text = value
     write('feed.xml', ET.tostring(rss, encoding='unicode', xml_declaration=True))
     sitemap = ET.Element('urlset', xmlns='http://www.sitemaps.org/schemas/sitemap/0.9')
-    for route in ['/', '/archive/', '/about/', *[p['route'] for p in published]]:
+    for route in ['/', '/blog/', '/archive/', '/about/', *[p['route'] for p in published]]:
         ET.SubElement(ET.SubElement(sitemap, 'url'), 'loc').text = BASE + route
     write('sitemap.xml', ET.tostring(sitemap, encoding='unicode', xml_declaration=True))
     write('robots.txt', f'User-agent: *\nAllow: /\nSitemap: {BASE}/sitemap.xml\n')
