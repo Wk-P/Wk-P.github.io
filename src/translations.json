@@ -1,4 +1,4 @@
-window.portfolioCopy = {
+{
   "en": {
     "common.name": "Lingxiao Zhou",
     "common.skip": "Skip to content",
@@ -293,4 +293,4 @@ window.portfolioCopy = {
     "nav.research": "논문 및 연구",
     "nav.personal": "개인 소개"
   }
-};
+}

@@ -1,0 +1,21 @@
+{
+  "name": "lingxiao-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 8014",
+    "build": "vite build && node scripts/pages.mjs",
+    "preview": "vite preview --host 127.0.0.1 --port 8014",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "vue": "^3.5.44"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.10",
+    "marked": "^18.1.1",
+    "smol-toml": "^1.9.1",
+    "vite": "^8.3.5"
+  }
+}
