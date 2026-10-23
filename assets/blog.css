@@ -37,3 +37,6 @@
 .contact h2{font-size:28px;margin:0 0 12px}
 .contact p{color:var(--muted);max-width:680px}
 @media(max-width:740px){.about-page .hero{padding:36px 0;gap:28px}.about-page h1{font-size:clamp(40px,10vw,62px)}.hero-sub{font-size:17px}.about-page .project-top .tag{white-space:normal;flex-shrink:1}.contact{padding:24px!important}}
+.education-dates{margin:8px 0 0;font-size:13px;font-variant-numeric:tabular-nums;color:var(--muted)}
+#education .timeline-item{grid-template-columns:90px minmax(0,1fr)}
+@media(max-width:740px){#education .timeline-item{grid-template-columns:1fr}}

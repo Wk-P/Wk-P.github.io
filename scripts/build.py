@@ -79,9 +79,18 @@ def page(title: str, description: str, body: str, route: str, active: str = 'Blo
     body = body.replace('> Engineering & research notes</div>', ' data-i18n="home.eyebrow">Engineering & research notes</div>')
     body = body.replace('<h3>The first post is on its way.</h3>', '<h3 data-i18n="home.emptyTitle">The first post is on its way.</h3>')
     body = body.replace('<p>This is the home for upcoming engineering and research notes. Explore my projects and background on the About page.</p>', '<p data-i18n="home.emptyHint">This is the home for upcoming engineering and research notes. Explore my projects and background on the About page.</p>')
-    nav = ''.join(f'<a href="{url}"' + (' aria-current="page"' if name == active else '') + f'>{name}</a>'
-                  for name, url in [('Portfolio', '/'), ('Blog', '/blog/'), ('About', '/about/')])
-    nav = nav.replace('>Portfolio</a>', ' data-i18n="nav.portfolio">Portfolio</a>').replace('>Blog</a>', ' data-i18n="nav.blog">Blog</a>').replace('>Archive</a>', ' data-i18n="nav.archive">Archive</a>').replace('>About</a>', ' data-i18n="nav.about">About</a>')
+    destinations = [
+        ('Research', '/#academic', 'nav.research'),
+        ('Education', '/about/#education', 'nav.education'),
+        ('About', '/about/', 'nav.personal'),
+        ('Projects', '/#projects', 'nav.projects'),
+        ('Blog', '/blog/', 'nav.blog'),
+    ]
+    nav = ''.join(
+        f'<a href="{url}"' + (' aria-current="page"' if name == active else '')
+        + f' data-i18n="{key}">{"Personal Info" if name == "About" else name}</a>'
+        for name, url, key in destinations
+    )
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)} · Lingxiao Zhou</title><meta name="description" content="{esc(description, quote=True)}">
@@ -92,7 +101,7 @@ def page(title: str, description: str, body: str, route: str, active: str = 'Blo
 <link rel="alternate" type="application/rss+xml" title="Lingxiao Zhou — Technical Blog" href="/feed.xml">{extra}
 </head><body><a class="skip" href="#content" data-i18n="common.skip">Skip to content</a><div class="wrap">
 <header class="site-header"><a class="wordmark" href="/"><span class="author-name" data-i18n="common.name">Lingxiao Zhou</span><span> / portfolio</span></a>
-<div class="header-actions"><nav class="navigation" aria-label="Main navigation">{nav}<a href="{BASE}/thesis/" data-i18n="nav.thesis">Thesis ↗</a><a class="nav-external" href="https://github.com/Wk-P" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav>
+<div class="header-actions"><nav class="navigation" aria-label="Main navigation">{nav}<a class="nav-external" href="https://github.com/Wk-P" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav>
 <div class="lang-switch" role="group" aria-label="Language"><button class="lang-btn" type="button" data-lang="zh" lang="zh-CN" aria-pressed="false">中文</button><button class="lang-btn active" type="button" data-lang="en" lang="en" aria-pressed="true">EN</button><button class="lang-btn" type="button" data-lang="ko" lang="ko" aria-pressed="false">한국어</button></div></div></header>
 <main id="content" tabindex="-1">{body}</main>
 <footer><span>© {dt.date.today().year} <span data-i18n="common.name">Lingxiao Zhou</span> · <span data-i18n="footer.tagline">Backend · Cloud · Research.</span></span><div class="footer-links"><a href="/feed.xml" data-i18n="footer.rss">RSS feed ↗</a><a href="mailto:weekend2000119@gmail.com" data-i18n="footer.email">Email ↗</a></div></footer>

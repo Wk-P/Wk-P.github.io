@@ -89,7 +89,10 @@ print("hello")
         build.build()
         home = (build.OUT / 'index.html').read_text()
         about = (build.OUT / 'about/index.html').read_text()
-        self.assertIn('href="/" aria-current="page"', home)
+        nav = home.split('aria-label="Main navigation">', 1)[1].split('</nav>', 1)[0]
+        import re
+        self.assertEqual(re.findall(r'href="([^"]+)"', nav)[:3],
+                         ['/#academic', '/about/#education', '/about/'])
         self.assertIn('Backend / Cloud Engineer', home)
         self.assertNotIn('data-count', home)
         self.assertNotIn('Gproject', home)
